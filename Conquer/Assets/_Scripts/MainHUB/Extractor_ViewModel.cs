@@ -13,6 +13,8 @@ namespace Assets._Scripts.MainHUB
 
         [Inject] public ManaManager manaManager;
         public ReactiveProperty<float> manaAmountOnClick;
+
+        public bool isPanelRolledUp = false;
         protected override void OnInitialize()
         {
             manaAmountOnClick = new ReactiveProperty<float>(model.manaAmountOnClick);
