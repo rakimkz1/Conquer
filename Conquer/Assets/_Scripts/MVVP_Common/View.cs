@@ -1,16 +1,15 @@
 using UnityEngine;
+using Zenject;
 
-public abstract class View<T> : MonoBehaviour where T : class
+public abstract class View<TViewModel> : MonoBehaviour where TViewModel : class
 {
-    protected T viewModel;
+    [Inject]
+    protected TViewModel viewModel;
 
-    // Инициализация ViewModel
-    public virtual void BindViewModel(T viewModel)
+    protected virtual void Start()
     {
-        this.viewModel = viewModel;
         OnBind();
     }
 
-    // Подписки и связывание UI
     protected abstract void OnBind();
 }

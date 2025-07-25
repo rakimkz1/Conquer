@@ -1,18 +1,25 @@
+using System;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
-public abstract class ViewModel<T> where T : Model
+public abstract class ViewModel<TModel> : IInitializable, IDisposable where TModel : Model
 {
-    protected T model;
+    protected TModel model;
     protected CompositeDisposable disposables = new CompositeDisposable();
 
-    public ViewModel(T model)
+    // you need to initialize it by Container.BindInterfacesAndSelfTo<TViewModel>().AsSingle();
+    [Inject]
+    public void Construct(TModel model)
     {
         this.model = model;
+    }
+
+    public virtual void Initialize()
+    {
         OnInitialize();
     }
 
-    // Переопределяется в дочерних ViewModel
     protected virtual void OnInitialize() { }
 
     public virtual void Dispose()
