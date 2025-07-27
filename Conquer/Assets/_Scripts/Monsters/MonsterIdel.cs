@@ -42,9 +42,9 @@ namespace Monsters
             bool isMousePointing = (hit.collider != null) & (hit.collider?.GetComponent<MonsterIdel>() == this);
             if (!isMousePointing)
                 return;
-            if (Input.GetMouseButton(0) && currentState.GetType() != typeof(DraggingIdelState)) 
+            if (Input.GetMouseButtonDown(0) && currentState.GetType() != typeof(DraggingIdelState)) 
                 OnBeginDrag();
-            if (Input.GetMouseButton(0) == false && currentState.GetType() == typeof(DraggingIdelState))
+            if (Input.GetMouseButtonUp(0) && currentState.GetType() == typeof(DraggingIdelState))
                 OnEndDrag();
         }
 
