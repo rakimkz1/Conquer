@@ -2,7 +2,7 @@
 using UnityEngine;
 using UniRx;
 
-namespace Assets._Scripts.MainHUB
+namespace MainHUB.Extractor
 {
     public class Extractor_Model : Model
     {

@@ -6,11 +6,6 @@ public class AudioManager : MonoBehaviour
     private AudioSource sfxSource;
     private AudioSource bgmSource;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
-
     public void Initialize()
     {
         // SFX

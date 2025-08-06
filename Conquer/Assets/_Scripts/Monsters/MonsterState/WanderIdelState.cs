@@ -37,7 +37,7 @@ namespace Monsters.MonsterState
 
         public override void OnWork()
         {
-            target.WanderToDiraction(speed, diraction);
+            target?.WanderToDiraction(speed, diraction);
         }
     }
 }

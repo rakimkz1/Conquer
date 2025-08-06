@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Monsters.MonsterState;
 using System.Threading;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Monsters
@@ -13,9 +11,12 @@ namespace Monsters
         public IdelStateBase waitState;
         public IdelStateBase moveState;
         public IdelStateBase dragState;
-
         public Rigidbody2D rb;
+        public MonsterType monsterType;
+        public int monsterLevel;
+
         protected IdelStateBase currentState;
+
 
         private CancellationTokenSource _cancelToken;
         protected virtual void Start()
@@ -40,9 +41,8 @@ namespace Monsters
             RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
 
             bool isMousePointing = (hit.collider != null) & (hit.collider?.GetComponent<MonsterIdel>() == this);
-            if (!isMousePointing)
-                return;
-            if (Input.GetMouseButtonDown(0) && currentState.GetType() != typeof(DraggingIdelState)) 
+
+            if (Input.GetMouseButtonDown(0) && currentState.GetType() != typeof(DraggingIdelState) && isMousePointing) 
                 OnBeginDrag();
             if (Input.GetMouseButtonUp(0) && currentState.GetType() == typeof(DraggingIdelState))
                 OnEndDrag();
@@ -59,6 +59,9 @@ namespace Monsters
         {
             _cancelToken?.Cancel();
             SwichState(dragState);
+            Collider2D collider = gameObject.GetComponent<Collider2D>();
+
+            collider.isTrigger = true;
         }
 
         public void OnDragging()
@@ -67,8 +70,28 @@ namespace Monsters
             transform.position = pos;
         }
 
+        private void CheckIsUnity()
+        {
+            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, Vector2.zero);
+
+            for(int i = 0;i < hit.Length; i++)
+            {
+                MonsterIdel target = hit[i].collider.gameObject.GetComponent<MonsterIdel>();
+                if (target != null && target != this && target.monsterType == monsterType && target.monsterLevel == monsterLevel)
+                    UnityMonster(target);
+            }
+        }
+
+        private void UnityMonster(MonsterIdel target)
+        {
+            monsterLevel++;
+            Destroy(target.gameObject);
+        }
+
         private void OnEndDrag()
         {
+            CheckIsUnity();
+            gameObject.GetComponent<Collider2D>().isTrigger = false;
             currentState.OnExit();
             currentState = null;
         }
@@ -96,6 +119,11 @@ namespace Monsters
         public void WanderToDiraction(float speed, Vector2 diraction)
         {
             rb.linearVelocity = diraction * speed;
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(currentState);
         }
     }
 }

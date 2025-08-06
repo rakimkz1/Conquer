@@ -8,7 +8,6 @@ namespace Monsters.MonsterState
     [CreateAssetMenu(fileName = "DragState", menuName = "ScriptableObjects/Monster/States/DragIdel")]
     public class DraggingIdelState : IdelStateBase
     {
-        private bool isWorking;
         private MonsterIdel target;
         public override void OnEnter(MonsterIdel target)
         {

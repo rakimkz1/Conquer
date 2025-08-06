@@ -4,17 +4,12 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using System.Threading.Tasks;
 
 public class ResourceManager : MonoBehaviour
 {
     private Dictionary<string, AsyncOperationHandle> loadedAssets = new Dictionary<string, AsyncOperationHandle>();
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
+    public ResourceKeys so_Keys;
     // Загрузка ресурса (например, префаба)
     public void LoadAsset<T>(string key, Action<T> onLoaded) where T : UnityEngine.Object
     {

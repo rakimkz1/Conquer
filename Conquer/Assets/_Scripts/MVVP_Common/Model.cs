@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
-public abstract class Model : MonoBehaviour
+[Serializable]
+public abstract class Model 
 {
 
 }

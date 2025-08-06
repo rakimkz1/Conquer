@@ -1,20 +1,25 @@
 ﻿using Assets._Scripts.Managers;
 using System;
-using System.Collections;
+using System.Diagnostics;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
-namespace Assets._Scripts.MainHUB
+namespace MainHUB.Extractor
 {
     public class Extractor_ViewModel : ViewModel<Extractor_Model>
     {
         public event Action<float> OnManaChange;
 
-        [Inject] public ManaManager manaManager;
+        public ManaManager manaManager;
         public ReactiveProperty<float> manaAmountOnClick;
 
         public bool isPanelRolledUp = false;
+
+        public Extractor_ViewModel(Extractor_Model model, ManaManager manaManager) : base(model)  
+        {
+            this.manaManager = manaManager;
+        }
+
         protected override void OnInitialize()
         {
             manaAmountOnClick = new ReactiveProperty<float>(model.manaAmountOnClick);
@@ -26,6 +31,23 @@ namespace Assets._Scripts.MainHUB
         public void AddMana(float amount)
         {
             manaManager.AddMana(amount);
+        }
+
+        public class Factory : IFactory<Extractor_ViewModel>
+        {
+            private readonly Extractor_Model model;
+            private readonly ManaManager mana;
+
+            public Factory(Extractor_Model model, ManaManager mana)
+            {
+                this.model = model;
+                this.mana = mana;
+            }
+
+            public Extractor_ViewModel Create()
+            {
+                return new Extractor_ViewModel(model, mana);
+            }
         }
     }
 }
