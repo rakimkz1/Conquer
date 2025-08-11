@@ -10,10 +10,10 @@ namespace MainHUB.Extractor
 
         [SerializeField] private Button btn_buyButton;
         [SerializeField] private TextMeshProUGUI txt_costText;
-        private SpawnPanel_ViewModel.Factory factory;
+        private IFactory<SpawnPanel_ViewModel> factory;
 
         [Inject]
-        private void Constructor(SpawnPanel_ViewModel.Factory factory)
+        private void Constructor(IFactory<SpawnPanel_ViewModel> factory)
         {
             this.factory = factory;
         }

@@ -15,16 +15,18 @@ namespace MainHUB.Extractor
         [SerializeField] private Button btn_clickMainButton;
         [SerializeField] private Button btn_rollUpPanel;
         [SerializeField] private TextMeshProUGUI txt_manaCounter;
-        private Extractor_ViewModel.Factory _factory;
+        private IFactory<Extractor_ViewModel> _factory;
 
 
         [Inject]
-        private void Contruct(Extractor_ViewModel.Factory factory)
+        private void Construct(IFactory<Extractor_ViewModel> factory)
         {
-            _factory = factory;        }
-
+            _factory = factory;
+            Debug.Log(_factory);
+        }
         protected override void OnBind()
         {
+            Debug.Log(_factory);
             viewModel = _factory.Create();
             btn_clickMainButton.onClick.AddListener(ExtracterClicked);
             btn_rollUpPanel.onClick.AddListener(RollUpPanel);

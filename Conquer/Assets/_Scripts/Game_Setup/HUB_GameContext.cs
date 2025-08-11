@@ -9,13 +9,17 @@ public class HUB_GameContext : MonoInstaller
 {
     [SerializeField] private ManaManager manaManager;
     [SerializeField] private MonsterSpawnManager monsterSpawnManager;
+    [SerializeField] GameObject[] instancesForInject;
 
     public override void InstallBindings()
     {
         BindManagers();
         BindModels();
         BindFactory();
+        BindInstances();
     }
+
+
     private void BindManagers()
     {
         Container.Bind<ManaManager>().FromInstance(manaManager).AsSingle();
@@ -23,8 +27,15 @@ public class HUB_GameContext : MonoInstaller
     }
     private void BindFactory()
     {
-        Container.Bind<Extractor_ViewModel.Factory>().AsTransient();
-        Container.Bind<SpawnPanel_ViewModel.Factory>().AsTransient();
+        Container.Bind<IFactory<Extractor_ViewModel>>().To<Extractor_ViewModel.Factory>().AsTransient();
+        Container.Bind<IFactory<SpawnPanel_ViewModel>>().To<SpawnPanel_ViewModel.Factory>().AsTransient();
+    }
+    private void BindInstances()
+    {
+        foreach (GameObject instance in instancesForInject)
+        {
+            Container.Inject(instance);
+        }
     }
     private void BindModels()
     {

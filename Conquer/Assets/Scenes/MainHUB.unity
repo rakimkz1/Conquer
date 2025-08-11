@@ -1237,6 +1237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaManager: {fileID: 1135559168}
   monsterSpawnManager: {fileID: 600598052}
+  instancesForInject: []
 --- !u!114 &1326526662
 MonoBehaviour:
   m_ObjectHideFlags: 0

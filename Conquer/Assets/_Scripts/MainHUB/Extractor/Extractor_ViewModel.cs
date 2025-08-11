@@ -1,6 +1,5 @@
 ﻿using Assets._Scripts.Managers;
 using System;
-using System.Diagnostics;
 using UniRx;
 using Zenject;
 
