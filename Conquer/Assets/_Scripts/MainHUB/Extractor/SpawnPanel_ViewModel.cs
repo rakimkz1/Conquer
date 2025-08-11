@@ -9,9 +9,9 @@ namespace MainHUB.Extractor
         private ManaManager manaManager;
         public int cost;
 
-        public SpawnPanel_ViewModel(SpawnPanel_Model model, ManaManager manaManager) : base(model)
+        public SpawnPanel_ViewModel(SpawnPanel_Model model, ManaManager mana) : base(model) 
         {
-            this.manaManager = manaManager;
+            manaManager = mana;
         }
 
         protected override void OnInitialize()
@@ -25,20 +25,12 @@ namespace MainHUB.Extractor
             return isAffordable;
         }
 
-        public class Factory : IFactory<SpawnPanel_ViewModel>
+        public class Factory : IFactory<SpawnPanel_Model ,SpawnPanel_ViewModel>
         {
-            private readonly SpawnPanel_Model model;
-            private readonly ManaManager mana;
 
-            public Factory(SpawnPanel_Model model, ManaManager mana)
+            public SpawnPanel_ViewModel Create(SpawnPanel_Model model)
             {
-                this.model = model;
-                this.mana = mana;
-            }
-
-            public SpawnPanel_ViewModel Create()
-            {
-                return new SpawnPanel_ViewModel(model, mana);
+                return new SpawnPanel_ViewModel(model, ManaManager.Instance);
             }
         }
     }

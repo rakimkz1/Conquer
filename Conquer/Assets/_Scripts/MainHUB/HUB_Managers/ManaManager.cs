@@ -9,8 +9,13 @@ namespace Assets._Scripts.Managers
     public class ManaManager : MonoBehaviour
     {
         public ReactiveProperty<float> manaAmount = new ReactiveProperty<float>();
-
+        public static ManaManager Instance { get; private set; }
         private MonsterSpawnManager monsterSpawnManager;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         [Inject]
         public void Construct(MonsterSpawnManager monsterSpawnManager)

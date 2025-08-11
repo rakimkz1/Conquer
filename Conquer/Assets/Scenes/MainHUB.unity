@@ -522,6 +522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a9e807e53a10146877dabf04a05c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _model:
+    manaAmountOnClick: 1
   obj_manaExtractorPanel: {fileID: 1492266050}
   tr_manaExtractorPanelStarterPoint: {fileID: 1647349184}
   tr_manaExtractorEndPoint: {fileID: 2058835918}
@@ -790,6 +792,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47790d96cac776d4cb3374dbd2e1bbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _model:
+    manaCost: 10
+    monsterLevel: 0
+    monsterType: 0
+    prefabKey: 1
   btn_buyButton: {fileID: 1270345319}
   txt_costText: {fileID: 1259868354}
 --- !u!1 &905751708

@@ -14,21 +14,21 @@ public class HUB_GameContext : MonoInstaller
     public override void InstallBindings()
     {
         BindManagers();
-        BindModels();
+        //BindModels();
         BindFactory();
         BindInstances();
     }
 
-
     private void BindManagers()
     {
-        Container.Bind<ManaManager>().FromInstance(manaManager).AsSingle();
+        //Debug.Log(manaManager.GetComponent<ManaManager>() == null);
+        //Container.Bind<ManaManager>().FromInstance(manaManager);
         Container.Bind<MonsterSpawnManager>().FromInstance(monsterSpawnManager).AsSingle();
     }
     private void BindFactory()
     {
-        Container.Bind<IFactory<Extractor_ViewModel>>().To<Extractor_ViewModel.Factory>().AsTransient();
-        Container.Bind<IFactory<SpawnPanel_ViewModel>>().To<SpawnPanel_ViewModel.Factory>().AsTransient();
+        Container.Bind<IFactory<Extractor_Model, Extractor_ViewModel>>().To<Extractor_ViewModel.Factory>().AsTransient();
+        Container.Bind<IFactory<SpawnPanel_Model, SpawnPanel_ViewModel>>().To<SpawnPanel_ViewModel.Factory>().AsTransient();
     }
     private void BindInstances()
     {
