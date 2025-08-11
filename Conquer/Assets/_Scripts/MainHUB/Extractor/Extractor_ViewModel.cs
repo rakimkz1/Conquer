@@ -8,17 +8,18 @@ namespace MainHUB.Extractor
 {
     public class Extractor_ViewModel : ViewModel<Extractor_Model>
     {
+        #region Properties
+
         public event Action<float> OnManaChange;
 
         public ManaManager manaManager;
         public ReactiveProperty<float> manaAmountOnClick;
 
         public bool isPanelRolledUp = false;
+        #endregion
+        #region Init
 
-        public Extractor_ViewModel(Extractor_Model model,ManaManager mana) : base(model) 
-        {
-            this.manaManager = mana;
-        }
+        public Extractor_ViewModel(Extractor_Model model) : base(model) { }
 
         protected override void OnInitialize()
         {
@@ -26,6 +27,7 @@ namespace MainHUB.Extractor
             manaAmountOnClick.Subscribe(value => model.manaAmountOnClick = value).AddTo(disposables);
             ManaManager.Instance.manaAmount.Subscribe(value => OnManaChange?.Invoke(value)).AddTo(disposables);
         }
+        #endregion
 
         public void AddMana(float amount)
         {
@@ -34,10 +36,9 @@ namespace MainHUB.Extractor
 
         public class Factory : IFactory<Extractor_Model,Extractor_ViewModel>
         {
-
             public Extractor_ViewModel Create(Extractor_Model model)
             {
-                return new Extractor_ViewModel(model, ManaManager.Instance);
+                return new Extractor_ViewModel(model);
             }
         }
     }

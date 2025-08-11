@@ -39,15 +39,5 @@ namespace Assets._Scripts.Managers
             }
             return false;
         }
-        public bool SpawnMonster(int cost, PrefabKey key)
-        {
-            bool isAffordable = RemoveMana(cost);
-            if (!isAffordable)
-                return false;
-
-            monsterSpawnManager.SpawnMonster(key);
-
-            return true;
-        }
     }
 }

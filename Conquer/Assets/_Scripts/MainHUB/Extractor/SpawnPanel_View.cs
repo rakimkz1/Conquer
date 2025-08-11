@@ -7,11 +7,15 @@ namespace MainHUB.Extractor
 {
     public class SpawnPanel_View : View<SpawnPanel_ViewModel>
     {
+        #region Properties
+
         [SerializeField] private SpawnPanel_Model _model;
         [SerializeField] private Button btn_buyButton;
         [SerializeField] private TextMeshProUGUI txt_costText;
         private IFactory<SpawnPanel_Model ,SpawnPanel_ViewModel> factory;
+        #endregion
 
+        #region Init
         [Inject]
         private void Constructor(IFactory<SpawnPanel_Model, SpawnPanel_ViewModel> factory)
         {
@@ -24,6 +28,7 @@ namespace MainHUB.Extractor
             btn_buyButton.onClick.AddListener(OnBuyButtonPressed);
             txt_costText.text = viewModel.cost.ToString();
         }
+        #endregion
 
         private void OnBuyButtonPressed()
         {

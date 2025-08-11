@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets._Scripts.Managers;
+using UnityEngine;
 using Zenject;
 
 namespace MainHUB.HUB_Managers
@@ -14,7 +15,7 @@ namespace MainHUB.HUB_Managers
             this.resource = resource;
         }
 
-        public void SpawnMonster(PrefabKey key)
+        public void SpawnMonsterInstance(PrefabKey key)
         {
             Vector3 pos = GetSpawnPosition();
 
@@ -28,6 +29,16 @@ namespace MainHUB.HUB_Managers
 
             Vector2 pos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * randomDistance;
             return pos;
+        }
+        public bool SpawnMonster(int cost, PrefabKey key)
+        {
+            bool isAffordable = ManaManager.Instance.RemoveMana(cost);
+            if (!isAffordable)
+                return false;
+
+            SpawnMonsterInstance(key);
+
+            return true;
         }
     }
 }

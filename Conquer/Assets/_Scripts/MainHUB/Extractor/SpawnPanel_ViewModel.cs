@@ -1,17 +1,18 @@
 
 using Assets._Scripts.Managers;
+using MainHUB.HUB_Managers;
 using Zenject;
 
 namespace MainHUB.Extractor
 {
     public class SpawnPanel_ViewModel : ViewModel<SpawnPanel_Model>
     {
-        private ManaManager manaManager;
+        private MonsterSpawnManager _monsterSpawn;
         public int cost;
 
-        public SpawnPanel_ViewModel(SpawnPanel_Model model, ManaManager mana) : base(model) 
+        public SpawnPanel_ViewModel(SpawnPanel_Model model, MonsterSpawnManager monsterSpawn) : base(model) 
         {
-            manaManager = mana;
+            _monsterSpawn = monsterSpawn;
         }
 
         protected override void OnInitialize()
@@ -21,16 +22,22 @@ namespace MainHUB.Extractor
 
         public bool SpawnMonster()
         {
-            bool isAffordable = manaManager.SpawnMonster(model.manaCost, model.prefabKey);
+            bool isAffordable = _monsterSpawn.SpawnMonster(model.manaCost, model.prefabKey);
             return isAffordable;
         }
 
         public class Factory : IFactory<SpawnPanel_Model ,SpawnPanel_ViewModel>
         {
+            private readonly MonsterSpawnManager monsterSpawn;
+
+            public Factory(MonsterSpawnManager monsterSpawn)
+            {
+                this.monsterSpawn = monsterSpawn;
+            }
 
             public SpawnPanel_ViewModel Create(SpawnPanel_Model model)
             {
-                return new SpawnPanel_ViewModel(model, ManaManager.Instance);
+                return new SpawnPanel_ViewModel(model, monsterSpawn);
             }
         }
     }

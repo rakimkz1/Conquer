@@ -1,7 +1,5 @@
 ﻿using Monsters;
 using System;
-using System.Collections;
-using UnityEngine;
 
 namespace MainHUB.Extractor
 {
