@@ -22,7 +22,7 @@ namespace MainHUB.Extractor
 
         public bool SpawnMonster()
         {
-            bool isAffordable = _monsterSpawn.SpawnMonster(model.manaCost, model.prefabKey);
+            bool isAffordable = _monsterSpawn.SpawnMonster(model.manaCost, model.prefabKey, model.data);
             return isAffordable;
         }
 

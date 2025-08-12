@@ -695,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a57cce0d363e884d9623f3e514ab63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadious: 18
+  spawnRadious: 5
 --- !u!4 &600598053
 Transform:
   m_ObjectHideFlags: 0
@@ -1244,7 +1244,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaManager: {fileID: 1135559168}
   monsterSpawnManager: {fileID: 600598052}
-  instancesForInject: []
+  so_MonsterCollection: {fileID: 11400000, guid: 8490f5d92f77a7f4299d7eeb97e2eedc, type: 2}
+  resourceManager: {fileID: 846399747451967831, guid: 9533b9dd0cdce1544aaaff99c6947e79, type: 3}
+  audioManager: {fileID: 593507622500880732, guid: d971a537d381ced468475f2693e695b6, type: 3}
 --- !u!114 &1326526662
 MonoBehaviour:
   m_ObjectHideFlags: 0

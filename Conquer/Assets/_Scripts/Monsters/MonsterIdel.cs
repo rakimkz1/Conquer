@@ -1,7 +1,9 @@
 using Cysharp.Threading.Tasks;
+using MainHUB.HUB_Managers;
 using Monsters.MonsterState;
 using System.Threading;
 using UnityEngine;
+using Zenject;
 
 namespace Monsters
 {
@@ -17,11 +19,17 @@ namespace Monsters
 
         protected IdelStateBase currentState;
 
-
         private CancellationTokenSource _cancelToken;
+        private MonsterSpawnManager _monsterSpawn;
         protected virtual void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+        }
+
+        [Inject]
+        public void Construct(MonsterSpawnManager monsterSpawn)
+        {
+            _monsterSpawn = monsterSpawn;
         }
 
         private void Update()
@@ -33,6 +41,12 @@ namespace Monsters
         private void ActionStateHandle()
         {
             currentState?.OnWork();
+        }
+
+        public void SetMonsterData(MonsterCollection.MonsterIdelData data)
+        {
+            monsterLevel = data.monsterLevel;
+            monsterType = data.monsterType;
         }
 
         private void CheckDraging()
@@ -57,7 +71,7 @@ namespace Monsters
 
         private void OnBeginDrag()
         {
-            _cancelToken?.Cancel();
+            CancelUniTask();
             SwichState(dragState);
             Collider2D collider = gameObject.GetComponent<Collider2D>();
 
@@ -85,7 +99,7 @@ namespace Monsters
         private void UnityMonster(MonsterIdel target)
         {
             monsterLevel++;
-            Destroy(target.gameObject);
+            _monsterSpawn.DestroyMonsterInstance(target);
         }
 
         private void OnEndDrag()
@@ -98,9 +112,9 @@ namespace Monsters
 
         public void TransmisionHandle()
         {
-            CheckDraging();
             if (currentState == null)
                 SwichState(waitState);
+            CheckDraging();
         }
 
         public async UniTask SwichStateByTime(float time, IdelStateBase toState)
@@ -114,7 +128,12 @@ namespace Monsters
             {
                 return;
             }
-            SwichState(toState);
+            if(gameObject != null)
+                SwichState(toState);
+        }
+        public void CancelUniTask()
+        {
+                _cancelToken?.Cancel();
         }
         public void WanderToDiraction(float speed, Vector2 diraction)
         {

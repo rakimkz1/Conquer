@@ -1,16 +1,27 @@
-﻿using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
+﻿using Cysharp.Threading.Tasks;
+using MainHUB.HUB_Managers;
+using Monsters;
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Zenject;
 
 public class ResourceManager : MonoBehaviour
 {
     private Dictionary<string, AsyncOperationHandle> loadedAssets = new Dictionary<string, AsyncOperationHandle>();
+    private DiContainer container;
 
     public ResourceKeys so_Keys;
     // Загрузка ресурса (например, префаба)
+
+    [Inject]
+    private void Construct(DiContainer container)
+    {
+        this.container = container;
+    }
+
     public void LoadAsset<T>(string key, Action<T> onLoaded) where T : UnityEngine.Object
     {
         if (loadedAssets.ContainsKey(key))
@@ -57,6 +68,7 @@ public class ResourceManager : MonoBehaviour
     {
         var handle = Addressables.InstantiateAsync(key, position, rotation);
         var instance = await handle.Task;
+        container.InjectGameObject(instance);
         onInstantiated?.Invoke(instance);
         return instance;
     }
