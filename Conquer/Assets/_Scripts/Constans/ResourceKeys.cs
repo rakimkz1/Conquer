@@ -18,9 +18,3 @@ public class ResourceData
     public PrefabKey key;
     public string prefabLocation;
 }
-
-public enum PrefabKey
-{
-    LoadingPrefab,
-    MonsterIdel
-}
