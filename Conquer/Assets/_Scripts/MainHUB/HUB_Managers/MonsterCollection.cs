@@ -18,7 +18,13 @@ public partial class MonsterCollection
 
     private void SetMonsterUnitData()
     {
-        List<MonsterIdelData> dataList = saveData.Get(SaveDataKeys.MONSTER_IDEL_DATA_LIST, out bool isContain)
+        List<MonsterIdelData> dataList = saveData.Get<List<MonsterIdelData>>(SaveDataKeys.MONSTER_IDEL_DATA_LIST, out bool isContain);
+        if (!isContain)
+        {
+            saveData.Set<List<MonsterIdelData>>(SaveDataKeys.MONSTER_IDEL_DATA_LIST, new List<MonsterIdelData>());
+            return;
+        }
+        monsterUnitList = dataList;
     }
 
     public void AddUnit(MonsterIdel unitTarget)
@@ -30,6 +36,10 @@ public partial class MonsterCollection
     {
         MonsterIdelData data = new MonsterIdelData(unitTarget.monsterLevel, unitTarget.monsterType);
         monsterUnitList.Remove(data);
+    }
+    public void SaveData()
+    {
+        saveManager.Save(saveData);
     }
     [ContextMenu("ClearAll")]
     public void Clear()

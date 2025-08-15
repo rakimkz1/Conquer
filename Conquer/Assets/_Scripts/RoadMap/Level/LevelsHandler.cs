@@ -41,6 +41,7 @@ namespace Level
                 levelDataList.Add(levelPoints[i].GetData());
 
             saveData.Set<List<LevelData>>(SaveDataKeys.LEVEL_POINTS_DATA, levelDataList);
+            saveManager.Save(saveData);
         }
     }
 }
