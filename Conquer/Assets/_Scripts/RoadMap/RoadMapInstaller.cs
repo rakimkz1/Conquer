@@ -6,6 +6,6 @@ public class RoadMapInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        
+        Container.Bind<SaveManager>().AsSingle();
     }
 }

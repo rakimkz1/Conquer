@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class MonsterCollection 
+public class MonsterCollection : IDisposable
 {
     public List<MonsterIdelData> monsterUnitList = new List<MonsterIdelData>();
 
@@ -45,5 +45,10 @@ public partial class MonsterCollection
     public void Clear()
     {
         monsterUnitList.Clear();
+    }
+
+    public void Dispose()
+    {
+        SaveData();
     }
 }

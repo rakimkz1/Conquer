@@ -43,7 +43,7 @@ namespace Monsters
             currentState?.OnWork();
         }
 
-        public void SetMonsterData(MonsterCollection.MonsterIdelData data)
+        public void SetMonsterData(MonsterIdelData data)
         {
             monsterLevel = data.monsterLevel;
             monsterType = data.monsterType;

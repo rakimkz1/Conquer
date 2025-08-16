@@ -11,22 +11,23 @@ namespace MainHUB.HUB_Managers
     {
         public float spawnRadious;
         private ResourceManager resource;
-        private MonsterCollection so_monsterCollection;
+        private MonsterCollection monsterCollection;
 
         [Inject]
         public void Construct(ResourceManager resource, MonsterCollection collection)
         {
             this.resource = resource;
-            so_monsterCollection = collection;
+            monsterCollection = collection;
+            LoadAllMonster();
         }
 
-        public async UniTask<GameObject> SpawnMonsterInstance(PrefabKey key, MonsterCollection.MonsterIdelData data)
+        public async UniTask<GameObject> SpawnMonsterInstance(PrefabKey key, MonsterIdelData data)
         {
             Vector3 pos = GetSpawnPosition();
 
             var handle = resource.InstantiateAsync(resource.so_Keys.GetKey(key), pos, Quaternion.identity);
             var install = await handle;
-            so_monsterCollection.AddUnit(install.GetComponent<MonsterIdel>());
+            monsterCollection.AddUnit(install.GetComponent<MonsterIdel>());
             install.GetComponent<MonsterIdel>().SetMonsterData(data);
             return install;
         }
@@ -34,7 +35,7 @@ namespace MainHUB.HUB_Managers
         public void DestroyMonsterInstance(MonsterIdel target)
         {
             target.CancelUniTask();
-            so_monsterCollection?.RemoveUnit(target);
+            monsterCollection?.RemoveUnit(target);
             Destroy(target.gameObject);
         }
 
@@ -47,7 +48,7 @@ namespace MainHUB.HUB_Managers
             Vector2 pos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * randomDistance;
             return pos + midPos;
         }
-        public bool SpawnMonster(int cost, PrefabKey key, MonsterCollection.MonsterIdelData data)
+        public bool SpawnMonster(int cost, PrefabKey key, MonsterIdelData data)
         {
             bool isAffordable = ManaManager.Instance.RemoveMana(cost);
             if (!isAffordable)
@@ -60,7 +61,7 @@ namespace MainHUB.HUB_Managers
 
         public async UniTask LoadAllMonster()
         {
-            List<MonsterCollection.MonsterIdelData> dataList = so_monsterCollection.monsterUnitList;
+            List<MonsterIdelData> dataList = monsterCollection.monsterUnitList;
             PrefabKey key = PrefabKey.MonsterIdel;
             for (int i = 0; i < dataList.Count; i++)
             {

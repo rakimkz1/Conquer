@@ -21,8 +21,7 @@ namespace Level
         private void SetLevelProperties()
         {
             List<LevelData> dataList = saveData.Get<List<LevelData>>(SaveDataKeys.LEVEL_POINTS_DATA, out bool isContain);
-
-            if (isContain == false)
+            if (isContain == false || dataList.Count != levelPoints.Length)
             {
                 SetLevelDatas();
                 return;
@@ -40,8 +39,14 @@ namespace Level
             for(int i =0; i < levelPoints.Length; i++)
                 levelDataList.Add(levelPoints[i].GetData());
 
-            saveData.Set<List<LevelData>>(SaveDataKeys.LEVEL_POINTS_DATA, levelDataList);
+            saveData.Set(SaveDataKeys.LEVEL_POINTS_DATA, levelDataList);
             saveManager.Save(saveData);
         }
+        [ContextMenu("Clear all level datas")]
+        public void RemoveLevelDatas()
+        {
+            saveManager.DeleteSave();
+        }
+
     }
 }

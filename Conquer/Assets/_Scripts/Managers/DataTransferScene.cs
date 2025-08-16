@@ -6,7 +6,7 @@ public class DataTransferScene : MonoBehaviour
 {
     public Dictionary<string, object> data = new Dictionary<string, object>();
 
-    public object Get(string key)
+    public object Get<T>(string key)
     {
         if(data.TryGetValue(key, out object obj))
         {
