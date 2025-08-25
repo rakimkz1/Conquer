@@ -3,7 +3,6 @@ using Assets._Scripts.Managers;
 using UnityEngine;
 using Zenject;
 using MainHUB.HUB_Managers;
-using System;
 
 public class HUB_GameContext : MonoInstaller
 {
@@ -20,6 +19,7 @@ public class HUB_GameContext : MonoInstaller
     {
         Container.Bind<MonsterSpawnManager>().FromInstance(monsterSpawnManager).AsSingle();
         Container.Bind<MonsterCollection>().AsSingle();
+        Container.Bind<SaveManager>().AsSingle();
 
         GameObject resource = Container.InstantiatePrefab(resourceManager);
         GameObject audio = Container.InstantiatePrefab(audioManager);

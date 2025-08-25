@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterCollection : IDisposable
+public class MonsterCollection
 {
     public List<MonsterIdelData> monsterUnitList = new List<MonsterIdelData>();
 
@@ -30,6 +30,7 @@ public class MonsterCollection : IDisposable
     public void AddUnit(MonsterIdel unitTarget)
     {
         MonsterIdelData data = new MonsterIdelData(unitTarget.monsterLevel, unitTarget.monsterType);
+        Debug.Log($"type : {data.monsterType} level : {data.monsterLevel}");
         monsterUnitList.Add(data);
     }
     public void RemoveUnit(MonsterIdel unitTarget)
@@ -39,16 +40,11 @@ public class MonsterCollection : IDisposable
     }
     public void SaveData()
     {
+        saveData.Set<List<MonsterIdelData>>(SaveDataKeys.MONSTER_IDEL_DATA_LIST, monsterUnitList);
         saveManager.Save(saveData);
     }
-    [ContextMenu("ClearAll")]
     public void Clear()
     {
         monsterUnitList.Clear();
-    }
-
-    public void Dispose()
-    {
-        SaveData();
     }
 }

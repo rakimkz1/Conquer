@@ -17,3 +17,5 @@ MonoBehaviour:
     prefabLocation: Assets/Prefabs/UI/LoadingSceen.prefab
   - key: 1
     prefabLocation: Assets/Prefabs/Monsters/Monster.prefab
+  - key: 2
+    prefabLocation: Assets/Prefabs/BattleField/SelectionIcon.prefab

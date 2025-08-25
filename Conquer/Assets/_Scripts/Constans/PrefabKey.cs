@@ -1,5 +1,6 @@
 public enum PrefabKey
 {
     LoadingPrefab,
-    MonsterIdel
+    MonsterIdel,
+    MonsterSelectionIcon
 }

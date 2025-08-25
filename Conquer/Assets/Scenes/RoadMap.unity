@@ -710,7 +710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1567099940564596315, guid: 6611dfa07b1efa741afe352ac3fd0410, type: 3}
       propertyPath: levelNumber
-      value: 2
+      value: 897
       objectReference: {fileID: 0}
     - target: {fileID: 4311795796135714865, guid: 6611dfa07b1efa741afe352ac3fd0410, type: 3}
       propertyPath: m_Pivot.x

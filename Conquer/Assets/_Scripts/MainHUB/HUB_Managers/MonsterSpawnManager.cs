@@ -21,17 +21,25 @@ namespace MainHUB.HUB_Managers
             LoadAllMonster();
         }
 
-        public async UniTask<GameObject> SpawnMonsterInstance(PrefabKey key, MonsterIdelData data)
+        public async UniTask<GameObject> SpawnMonsterInstance(PrefabKey key, MonsterIdelData data, bool isAddToCollection)
         {
             Vector3 pos = GetSpawnPosition();
 
             var handle = resource.InstantiateAsync(resource.so_Keys.GetKey(key), pos, Quaternion.identity);
             var install = await handle;
-            monsterCollection.AddUnit(install.GetComponent<MonsterIdel>());
             install.GetComponent<MonsterIdel>().SetMonsterData(data);
+            if(isAddToCollection) 
+                monsterCollection.AddUnit(install.GetComponent<MonsterIdel>());
             return install;
         }
 
+        public void UnityTwoMonsters(MonsterIdel mainMonsterIdel, MonsterIdel secondaryMonsterIdel)
+        {
+
+            monsterCollection.RemoveUnit(secondaryMonsterIdel);
+            monsterCollection.AddUnit(mainMonsterIdel);
+            DestroyMonsterInstance(secondaryMonsterIdel);
+        }
         public void DestroyMonsterInstance(MonsterIdel target)
         {
             target.CancelUniTask();
@@ -54,7 +62,7 @@ namespace MainHUB.HUB_Managers
             if (!isAffordable)
                 return false;
 
-            SpawnMonsterInstance(key, data);
+            SpawnMonsterInstance(key, data,true);
 
             return true;
         }
@@ -65,7 +73,7 @@ namespace MainHUB.HUB_Managers
             PrefabKey key = PrefabKey.MonsterIdel;
             for (int i = 0; i < dataList.Count; i++)
             {
-                GameObject target = await SpawnMonsterInstance(key, dataList[i]);
+                GameObject target = await SpawnMonsterInstance(key, dataList[i], false);
             }
         }
 
@@ -74,5 +82,18 @@ namespace MainHUB.HUB_Managers
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(Camera.main.ScreenToWorldPoint(new Vector2(Camera.main.pixelWidth * 0.25f, Camera.main.pixelHeight * 0.5f)), spawnRadious);
         }
+
+        [ContextMenu("Save")]
+        public void Save()
+        {
+            monsterCollection.SaveData();
+        }
+
+        [ContextMenu("Clear")]
+        public void Clear()
+        {
+            monsterCollection.Clear();
+        }
+
     }
 }

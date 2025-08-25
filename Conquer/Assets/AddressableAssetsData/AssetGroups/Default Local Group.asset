@@ -40,6 +40,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff4cf0cd86a7bda43b93b3993123f2c3
+    m_Address: Assets/Prefabs/BattleField/SelectionIcon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9e92d32dcdea75247aa7e4fa1263369d, type: 2}
   m_SchemaSet:

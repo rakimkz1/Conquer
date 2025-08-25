@@ -99,7 +99,7 @@ namespace Monsters
         private void UnityMonster(MonsterIdel target)
         {
             monsterLevel++;
-            _monsterSpawn.DestroyMonsterInstance(target);
+            _monsterSpawn.UnityTwoMonsters(this, target);
         }
 
         private void OnEndDrag()
