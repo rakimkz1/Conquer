@@ -1,16 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Zenject;
+using BattleField;
 
 public class DataTransferScene : MonoBehaviour
 {
     public Dictionary<string, object> data = new Dictionary<string, object>();
-
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-
+    [Inject]
+    private void Construct(BattleSceneSetting battleSceneSetting)
+    {
+        Set(SceneTransferKeys.CURRENT_BATTLE_SETTING, battleSceneSetting);
+    }
     public object Get<T>(string key)
     {
         if(data.TryGetValue(key, out object obj))
@@ -19,7 +24,7 @@ public class DataTransferScene : MonoBehaviour
         }
         return default;
     }
-    public void Set(string key, object value)
+    public void Set<T>(string key, T value)
     {
         data[key] = value;
     }

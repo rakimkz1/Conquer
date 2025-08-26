@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace BattleField
 {
@@ -9,13 +10,13 @@ namespace BattleField
         public int allowedMonsterPlace;
         private SaveManager saveManager;
         private SaveData saveData;
-        private DataTransferScene dataTransfer;
         private BattleSceneSetting so_currentBattleSetting;
-
-        public UnitSelectPanel_Model(SaveManager saveManager, DataTransferScene dataTransfer)
+        private DataTransferScene _dataTransfer;
+        public UnitSelectPanel_Model(SaveManager saveManager, DataTransferScene dataTransfer, BattleSceneSetting battleSetting)
         {
             this.saveManager = saveManager;
-            this.dataTransfer = dataTransfer;
+            _dataTransfer = dataTransfer;
+            so_currentBattleSetting = battleSetting;
             SetupData();
         }
 
@@ -23,10 +24,7 @@ namespace BattleField
         {
             saveData = saveManager.Load();
             monstersList = saveData.Get<List<MonsterIdelData>>(SaveDataKeys.MONSTER_IDEL_DATA_LIST, out bool isContain);
-#if UNITY_EDITOR
-            so_currentBattleSetting = new BattleSceneSetting();
-#endif
-      //      so_currentBattleSetting = dataTransfer.data[SceneTransferKeys.CURRENT_BATTLE_SETTING] as BattleSceneSetting;
+            //so_currentBattleSetting = _dataTransfer.Get<BattleSceneSetting>(SceneTransferKeys.CURRENT_BATTLE_SETTING) as BattleSceneSetting;
             if (!isContain)
                 throw new Exception("MonsterIdelData is empty you bitch");
             if (so_currentBattleSetting == null)

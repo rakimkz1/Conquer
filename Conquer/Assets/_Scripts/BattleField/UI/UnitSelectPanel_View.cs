@@ -1,10 +1,7 @@
 using Cysharp.Threading.Tasks;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.UI;
 using Zenject;
 
 namespace BattleField
@@ -14,6 +11,7 @@ namespace BattleField
     {
         [SerializeField] private GameObject _unselectedPanel;
         [SerializeField] private GameObject _selectedPanel;
+        [SerializeField] private Button _startBattleButton;
         private ResourceManager _resourceManager;
         private SaveManager _saveManager;
         private SaveData _saveData;
@@ -30,7 +28,13 @@ namespace BattleField
 
         protected override void OnBind()
         {
-            
+            viewModel.OnShowStartBattleButton += ShowStartBattleButton;
+            viewModel.OnHideStartBatlleButton += HideStartBattleButton;
+            viewModel.HideWholeSelectionPanel += HideWholeSelectionPanel;
+            _startBattleButton.onClick.AddListener(() =>
+            {
+                viewModel.PressStartBattleButton();
+            });
         }
 
         private async void SpawnAllMonsterIcon()
@@ -53,17 +57,12 @@ namespace BattleField
             _resourceManager.LoadAsset<GameObject>(key, prefab =>
             {
                 _monsterIconPrefab = prefab;
-                Debug.Log("monsterprefab seted");
             });
             await UniTask.WaitUntil(() => _monsterIconPrefab != null);
         }
 
         private void InitializeIcon(MonsterIdelData monsterIdelData)
         {
-            if(_monsterIconPrefab == null)
-            {
-                Debug.Log("_monsterIcon is null");
-            }
             GameObject target = Instantiate(_monsterIconPrefab);
             target.transform.SetParent(_unselectedPanel.transform);
             MonsterSelectionIcon icon = target.GetComponent<MonsterSelectionIcon>();
@@ -86,5 +85,13 @@ namespace BattleField
                 viewModel.selectedMonsters.Remove(icon.MonsterType);
             }
         }
+        private void HideWholeSelectionPanel()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void ShowStartBattleButton() => _startBattleButton.gameObject.SetActive(true);
+
+        public void HideStartBattleButton() => _startBattleButton.gameObject.SetActive(false);
     }
 }

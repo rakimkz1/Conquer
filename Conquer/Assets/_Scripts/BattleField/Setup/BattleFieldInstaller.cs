@@ -1,13 +1,14 @@
 using BattleField;
-using System;
 using UnityEngine;
 using Zenject;
 
 public class BattleFieldInstaller : MonoInstaller
 {
     [SerializeField] private ResourceManager _resourceManager;
+    [SerializeField] private BattleSceneSetting BattleSceneSetting;
     public override void InstallBindings()
     {
+        Container.Bind<BattleSceneSetting>().AsSingle();
         BindManagers();
         BindMVVM();
     }
@@ -23,5 +24,6 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<SaveManager>().AsSingle();
         Container.Bind<ResourceManager>().FromInstance(_resourceManager).AsSingle();
         Container.Bind<DataTransferScene>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<LevelBuilder>().AsSingle().NonLazy();
     }
 }
