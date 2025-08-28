@@ -19,10 +19,4 @@ MonoBehaviour:
     enemyWaves:
     - level: 0
       monsterType: 0
-      unitNumber: 0
-    - level: 0
-      monsterType: 1
-      unitNumber: 1
-    - level: 0
-      monsterType: 0
-      unitNumber: 1
+      unitNumber: 4

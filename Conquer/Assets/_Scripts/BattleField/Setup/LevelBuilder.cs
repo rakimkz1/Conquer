@@ -1,6 +1,8 @@
 ﻿
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 namespace BattleField
@@ -10,11 +12,13 @@ namespace BattleField
         private DataTransferScene _dataTransfer;
         public BattleSceneSetting CurrentSceneSettings { get; private set; }
         public List<MonsterIdelData> AllMonstersUnits { get; private set; }
+        private MonsterUnitFactory _factory; 
 
         [Inject]
-        public LevelBuilder(DataTransferScene dataTransfer)
+        public LevelBuilder(DataTransferScene dataTransfer, MonsterUnitFactory factory)
         {
             _dataTransfer = dataTransfer;
+            _factory = factory;
             Initialize();
         }
 
@@ -28,6 +32,14 @@ namespace BattleField
         {
             AllMonstersUnits = new List<MonsterIdelData>();
             AllMonstersUnits.AddRange(list);
+            SpawnMonsters();
+        }
+        public void SpawnMonsters()
+        {
+            for(int i = 0; i < AllMonstersUnits.Count; i++)
+            {
+                _factory.Create(false, AllMonstersUnits[i], Vector3.zero);
+            }
         }
     }
 }

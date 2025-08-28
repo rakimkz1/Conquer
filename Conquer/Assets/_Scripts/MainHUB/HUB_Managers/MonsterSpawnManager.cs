@@ -93,7 +93,7 @@ namespace MainHUB.HUB_Managers
         public void Clear()
         {
             monsterCollection.Clear();
+            monsterCollection.SaveData();
         }
-
     }
 }
