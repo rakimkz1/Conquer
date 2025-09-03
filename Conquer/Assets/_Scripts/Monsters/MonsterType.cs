@@ -2,9 +2,9 @@
 {
     public enum MonsterType
     {
-        Rangers,
         Tanks,
         Sprinter,
+        Rangers,
         Mage,
         Sieges
     }

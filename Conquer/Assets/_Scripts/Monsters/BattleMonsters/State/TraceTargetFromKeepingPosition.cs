@@ -2,23 +2,21 @@
 
 namespace Monsters
 {
-    public class AttackPreparationState : IBattleMonsterState
+    public class TraceTargetFromKeepingPosition : IBattleMonsterState
     {
-        public bool IsReady = false;
-
         public void OnEnter(BattleMonster target)
         {
-            Debug.Log("Attack Preparatoin Enter");
+            Debug.Log("TraceState Enter");
         }
 
         public void OnExit(BattleMonster target)
         {
-            Debug.Log("Attack Preparation Exit");
+
         }
 
         public void OnWork(BattleMonster target)
         {
-            Debug.Log("Attack Preparation Work");
+            target.MoveToTarget();
         }
     }
 }

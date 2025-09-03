@@ -1,0 +1,83 @@
+using Monsters;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ArmyStandRowHandler : MonoBehaviour
+{
+    public int maxUnitsInRow;
+    public float spaceBetweenUnitInRow;
+    public float spaceBetweenRows;
+    public List<Row> rows = new List<Row>();
+    public event Action OnArmyRowChanged;
+
+    public Row Add(BattleMonster monster)
+    {
+        for(int i = 0; i < rows.Count; i++)
+        {
+            bool isAdded = rows[i].AddMember(monster);
+            if (isAdded)
+                return rows[i];
+        }
+        int newRowIndex = FindNewRowIndex(monster);
+        Row row = new Row(monster.monsterType, maxUnitsInRow);
+        row.AddMember(monster);
+        rows.Insert(newRowIndex, row);
+        OnArmyRowChanged?.Invoke();
+        return row;
+    }
+
+    public Vector3 GetPosition(BattleMonster monster, Row targetRow)
+    {
+        int rowsOder = rows.IndexOf(targetRow);
+        int monsterOrder = rows[rowsOder].rowMembersOrder.IndexOf(monster);
+
+        Vector3 positionInRow = (spaceBetweenUnitInRow * targetRow.rowMembersOrder.Count * 0.5f - monsterOrder * spaceBetweenUnitInRow) * Vector3.up;
+        Vector3 rowPostionInArmy = rowsOder * spaceBetweenRows * Vector3.left; 
+        return transform.position + positionInRow + rowPostionInArmy;
+    }
+
+    public void Remove(Row targetRow, BattleMonster monster)
+    {
+        int index = rows.IndexOf(targetRow);
+        rows[index].Remove(monster);
+        if (rows[index].rowMembersOrder.Count == 0)
+            rows.RemoveAt(index);
+        OnArmyRowChanged?.Invoke();
+    }
+
+    private int FindNewRowIndex(BattleMonster monster)
+    {
+        for(int i = 0; i < rows.Count; i++)
+        {
+            if(monster.monsterType < rows[i].type)
+                return i;
+        }
+        return rows.Count;
+    }
+
+    public class Row
+    {
+        public List<BattleMonster> rowMembersOrder = new();
+        public MonsterType type;
+        public int maxMemberNumber;
+
+        public Row (MonsterType type, int maxMemberNumber)
+        {
+            this.type = type;
+            this.maxMemberNumber = maxMemberNumber;
+        } 
+        public bool AddMember(BattleMonster monster)
+        {
+            if (rowMembersOrder.Count == maxMemberNumber || monster.monsterType != type)
+                return false;
+
+            rowMembersOrder.Add(monster);
+            return true;
+        }
+        public void Remove(BattleMonster monster)
+        {
+            rowMembersOrder.Remove(monster);
+        }
+    }
+}

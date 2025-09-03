@@ -2,23 +2,21 @@
 
 namespace Monsters
 {
-    public class MoveToTargetState : IBattleMonsterState
+    public class AttackState : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-            Debug.Log("MovementEnter");
-            target.FindAttackTarget();
+            target.Attack();
         }
 
         public void OnExit(BattleMonster target)
         {
-            Debug.Log("Movement Exit");
-            target.StopMoving();
+            Debug.Log("Attack Exit");
         }
 
         public void OnWork(BattleMonster target)
         {
-            target.MoveToTarget();
+
         }
     }
 }

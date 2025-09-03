@@ -11,6 +11,7 @@ namespace BattleField
         public float speed;
         public float attackDistance;
         public float attackSpeed;
+        public float attackPreparationTime;
         public float attackPriority;
     }
 }

@@ -12,7 +12,8 @@ namespace BattleField
         private DataTransferScene _dataTransfer;
         public BattleSceneSetting CurrentSceneSettings { get; private set; }
         public List<MonsterIdelData> AllMonstersUnits { get; private set; }
-        private MonsterUnitFactory _factory; 
+        private MonsterUnitFactory _factory;
+        private EnemyWaveHandler _waveHandler;
 
         [Inject]
         public LevelBuilder(DataTransferScene dataTransfer, MonsterUnitFactory factory)

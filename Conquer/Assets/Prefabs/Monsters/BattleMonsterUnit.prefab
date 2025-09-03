@@ -129,10 +129,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemyUnit: 0
+  monsterLevel: 0
+  monsterType: 0
   provocationDistance: 3
   maxTracingDistance: 4
   speed: 0.76
   attackDistance: 1.7
   attackSpeed: 1.67
+  attackPreparationTime: 0
   isReadyToAttack: 1
   _keepingPosition: {x: 0, y: 0, z: 0}
+  rowHandler: {fileID: 0}

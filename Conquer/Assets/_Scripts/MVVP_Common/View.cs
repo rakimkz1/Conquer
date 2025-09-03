@@ -11,4 +11,5 @@ public abstract class View<TViewModel> : MonoBehaviour where TViewModel : class
     }
 
     protected abstract void OnBind();
+
 }

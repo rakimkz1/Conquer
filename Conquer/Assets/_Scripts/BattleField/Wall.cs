@@ -30,4 +30,8 @@ public class Wall : MonoBehaviour, IAttackTarget
         targetPosition = transform.position;
         attackPriority = 1f;
     }
+    private void Update()
+    {
+        targetPosition = transform.position;
+    }
 }

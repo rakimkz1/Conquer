@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Threading;
+using UnityEngine;
 namespace Monsters
 {
     public class IdelState : IBattleMonsterState
@@ -14,6 +15,7 @@ namespace Monsters
 
         public void OnExit(BattleMonster target)
         {
+            target.isMonsterInKeepingPosition = false;
             _cancelToken?.Cancel();
         }
 

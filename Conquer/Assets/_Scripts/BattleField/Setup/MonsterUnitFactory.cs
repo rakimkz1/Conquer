@@ -11,6 +11,8 @@ namespace BattleField
         private DiContainer _container;
         private GameObject _monsterPrefab;
         private List<BattleMonsterPreset> so_monsterPreset;
+        [Inject(Id = "playerArmyRow")] private ArmyStandRowHandler playerArmyRow;
+        [Inject(Id = "enemyArmyRow")] private ArmyStandRowHandler enemyArmyRow;
         public MonsterUnitFactory(DiContainer container, GameObject monsterPrefab, List<BattleMonsterPreset> list)
         {
             _container = container;
@@ -24,18 +26,23 @@ namespace BattleField
             BattleMonster monster = target.GetComponent<BattleMonster>();
 
             monster.isEnemyUnit = isEnemy;
+            monster.rowHandler = isEnemy ? enemyArmyRow : playerArmyRow;
             SetMonsterSetting(type, monster);
             target.transform.position = position;
         }
 
+
         private void SetMonsterSetting(MonsterIdelData type, BattleMonster monster)
         {
             BattleMonsterPreset monsterPreset = FindMonsterPreset(type);
+            monster.monsterLevel = type.monsterLevel;
+            monster.monsterType = type.monsterType;
             monster.provocationDistance = monsterPreset.provocationDistance;
             monster.maxTracingDistance = monsterPreset.maxTracingDistance;
             monster.speed = monsterPreset.speed;
             monster.attackDistance = monsterPreset.attackDistance;
             monster.attackSpeed = monsterPreset.attackSpeed;
+            monster.attackPreparationTime = monsterPreset.attackPreparationTime;
             monster.attackPriority = monsterPreset.attackPriority;
         }
 

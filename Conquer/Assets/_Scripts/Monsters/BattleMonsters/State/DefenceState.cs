@@ -1,22 +1,22 @@
-using System;
+﻿using UnityEngine;
 
 namespace Monsters
 {
-    public class ReturnToPositionState : IBattleMonsterState
+    public class DefenceState : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnExit(BattleMonster target)
         {
-            throw new NotImplementedException();
+
         }
 
         public void OnWork(BattleMonster target)
         {
-            target.ReturnToPosition();
+
         }
     }
 }

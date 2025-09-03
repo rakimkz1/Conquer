@@ -1,23 +1,23 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace Monsters
 {
-    public class DefenceState : IBattleMonsterState
+    public class ReturnToPositionState : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-            Debug.Log("Defence Enter");
+            Debug.Log("Return to position enter");
         }
 
         public void OnExit(BattleMonster target)
         {
-            Debug.Log("Defence Exit");
+
         }
 
         public void OnWork(BattleMonster target)
         {
-            Debug.Log("Defence Work");
+            target.ReturnToPosition();
         }
     }
 }

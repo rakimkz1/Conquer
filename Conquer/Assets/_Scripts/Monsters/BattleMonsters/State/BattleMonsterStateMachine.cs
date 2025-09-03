@@ -1,13 +1,14 @@
 ﻿using BattleField;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Monsters
 {
     public class BattleMonsterStateMachine
     {
         public IBattleMonsterState currentState;
-        public ArmyCommandTypes currentArmyCommand;
+        public ArmyCommandTypes currentArmyCommand = ArmyCommandTypes.Defence;
         public Dictionary<IBattleMonsterState, List<TransitionState>> transitions = new();
         public List<TransitionState> anyTransitions = new();
         private BattleMonster _monster;
@@ -45,6 +46,7 @@ namespace Monsters
             {
                 if (state.Condition() && currentState != state.TargetState)
                 {
+                    Debug.Log(state.TargetState.ToString());
                     SwichState(state.TargetState);
                     return;
                 }
