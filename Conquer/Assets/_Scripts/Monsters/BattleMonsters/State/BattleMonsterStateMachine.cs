@@ -8,6 +8,7 @@ namespace Monsters
     public class BattleMonsterStateMachine
     {
         public IBattleMonsterState currentState;
+        public IBattleMonsterState movingToState;
         public ArmyCommandTypes currentArmyCommand = ArmyCommandTypes.Defence;
         public Dictionary<IBattleMonsterState, List<TransitionState>> transitions = new();
         public List<TransitionState> anyTransitions = new();
@@ -23,6 +24,7 @@ namespace Monsters
 
         public void SwichState(IBattleMonsterState swichTo)
         {
+            movingToState = swichTo;
             currentState?.OnExit(_monster);
             currentState = swichTo;
             swichTo.OnEnter(_monster);
@@ -46,7 +48,7 @@ namespace Monsters
             {
                 if (state.Condition() && currentState != state.TargetState)
                 {
-                    Debug.Log(state.TargetState.ToString());
+                    //Debug.Log(state.TargetState.ToString());
                     SwichState(state.TargetState);
                     return;
                 }
@@ -61,6 +63,7 @@ namespace Monsters
                 {
                     if (stateTransitions[i].Condition())
                     {
+                        Debug.Log($"Swich from {currentState.ToString()}  to {stateTransitions[i].TargetState.ToString()}");
                         SwichState(stateTransitions[i].TargetState);
                         return;
                     }

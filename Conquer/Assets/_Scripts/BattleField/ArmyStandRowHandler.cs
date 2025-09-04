@@ -13,6 +13,7 @@ public class ArmyStandRowHandler : MonoBehaviour
 
     public Row Add(BattleMonster monster)
     {
+        OnArmyRowChanged?.Invoke();
         for(int i = 0; i < rows.Count; i++)
         {
             bool isAdded = rows[i].AddMember(monster);
@@ -23,7 +24,6 @@ public class ArmyStandRowHandler : MonoBehaviour
         Row row = new Row(monster.monsterType, maxUnitsInRow);
         row.AddMember(monster);
         rows.Insert(newRowIndex, row);
-        OnArmyRowChanged?.Invoke();
         return row;
     }
 
@@ -33,7 +33,7 @@ public class ArmyStandRowHandler : MonoBehaviour
         int monsterOrder = rows[rowsOder].rowMembersOrder.IndexOf(monster);
 
         Vector3 positionInRow = (spaceBetweenUnitInRow * targetRow.rowMembersOrder.Count * 0.5f - monsterOrder * spaceBetweenUnitInRow) * Vector3.up;
-        Vector3 rowPostionInArmy = rowsOder * spaceBetweenRows * Vector3.left; 
+        Vector3 rowPostionInArmy = (rows.Count - rowsOder) * spaceBetweenRows * Vector3.right; 
         return transform.position + positionInRow + rowPostionInArmy;
     }
 

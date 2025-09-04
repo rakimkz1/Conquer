@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Monsters
 {
@@ -12,7 +13,10 @@ namespace Monsters
 
         public void OnExit(BattleMonster target)
         {
-
+            if(target.stateMachine.movingToState is DefenceState == false)
+            {
+                target.ExitFromRow();
+            }
         }
 
         public void OnWork(BattleMonster target)

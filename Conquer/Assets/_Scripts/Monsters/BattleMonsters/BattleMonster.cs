@@ -30,7 +30,6 @@ namespace Monsters
         public Vector3 targetPosition { get; set; }
         public bool isRowPlaceChanged { get; private set; }
         public bool isMonsterInKeepingPosition;
-        private ArmyCommandHandler _armyCommandHandler;
         private AttackableUnitsOnSceneCollection _targetCollection;
         private ArmyStandRowHandler.Row _denfenceStandRow;
         private Vector3 _defencePosition;
@@ -114,11 +113,15 @@ namespace Monsters
         {
             if (isRowPlaceChanged == true)
                 return;
-            rowHandler.Remove(_denfenceStandRow, this);
             rowHandler.OnArmyRowChanged -= RowPositionChanged;
+            rowHandler.Remove(_denfenceStandRow, this);
             _denfenceStandRow = null;
         }
-        public void RowPositionChanged() => isRowPlaceChanged = true;
+        public void RowPositionChanged()
+        {
+            if(stateMachine.currentArmyCommand == ArmyCommandTypes.Defence)
+                isRowPlaceChanged = true;
+        }
 
         public void MoveToDefencePosition()
         {
@@ -149,20 +152,10 @@ namespace Monsters
         }
         public void Dead()
         {
-            _armyCommandHandler.OnCommand[monsterType] -= ListenArmyCommand;
+            _commandHandler.OnCommand[monsterType] -= ListenArmyCommand;
         }
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(transform.position, provocationDistance);
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position, attackDistance);
-            if(_keepingPosition != null)
-            {
-                Gizmos.color = Color.blue;
-                Gizmos.DrawSphere(_keepingPosition, 0.2f);
-            }
         }
-
     }
 }

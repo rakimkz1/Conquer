@@ -14,7 +14,6 @@ public class DataTransferScene : MonoBehaviour
     [Inject]
     private void Construct(BattleSceneSetting battleSceneSetting)
     {
-        Set(SceneTransferKeys.CURRENT_BATTLE_SETTING, battleSceneSetting);
     }
     public object Get<T>(string key)
     {

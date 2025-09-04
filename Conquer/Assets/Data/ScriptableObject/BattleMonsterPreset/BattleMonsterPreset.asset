@@ -16,9 +16,9 @@ MonoBehaviour:
     monsterLevel: 0
     monsterType: 2
   provocationDistance: 2.18
-  maxTracingDistance: 0.5
+  maxTracingDistance: 5
   speed: 2.74
   attackDistance: 0.59
   attackSpeed: 0.89
-  attackPreparationTime: 1.32
+  attackPreparationTime: 3.17
   attackPriority: 0.45

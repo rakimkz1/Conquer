@@ -16,17 +16,18 @@ namespace BattleField
         private EnemyWaveHandler _waveHandler;
 
         [Inject]
-        public LevelBuilder(DataTransferScene dataTransfer, MonsterUnitFactory factory)
+        public LevelBuilder(DataTransferScene dataTransfer, MonsterUnitFactory factory, BattleSceneSetting sceneSetting)
         {
             _dataTransfer = dataTransfer;
             _factory = factory;
+            CurrentSceneSettings = sceneSetting;
             Initialize();
         }
 
         private void Initialize()
         {
             string key = SceneTransferKeys.CURRENT_BATTLE_SETTING;
-            CurrentSceneSettings = _dataTransfer.Get<BattleSceneSetting>(key) as BattleSceneSetting;
+            //CurrentSceneSettings = _dataTransfer.Get<BattleSceneSetting>(key) as BattleSceneSetting;
         }
 
         public void SetAllMonsterUnit(List<MonsterIdelData> list)

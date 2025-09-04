@@ -14,7 +14,7 @@ public class BattleFieldInstaller : MonoInstaller
     [SerializeField] private ArmyStandRowHandler enemyRowHandler;
     public override void InstallBindings()
     {
-        Container.Bind<BattleSceneSetting>().AsSingle();
+        Container.Bind<BattleSceneSetting>().FromInstance(BattleSceneSetting).AsSingle();
         BindManagers();
         BindMVVM();
         BindScriptableObjects();
@@ -36,7 +36,7 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<ArmyCommandHandler>().AsSingle();
         Container.Bind<AttackableUnitsOnSceneCollection>().AsSingle();
         Container.Bind<MonsterUnitFactory>().AsTransient().WithArguments(monsterUnitPrefab);
-        //Container.Bind<EnemyWaveHandler>().AsSingle().NonLazy();
+        Container.Bind<EnemyWaveHandler>().AsSingle().NonLazy();
     }
     private void BindPrefabs()
     {

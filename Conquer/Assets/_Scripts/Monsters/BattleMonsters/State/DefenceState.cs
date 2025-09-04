@@ -11,7 +11,7 @@ namespace Monsters
 
         public void OnExit(BattleMonster target)
         {
-
+            target.ExitFromRow();
         }
 
         public void OnWork(BattleMonster target)

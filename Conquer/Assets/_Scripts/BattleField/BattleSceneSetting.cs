@@ -11,7 +11,7 @@ namespace BattleField
     {
         public int allowedMonstersNumber;
         public int enemysWallHealth;
-        public List<EnemyWave> enemyWaves;
+        public List<EnemyWave> enemyWaves = new();
 
         [Serializable]
         public class EnemyWave
