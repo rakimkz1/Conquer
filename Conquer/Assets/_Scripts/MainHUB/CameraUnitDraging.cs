@@ -4,25 +4,15 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CameraMovement : MonoBehaviour
+public class CameraUnitDraging : MonoBehaviour
 {
     [SerializeField, Range(0f, 1f)] private float acceptableTime;
-    [SerializeField, Range(0f, 10f)] private float speed;
     private bool isDragging = false;
     private CancellationTokenSource token;
 
     private void Update()
     {
         CheckDragging();
-        CameraMove();
-    }
-
-    private void CameraMove()
-    {
-        if (!isDragging)
-            return;
-
-        transform.position += Input.mousePositionDelta * -speed * Time.deltaTime;
     }
     private void CheckDragging()
     {
