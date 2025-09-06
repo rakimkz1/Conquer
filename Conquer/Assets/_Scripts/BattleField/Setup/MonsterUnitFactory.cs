@@ -1,9 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game_Setup;
 using Monsters;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +16,7 @@ namespace BattleField
         private SaveData _saveData;
         private ResourceManager _resourceManager;
         private PlayerStartProperties so_playerStartProperties;
+        private BattleMonsterPreset _preset;
         [Inject(Id = "playerArmyRow")] private ArmyStandRowHandler playerArmyRow;
         [Inject(Id = "enemyArmyRow")] private ArmyStandRowHandler enemyArmyRow;
         [Inject(Id = "playerRetreatPoint")] private Transform playerRetreatPoint;
@@ -35,35 +34,26 @@ namespace BattleField
             LoadResources();
         }
 
-
         public void Create(bool isEnemy, MonsterIdelData type, Vector3 position)
         {
             GameObject target = _container.InstantiatePrefab(_monsterPrefab);
             BattleMonster monster = target.GetComponent<BattleMonster>();
-
+            _preset = FindMonsterPreset(type);
             monster.isEnemyUnit = isEnemy;
-            monster.rowHandler = isEnemy ? enemyArmyRow : playerArmyRow;
-            monster.outOfBattlePoint = isEnemy ? enemyRetreatPoint : playerRetreatPoint;
-            monster.enterToBattleInRowHandler = isEnemy ? enemyEnterToBattle : playerEnterToBattle;
-            SetMonsterHealProperties(monster);
             SetMonsterSetting(type, monster);
             target.transform.position = position;
         }
-
-
         private void SetMonsterSetting(MonsterIdelData type, BattleMonster monster)
         {
-            BattleMonsterPreset monsterPreset = FindMonsterPreset(type);
             monster.monsterLevel = type.monsterLevel;
             monster.monsterType = type.monsterType;
-            monster.provocationDistance = monsterPreset.provocationDistance;
-            monster.maxTracingDistance = monsterPreset.maxTracingDistance;
-            monster.speed = monsterPreset.speed;
-            monster.attackDistance = monsterPreset.attackDistance;
-            monster.attackSpeed = monsterPreset.attackSpeed;
-            monster.attackPreparationTime = monsterPreset.attackPreparationTime;
-            monster.attackPriority = monsterPreset.attackPriority;
-            monster.healthHandler.maxHealth = monsterPreset.maxHealth;
+
+            SetMonsterHealProperties(monster);
+            SetAttackHandler(monster);
+            SetDefenceHandler(monster);
+            SetStandHandler(monster);
+            SetRetreatHandler(monster);
+            monster.healthHandler.maxHealth = _preset.maxHealth;
         }
         private void SetMonsterHealProperties(BattleMonster monster)
         {
@@ -82,6 +72,25 @@ namespace BattleField
             monster.healthHandler = new HealthHandler();
             monster.healthHandler.retreadHealAmount = retreatHealAmount;
             monster.healthHandler.retreatHealColdown = retreatHealColdown;
+        }
+        private void SetAttackHandler(BattleMonster monster)
+        {
+            monster.attackHandler = new AttackHandler(monster, _preset.attackSpeed,_preset.attackDistance, _preset.attackPreparationTime, _preset.speed);
+        }
+        private void SetDefenceHandler(BattleMonster monster)
+        {
+            ArmyStandRowHandler rowHandler = monster.isEnemyUnit ? enemyArmyRow : playerArmyRow;
+            monster.defenceHandler = new DefenceHander(monster, rowHandler, _preset.speed);
+        }
+        private void SetStandHandler(BattleMonster monster)
+        {
+            monster.standPositionHandler = new StandPositionHandler(monster, _preset.speed, _preset.provocationDistance, _preset.maxTracingDistance);
+        }
+        private void SetRetreatHandler(BattleMonster monster)
+        {
+            EnterToBattleInRowHandler enterBattle = monster.isEnemyUnit ? enemyEnterToBattle : playerEnterToBattle;
+            Transform pointPos = monster.isEnemyUnit ? enemyRetreatPoint : playerRetreatPoint;
+            monster.retreatHandler = new RetreatHandler(monster, enterBattle, pointPos, _preset.speed);
         }
         private async UniTask LoadResources()
         {

@@ -1,22 +1,14 @@
-﻿using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class DefenceState : IBattleMonsterState
     {
-        public void OnEnter(BattleMonster target)
-        {
-            
-        }
+        public void OnEnter(BattleMonster target) { }
 
         public void OnExit(BattleMonster target)
         {
-            target.ExitFromRow();
+            target.defenceHandler.ExitFromRow();
         }
 
-        public void OnWork(BattleMonster target)
-        {
-
-        }
+        public void OnWork(BattleMonster target) { }
     }
 }

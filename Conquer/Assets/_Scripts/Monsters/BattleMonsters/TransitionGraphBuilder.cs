@@ -45,7 +45,7 @@ namespace Monsters
         {
             _stateMachine.AddAnyTransition(_attackPreparationState, () =>
             {
-                return _monster.IsTargetAttackRange() && _monster.isReadyToAttack;
+                return _monster.IsTargetAttackRange() && _monster.isCapableToAttack();
             });
             _stateMachine.AddAnyTransition(_moveToTargetState, () =>
             {
@@ -65,7 +65,7 @@ namespace Monsters
             });
             _stateMachine.AddTransition(_attackPreparationState, _attackState, () =>
             {
-                return _attackPreparationState.IsReady;
+                return _monster.isReadyToAttack();
             });
             _stateMachine.AddTransition(_moveDefencePosition, _defenceState, () =>
             {
@@ -73,11 +73,11 @@ namespace Monsters
             });
             _stateMachine.AddTransition(_moveDefencePosition, _moveDefencePosition, () =>
             {
-                return _monster.isRowPlaceChanged;
+                return _monster.isRowPlaceChanged();
             });
             _stateMachine.AddTransition(_defenceState, _moveDefencePosition, () =>
             {
-                return _monster.isRowPlaceChanged;
+                return _monster.isRowPlaceChanged();
             });
             _stateMachine.AddTransition(_idelState, _traceTargetFromKeepingPosition, () =>
             {
@@ -89,7 +89,7 @@ namespace Monsters
             });
             _stateMachine.AddTransition(_returnToPositionState, _idelState, () =>
             {
-                return _stateMachine.currentArmyCommand == ArmyCommandTypes.KeepPosition && _monster.isMonsterInKeepingPosition;
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.KeepPosition && _monster.isMonsterInKeepingPosition();
             });
             _stateMachine.AddTransition(_retreatState, _outOfBattleState, () =>
             {
@@ -101,11 +101,11 @@ namespace Monsters
             });
             _stateMachine.AddTransition(_waitEnterToBattle, _moveToTargetState, () =>
             {
-                return _monster.isAllowedToEnterBattle && _stateMachine.currentArmyCommand == ArmyCommandTypes.Attack;
+                return _monster.isAllowedToEnterBattle() && _stateMachine.currentArmyCommand == ArmyCommandTypes.Attack;
             });
             _stateMachine.AddTransition(_waitEnterToBattle, _moveDefencePosition, () =>
             {
-                return _monster.isAllowedToEnterBattle && _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence;
+                return _monster.isAllowedToEnterBattle() && _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence;
             });
         }
     }

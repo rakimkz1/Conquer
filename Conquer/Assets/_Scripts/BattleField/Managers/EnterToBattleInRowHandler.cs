@@ -1,10 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Monsters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BattleField
@@ -27,10 +24,10 @@ namespace BattleField
                     retreatedUnitsList[i].AddMember(monster);
                     if (onAllowedEnterMap.ContainsKey(monster))
                     {
-                        onAllowedEnterMap[monster] += monster.AllowedEnterToBattle;
+                        onAllowedEnterMap[monster] += monster.retreatHandler.AllowedEnterToBattle;
                         return;
                     }
-                    onAllowedEnterMap.Add(monster, monster.AllowedEnterToBattle);
+                    onAllowedEnterMap.Add(monster, monster.retreatHandler.AllowedEnterToBattle);
                     return;
                 }
             }
@@ -41,7 +38,6 @@ namespace BattleField
         public void RequestToEnterBattle(BattleMonster monster)
         {
             isMonsterOrderedEnter[(int)monster.monsterType] = true;
-            Debug.Log("Request to Enter");
             CheckAllRequests();
         }
 
@@ -92,10 +88,10 @@ namespace BattleField
             retreatedUnitsList.Add(row);
             if(onAllowedEnterMap.ContainsKey(monster))
             {
-                onAllowedEnterMap[monster] += monster.AllowedEnterToBattle;
+                onAllowedEnterMap[monster] += monster.retreatHandler.AllowedEnterToBattle;
                 return;
             }
-            onAllowedEnterMap.Add(monster, monster.AllowedEnterToBattle);
+            onAllowedEnterMap.Add(monster, monster.retreatHandler.AllowedEnterToBattle);
         }
     }
 }

@@ -1,22 +1,14 @@
-﻿using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class RetreatState : IBattleMonsterState
     {
-        public void OnEnter(BattleMonster target)
-        {
+        public void OnEnter(BattleMonster target) { }
 
-        }
-
-        public void OnExit(BattleMonster target)
-        {
-            Debug.Log("Retreat Exit");
-        }
+        public void OnExit(BattleMonster target) { }
 
         public void OnWork(BattleMonster target)
         {
-            target.MoveToRetreatPoint();
+            target.retreatHandler.MoveToRetreatPoint();
         }
     }
 }

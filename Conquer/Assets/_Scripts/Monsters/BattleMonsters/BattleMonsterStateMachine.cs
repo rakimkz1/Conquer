@@ -1,7 +1,6 @@
 ﻿using BattleField;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Monsters
 {
@@ -18,9 +17,7 @@ namespace Monsters
         {
             _monster = monster;
             _transitionGraphBuilder = new TransitionGraphBuilder(this, _monster);
-
         }
-        
 
         public void SwichState(IBattleMonsterState swichTo)
         {
@@ -34,6 +31,7 @@ namespace Monsters
         {
             if(!transitions.ContainsKey(from))
                 transitions[from] = new List<TransitionState>();
+
             transitions[from].Add(new TransitionState(to, condition));
         }
 
@@ -57,16 +55,16 @@ namespace Monsters
 
         public void CheckTransitions()
         {
-            if(transitions.TryGetValue(currentState, out List<TransitionState> stateTransitions))
+            if (!transitions.TryGetValue(currentState, out List<TransitionState> stateTransitions))
+                return;
+            
+            for(int i = 0; i < stateTransitions.Count; i++)
             {
-                for(int i = 0; i < stateTransitions.Count; i++)
+                if (stateTransitions[i].Condition())
                 {
-                    if (stateTransitions[i].Condition())
-                    {
-                        //Debug.Log($"Swich from {currentState.ToString()}  to {stateTransitions[i].TargetState.ToString()}");
-                        SwichState(stateTransitions[i].TargetState);
-                        return;
-                    }
+                    //Debug.Log($"Swich from {currentState.ToString()}  to {stateTransitions[i].TargetState.ToString()}");
+                    SwichState(stateTransitions[i].TargetState);
+                    return;
                 }
             }
         }

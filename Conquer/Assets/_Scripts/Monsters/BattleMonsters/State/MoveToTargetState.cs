@@ -1,7 +1,4 @@
-﻿using BattleField;
-using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class MoveToTargetState : IBattleMonsterState
     {
@@ -9,15 +6,10 @@ namespace Monsters
         {
             target.FindAttackTarget();
         }
-
-        public void OnExit(BattleMonster target)
-        {
-            
-        }
-
+        public void OnExit(BattleMonster target) { }
         public void OnWork(BattleMonster target)
         {
-            target.MoveToTarget();
+            target.attackHandler.MoveToTarget();
         }
     }
 }

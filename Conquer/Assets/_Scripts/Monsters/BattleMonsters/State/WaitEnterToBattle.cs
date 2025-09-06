@@ -1,22 +1,15 @@
-﻿using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class WaitEnterToBattle : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-            target.RequestEnterToBattle();
+            target.retreatHandler.RequestEnterToBattle();
         }
-
         public void OnExit(BattleMonster target)
         {
-            target.ResetAllowmentEnter();
+            target.retreatHandler.ResetAllowmentEnter();
         }
-
-        public void OnWork(BattleMonster target)
-        {
-
-        }
+        public void OnWork(BattleMonster target) { }
     }
 }

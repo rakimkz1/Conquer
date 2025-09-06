@@ -1,27 +1,24 @@
-﻿using System;
-using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class MoveToDefencePosition : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-            target.SetRow();
-            target.GetDefendePosition();
+            target.defenceHandler.SetRow();
+            target.defenceHandler.GetDefendePosition();
         }
 
         public void OnExit(BattleMonster target)
         {
             if(target.stateMachine.movingToState is DefenceState == false)
             {
-                target.ExitFromRow();
+                target.defenceHandler.ExitFromRow();
             }
         }
 
         public void OnWork(BattleMonster target)
         {
-            target.MoveToDefencePosition();
+            target.defenceHandler.MoveToDefencePosition();
         }
     }
 }

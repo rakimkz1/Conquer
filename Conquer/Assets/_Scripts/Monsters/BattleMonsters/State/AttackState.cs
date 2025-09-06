@@ -1,22 +1,14 @@
-﻿using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class AttackState : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-            target.Attack();
+            target.attackHandler.Attack();
         }
 
-        public void OnExit(BattleMonster target)
-        {
-            Debug.Log("Attack Exit");
-        }
+        public void OnExit(BattleMonster target) { }
 
-        public void OnWork(BattleMonster target)
-        {
-
-        }
+        public void OnWork(BattleMonster target) { }
     }
 }

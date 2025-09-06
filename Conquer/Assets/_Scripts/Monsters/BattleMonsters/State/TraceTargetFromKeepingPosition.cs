@@ -1,22 +1,14 @@
-﻿using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class TraceTargetFromKeepingPosition : IBattleMonsterState
     {
-        public void OnEnter(BattleMonster target)
-        {
-            Debug.Log("TraceState Enter");
-        }
+        public void OnEnter(BattleMonster target) { }
 
-        public void OnExit(BattleMonster target)
-        {
-
-        }
+        public void OnExit(BattleMonster target) { }
 
         public void OnWork(BattleMonster target)
         {
-            target.MoveToTarget();
+            target.attackHandler.MoveToTarget();
         }
     }
 }

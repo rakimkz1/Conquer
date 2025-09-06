@@ -1,22 +1,15 @@
-﻿using UnityEngine;
-
-namespace Monsters
+﻿namespace Monsters
 {
     public class OutOfBattleState : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-            target.GoOutOfBattle();
+            target.retreatHandler.GoOutOfBattle();
         }
-
         public void OnExit(BattleMonster target)
         {
-            target.EnterToBattleFromRetreat();
+            target.retreatHandler.EnterToBattleFromRetreat();
         }
-
-        public void OnWork(BattleMonster target)
-        {
-
-        }
+        public void OnWork(BattleMonster target) { }
     }
 }
