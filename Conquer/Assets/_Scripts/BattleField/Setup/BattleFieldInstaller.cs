@@ -1,4 +1,5 @@
 using BattleField;
+using ModestTree;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class BattleFieldInstaller : MonoInstaller
     [SerializeField] private GameObject monsterUnitPrefab;
     [SerializeField] private ArmyStandRowHandler playerRowHandler;
     [SerializeField] private ArmyStandRowHandler enemyRowHandler;
+    [SerializeField] private EnterToBattleInRowHandler playerRetreatPoint;
+    [SerializeField] private EnterToBattleInRowHandler enemyRetreatPoint;
+
     public override void InstallBindings()
     {
         Container.Bind<BattleSceneSetting>().FromInstance(BattleSceneSetting).AsSingle();
@@ -42,6 +46,10 @@ public class BattleFieldInstaller : MonoInstaller
     {
         Container.Bind<ArmyStandRowHandler>().WithId("playerArmyRow").FromInstance(playerRowHandler).AsCached();
         Container.Bind<ArmyStandRowHandler>().WithId("enemyArmyRow").FromInstance(enemyRowHandler).AsCached();
+        Container.Bind<Transform>().WithId("playerRetreatPoint").FromInstance(playerRetreatPoint.gameObject.transform).AsCached();
+        Container.Bind<Transform>().WithId("enemyRetreatPoint").FromInstance(enemyRetreatPoint.gameObject.transform).AsCached();
+        Container.Bind<EnterToBattleInRowHandler>().WithId("playerEnterToBattleInRow").FromInstance(playerRetreatPoint).AsCached();
+        Container.Bind<EnterToBattleInRowHandler>().WithId("enemyEnterToBattleInRow").FromInstance(enemyRetreatPoint).AsCached();
     }
     private void BindScriptableObjects()
     {

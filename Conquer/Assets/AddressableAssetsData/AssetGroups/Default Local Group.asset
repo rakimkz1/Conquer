@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 35844d271800aa6429d57d8d9a69e104
   m_SerializeEntries:
+  - m_GUID: 092adb1c0c2b2d340a1f331b0f850dcb
+    m_Address: Assets/Data/ScriptableObject/PlayerSetup/PlayerStartProperties.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 12953d0c06b0ad343b38f217badc667e
     m_Address: Assets/Prefabs/Monsters/Monster.prefab
     m_ReadOnly: 0

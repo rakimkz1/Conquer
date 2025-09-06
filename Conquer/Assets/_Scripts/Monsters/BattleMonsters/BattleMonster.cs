@@ -1,5 +1,6 @@
 using BattleField;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using System;
 using System.IO.Compression;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Monsters
     {
         public BattleMonsterStateMachine stateMachine;
         public AttackTargetFinder targetFinder;
+        public HealthHandler healthHandler;
         public bool isEnemyUnit;
         [Header("Properties")]
         public int monsterLevel;
@@ -26,12 +28,15 @@ namespace Monsters
         public Vector3 _keepingPosition;
         public event Action OnDead;
         public ArmyStandRowHandler rowHandler;
+        public EnterToBattleInRowHandler enterToBattleInRowHandler;
+        public Transform outOfBattlePoint;
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
         public bool isRowPlaceChanged { get; private set; }
+        public bool isAllowedToEnterBattle { get; private set; }
         public bool isMonsterInKeepingPosition;
         private AttackableUnitsOnSceneCollection _targetCollection;
-        private ArmyStandRowHandler.Row _denfenceStandRow;
+        private Row _denfenceStandRow;
         private Vector3 _defencePosition;
         private ArmyCommandHandler _commandHandler;
         [Inject]
@@ -70,6 +75,28 @@ namespace Monsters
         {
             Vector3 dir = (targetFinder.currentAttackTarget.targetPosition - transform.position).normalized;
             transform.Translate(dir * speed * Time.deltaTime);
+        }
+        public void MoveToRetreatPoint()
+        {
+            transform.position = Vector3.MoveTowards(transform.position, outOfBattlePoint.position, speed * Time.deltaTime);
+        }
+
+        public void GoOutOfBattle()
+        {
+            if (isEnemyUnit)
+                _targetCollection.RemoveEnemyUnit(this);
+            else
+                _targetCollection.RemovePlayerUnit(this);
+            healthHandler.GoOutOfBattle();
+            enterToBattleInRowHandler.Add(this);
+        }
+        public void EnterToBattleFromRetreat()
+        {
+            if (isEnemyUnit)
+                _targetCollection.AddEnemyUnit(this);
+            else
+                _targetCollection.AddPlayerUnit(this);
+            healthHandler.EnterToBattle();
         }
 
         public void RememberStayingPosition() => _keepingPosition = transform.position;
@@ -127,6 +154,16 @@ namespace Monsters
         {
             transform.position = Vector3.MoveTowards(transform.position, _defencePosition, speed * Time.deltaTime);
         }
+        public void AllowedEnterToBattle(Vector3 pos)
+        {
+            transform.position = pos;
+            isAllowedToEnterBattle = true;
+        }
+        public void ResetAllowmentEnter () => isAllowedToEnterBattle = false;
+        public void RequestEnterToBattle()
+        {
+            enterToBattleInRowHandler.RequestToEnterBattle(this);
+        }
         private async UniTask WaitAttackColdown()
         {
             isReadyToAttack = false;
@@ -150,12 +187,15 @@ namespace Monsters
                 return true;
             return false;
         }
+        public bool IsOutOfBattle()
+        {
+            if (transform.position == outOfBattlePoint.position)
+                return true;
+            return false;
+        }
         public void Dead()
         {
             _commandHandler.OnCommand[monsterType] -= ListenArmyCommand;
-        }
-        private void OnDrawGizmos()
-        {
         }
     }
 }

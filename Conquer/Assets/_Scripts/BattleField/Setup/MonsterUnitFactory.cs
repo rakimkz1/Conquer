@@ -1,6 +1,9 @@
-﻿using Monsters;
+﻿using Cysharp.Threading.Tasks;
+using Game_Setup;
+using Monsters;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -11,14 +14,27 @@ namespace BattleField
         private DiContainer _container;
         private GameObject _monsterPrefab;
         private List<BattleMonsterPreset> so_monsterPreset;
+        private SaveManager _saveManager;
+        private SaveData _saveData;
+        private ResourceManager _resourceManager;
+        private PlayerStartProperties so_playerStartProperties;
         [Inject(Id = "playerArmyRow")] private ArmyStandRowHandler playerArmyRow;
         [Inject(Id = "enemyArmyRow")] private ArmyStandRowHandler enemyArmyRow;
-        public MonsterUnitFactory(DiContainer container, GameObject monsterPrefab, List<BattleMonsterPreset> list)
+        [Inject(Id = "playerRetreatPoint")] private Transform playerRetreatPoint;
+        [Inject(Id = "enemyRetreatPoint")] private Transform enemyRetreatPoint;
+        [Inject(Id = "playerEnterToBattleInRow")] private EnterToBattleInRowHandler playerEnterToBattle;
+        [Inject(Id = "enemyEnterToBattleInRow")] private EnterToBattleInRowHandler enemyEnterToBattle;
+        public MonsterUnitFactory(DiContainer container, GameObject monsterPrefab, List<BattleMonsterPreset> list, SaveManager saveManager, ResourceManager resourceManager)
         {
             _container = container;
             _monsterPrefab = monsterPrefab;
             so_monsterPreset = list;
+            _resourceManager = resourceManager;
+            _saveManager = saveManager;
+            _saveData = _saveManager.Load();
+            LoadResources();
         }
+
 
         public void Create(bool isEnemy, MonsterIdelData type, Vector3 position)
         {
@@ -27,6 +43,9 @@ namespace BattleField
 
             monster.isEnemyUnit = isEnemy;
             monster.rowHandler = isEnemy ? enemyArmyRow : playerArmyRow;
+            monster.outOfBattlePoint = isEnemy ? enemyRetreatPoint : playerRetreatPoint;
+            monster.enterToBattleInRowHandler = isEnemy ? enemyEnterToBattle : playerEnterToBattle;
+            SetMonsterHealProperties(monster);
             SetMonsterSetting(type, monster);
             target.transform.position = position;
         }
@@ -44,6 +63,32 @@ namespace BattleField
             monster.attackSpeed = monsterPreset.attackSpeed;
             monster.attackPreparationTime = monsterPreset.attackPreparationTime;
             monster.attackPriority = monsterPreset.attackPriority;
+            monster.healthHandler.maxHealth = monsterPreset.maxHealth;
+        }
+        private void SetMonsterHealProperties(BattleMonster monster)
+        {
+            float retreatHealAmount = _saveData.Get<float>(SaveDataKeys.PLAYER_RETREAT_HEAL_AMOUNT, out bool isContainHealAmount);
+            float retreatHealColdown = _saveData.Get<float>(SaveDataKeys.PLAYER_RETREAT_HEAL_COLDOWN, out bool isContainHealColdown);
+            if (!isContainHealAmount)
+            {
+                retreatHealAmount = so_playerStartProperties.RetreatHealAmount;
+                _saveData.Set(SaveDataKeys.PLAYER_RETREAT_HEAL_AMOUNT, retreatHealAmount);
+            }
+            if (!isContainHealColdown)
+            {
+                retreatHealColdown = so_playerStartProperties.RetreatHealColdown;
+                _saveData.Set(SaveDataKeys.PLAYER_RETREAT_HEAL_COLDOWN, retreatHealColdown);
+            }
+            monster.healthHandler = new HealthHandler();
+            monster.healthHandler.retreadHealAmount = retreatHealAmount;
+            monster.healthHandler.retreatHealColdown = retreatHealColdown;
+        }
+        private async UniTask LoadResources()
+        {
+            _resourceManager.LoadAsset<PlayerStartProperties>(_resourceManager.so_Keys.GetKey(PrefabKey.PlayerStartProperties),value =>
+            {
+                so_playerStartProperties = value;
+            });
         }
 
         private BattleMonsterPreset FindMonsterPreset(MonsterIdelData type)

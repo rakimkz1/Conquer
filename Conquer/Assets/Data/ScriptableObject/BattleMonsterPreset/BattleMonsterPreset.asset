@@ -22,3 +22,4 @@ MonoBehaviour:
   attackSpeed: 0.89
   attackPreparationTime: 3.17
   attackPriority: 0.45
+  maxHealth: 80

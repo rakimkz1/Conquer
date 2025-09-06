@@ -2,21 +2,21 @@
 
 namespace Monsters
 {
-    public class RetreatState : IBattleMonsterState
+    public class OutOfBattleState : IBattleMonsterState
     {
         public void OnEnter(BattleMonster target)
         {
-
+            target.GoOutOfBattle();
         }
 
         public void OnExit(BattleMonster target)
         {
-            Debug.Log("Retreat Exit");
+            target.EnterToBattleFromRetreat();
         }
 
         public void OnWork(BattleMonster target)
         {
-            target.MoveToRetreatPoint();
+
         }
     }
 }

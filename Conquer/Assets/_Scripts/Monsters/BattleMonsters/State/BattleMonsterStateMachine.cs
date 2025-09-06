@@ -63,7 +63,7 @@ namespace Monsters
                 {
                     if (stateTransitions[i].Condition())
                     {
-                        Debug.Log($"Swich from {currentState.ToString()}  to {stateTransitions[i].TargetState.ToString()}");
+                        //Debug.Log($"Swich from {currentState.ToString()}  to {stateTransitions[i].TargetState.ToString()}");
                         SwichState(stateTransitions[i].TargetState);
                         return;
                     }

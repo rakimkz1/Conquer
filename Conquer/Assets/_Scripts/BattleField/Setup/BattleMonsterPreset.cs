@@ -13,5 +13,6 @@ namespace BattleField
         public float attackSpeed;
         public float attackPreparationTime;
         public float attackPriority;
+        public float maxHealth;
     }
 }

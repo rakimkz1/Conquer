@@ -19,3 +19,5 @@ MonoBehaviour:
     prefabLocation: Assets/Prefabs/Monsters/Monster.prefab
   - key: 2
     prefabLocation: Assets/Prefabs/BattleField/SelectionIcon.prefab
+  - key: 3
+    prefabLocation: Assets/Data/ScriptableObject/PlayerSetup/PlayerStartProperties.asset

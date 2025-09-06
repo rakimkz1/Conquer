@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmyStandRowHandler : MonoBehaviour
+public partial class ArmyStandRowHandler : MonoBehaviour
 {
     public int maxUnitsInRow;
     public float spaceBetweenUnitInRow;
@@ -32,8 +32,8 @@ public class ArmyStandRowHandler : MonoBehaviour
         int rowsOder = rows.IndexOf(targetRow);
         int monsterOrder = rows[rowsOder].rowMembersOrder.IndexOf(monster);
 
+        Vector3 rowPostionInArmy = (rows.Count - rowsOder) * spaceBetweenRows * Vector3.right;
         Vector3 positionInRow = (spaceBetweenUnitInRow * targetRow.rowMembersOrder.Count * 0.5f - monsterOrder * spaceBetweenUnitInRow) * Vector3.up;
-        Vector3 rowPostionInArmy = (rows.Count - rowsOder) * spaceBetweenRows * Vector3.right; 
         return transform.position + positionInRow + rowPostionInArmy;
     }
 
@@ -54,30 +54,5 @@ public class ArmyStandRowHandler : MonoBehaviour
                 return i;
         }
         return rows.Count;
-    }
-
-    public class Row
-    {
-        public List<BattleMonster> rowMembersOrder = new();
-        public MonsterType type;
-        public int maxMemberNumber;
-
-        public Row (MonsterType type, int maxMemberNumber)
-        {
-            this.type = type;
-            this.maxMemberNumber = maxMemberNumber;
-        } 
-        public bool AddMember(BattleMonster monster)
-        {
-            if (rowMembersOrder.Count == maxMemberNumber || monster.monsterType != type)
-                return false;
-
-            rowMembersOrder.Add(monster);
-            return true;
-        }
-        public void Remove(BattleMonster monster)
-        {
-            rowMembersOrder.Remove(monster);
-        }
     }
 }
