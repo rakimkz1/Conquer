@@ -6,11 +6,15 @@ namespace BattleField
 {
     public class ArmyCommandHandler
     {
-        public Dictionary<MonsterType, Action<ArmyCommandTypes>> OnCommand = new Dictionary<MonsterType, Action<ArmyCommandTypes>>();
-
-        public void SayCommand(MonsterType type, ArmyCommandTypes commandType)
+        public event Action<MonsterType, ArmyCommandTypes> OnEnemyCommand;
+        public event Action<MonsterType, ArmyCommandTypes> OnPlayerCommand;
+        public void SayCommandEnemy(MonsterType type, ArmyCommandTypes commandType)
         {
-            OnCommand[type]?.Invoke(commandType);
+            OnEnemyCommand?.Invoke(type, commandType);
+        }
+        public void SayCommandPlayer(MonsterType type, ArmyCommandTypes commandType)
+        {
+            OnPlayerCommand?.Invoke(type, commandType);
         }
     }
 

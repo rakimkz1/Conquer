@@ -35,9 +35,9 @@ namespace BattleField
             return;
         }
 
-        public void RequestToEnterBattle(BattleMonster monster)
+        public void RequestToEnterBattle(MonsterType monsterType)
         {
-            isMonsterOrderedEnter[(int)monster.monsterType] = true;
+            isMonsterOrderedEnter[(int)monsterType] = true;
             CheckAllRequests();
         }
 
@@ -45,6 +45,7 @@ namespace BattleField
         {
             if (isSpawningColdown)
                 return;
+            isSpawningColdown = true;
             for(int  i = 0; i < isMonsterOrderedEnter.Length; i++)
             {
                 if (isMonsterOrderedEnter[i])
@@ -54,11 +55,11 @@ namespace BattleField
                     i = -1;
                 }
             }
+            isSpawningColdown = false;
         }
 
         private async UniTask AllowRowToEnter(MonsterType type)
         {
-            isSpawningColdown = true;
             for(int i = 0; i < retreatedUnitsList.Count; i++)
             {
                 if (retreatedUnitsList[i].type == type)
@@ -69,7 +70,6 @@ namespace BattleField
                     await UniTask.Delay((int)(rowSpawnTime * 1000f));
                 }
             }
-            isSpawningColdown = false;
         }
 
         private void SendStartPositionToUnits(Row row)
@@ -79,6 +79,7 @@ namespace BattleField
                 Vector3 pos = transform.position + (spaceBetweenUnitInRow * (row.rowMembersOrder.Count - 1) * 0.5f - i * spaceBetweenUnitInRow) * Vector3.up;
                 onAllowedEnterMap[row.rowMembersOrder[i]]?.Invoke(pos);
             }
+            Debug.Log($"Allow To Enter {row.type.ToString()}");
         }
 
         private void AddNewRow(BattleMonster monster)
@@ -92,6 +93,20 @@ namespace BattleField
                 return;
             }
             onAllowedEnterMap.Add(monster, monster.retreatHandler.AllowedEnterToBattle);
+        }
+
+        [ContextMenu("CkeckInfo")]
+        public void CheckInfo()
+        {
+            for(int i=0;i<retreatedUnitsList.Count; i++)
+            {
+                string answer = "";
+                for(int j =0; j < retreatedUnitsList[i].rowMembersOrder.Count; j++)
+                {
+                    answer += $" {retreatedUnitsList[i].rowMembersOrder[j].monsterType.ToString()} ";
+                }
+                Debug.Log(answer);
+            }
         }
     }
 }

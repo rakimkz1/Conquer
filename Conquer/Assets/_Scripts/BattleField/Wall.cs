@@ -9,7 +9,7 @@ public class Wall : MonoBehaviour, IAttackTarget
     public bool isEnemyWall;
     public float attackPriority { get; set; }
     public Vector3 targetPosition { get; set; }
-    public event Action OnDead;
+    public event Action<IAttackTarget> OnDead;
 
     private AttackableUnitsOnSceneCollection _targetCollection;
 
@@ -33,5 +33,9 @@ public class Wall : MonoBehaviour, IAttackTarget
     private void Update()
     {
         targetPosition = transform.position;
+    }
+
+    public void TakeDamage(float damage)
+    {
     }
 }

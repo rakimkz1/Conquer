@@ -50,7 +50,7 @@ namespace Monsters
         public void ResetAllowmentEnter() => isAllowedToEnterBattle = false;
         public void RequestEnterToBattle()
         {
-            enterToBattleInRowHandler.RequestToEnterBattle(monster);
+            enterToBattleInRowHandler.RequestToEnterBattle(monster.monsterType);
         }
 
         public bool IsOutOfBattle()

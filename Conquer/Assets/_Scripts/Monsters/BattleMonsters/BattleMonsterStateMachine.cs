@@ -8,15 +8,18 @@ namespace Monsters
     {
         public IBattleMonsterState currentState;
         public IBattleMonsterState movingToState;
-        public ArmyCommandTypes currentArmyCommand = ArmyCommandTypes.Defence;
+        public ArmyCommandTypes currentArmyCommand;
         public Dictionary<IBattleMonsterState, List<TransitionState>> transitions = new();
         public List<TransitionState> anyTransitions = new();
         private BattleMonster _monster;
+        private UnitsCommandKeeper _commandKeeper;
         private TransitionGraphBuilder _transitionGraphBuilder;
-        public BattleMonsterStateMachine(BattleMonster monster)
+        public BattleMonsterStateMachine(BattleMonster monster, UnitsCommandKeeper commandKeeper)
         {
             _monster = monster;
+            _commandKeeper = commandKeeper;
             _transitionGraphBuilder = new TransitionGraphBuilder(this, _monster);
+            currentArmyCommand = _commandKeeper.GetCommand(_monster.monsterType, _monster.isEnemyUnit);
         }
 
         public void SwichState(IBattleMonsterState swichTo)
@@ -69,9 +72,10 @@ namespace Monsters
             }
         }
 
-        public void ListenArmyCommand(ArmyCommandTypes types)
+        public void ListenArmyCommand(ArmyCommandTypes types, MonsterType monsterType)
         {
-            currentArmyCommand = types;
+            if(monsterType == _monster.monsterType)
+                currentArmyCommand = types;
         }
     }
 }

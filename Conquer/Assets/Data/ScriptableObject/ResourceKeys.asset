@@ -21,3 +21,7 @@ MonoBehaviour:
     prefabLocation: Assets/Prefabs/BattleField/SelectionIcon.prefab
   - key: 3
     prefabLocation: Assets/Data/ScriptableObject/PlayerSetup/PlayerStartProperties.asset
+  - key: 4
+    prefabLocation: Assets/Data/ScriptableObject/PlayerSetup/ExtractorSetup.asset
+  - key: 5
+    prefabLocation: Assets/Prefabs/BattleField/Extractor.prefab

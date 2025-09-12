@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowedMonstersNumber: 5
   enemysWallHealth: 100
+  enemyExtractorNumber: 0
+  unitManaCost: 50
   enemyWaves:
-  - waveDuration: 6
-    enemyWaves:
-    - level: 0
-      monsterType: 0
-      unitNumber: 4
+  - level: 0
+    monsterType: 0
+    unitNumber: 0

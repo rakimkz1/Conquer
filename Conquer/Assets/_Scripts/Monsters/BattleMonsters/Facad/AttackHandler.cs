@@ -10,16 +10,19 @@ namespace Monsters
     {
         public bool isCapableToAttack = true;
         public bool isReadyToAttack;
+        private IMonsterAttackType attackType;
         private BattleMonster monster;
         private float attackSpeed;
-        private float attackDistance;
+        //this need to be private
+        public float attackDistance;
         private float attackPreparationTime;
         private float speed;
 
         private CancellationTokenSource _cancel;
-        public AttackHandler(BattleMonster battleMonster, float attackSpeed, float attackDistance, float attackPreparationTime, float speed)
+        public AttackHandler(BattleMonster battleMonster, IMonsterAttackType attackType, float attackSpeed, float attackDistance, float attackPreparationTime, float speed)
         {
             monster = battleMonster;
+            this.attackType = attackType;
             this.attackSpeed = attackSpeed;
             this.attackDistance = attackDistance;
             this.attackPreparationTime = attackPreparationTime;
@@ -28,6 +31,12 @@ namespace Monsters
 
         public void Attack()
         {
+            if (monster.monsterType == MonsterType.Sprinter || monster.monsterType == MonsterType.Rangers || monster.monsterType == MonsterType.Sieges)
+                attackType.InitAttack(monster.targetFinder.currentAttackTarget, monster.targetPosition);
+            else
+                attackType.InitAttack(monster.targetFinder.currentAttackTarget.targetPosition, monster.targetPosition);
+
+                attackType.Attack();
             WaitAttackColdown();
         }
         private async UniTask WaitAttackColdown()

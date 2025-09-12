@@ -15,14 +15,14 @@ namespace BattleField {
         [SerializeField] private Button btn_RangerType;
         [SerializeField] private Button btn_MageType;
         [SerializeField] private Button btn_SiegesType;
-        private UnitSelectPanel_ViewModel _unitSelectionViewModel;
+        private BattleStarter _battleStarter;
         protected override void OnBind() { }
     
         [Inject] 
-        private void Construct( CommandPanel_ViewModel viewModel, UnitSelectPanel_ViewModel selectViewModel)
+        private void Construct( CommandPanel_ViewModel viewModel, BattleStarter battleStarter)
         {
             this.viewModel = viewModel;
-            _unitSelectionViewModel = selectViewModel;
+            _battleStarter = battleStarter;
             Init();
         }
 
@@ -69,7 +69,7 @@ namespace BattleField {
             viewModel.OnShowRangerUnit += ShowInActiveRanger;
             viewModel.OnShowMageUnit += ShowInActiveMage;
             viewModel.OnShowSiegeUnit += ShowInActiveSieges;
-            _unitSelectionViewModel.OnGameStarted += ShowPanel;
+            _battleStarter.OnBattleStart += ShowPanel;
         }
 
         private void ShowPanel()
@@ -84,7 +84,7 @@ namespace BattleField {
         public void ShowInActiveSieges(bool isAcive) => btn_SiegesType.gameObject.GetComponent<Image>().color = isAcive ? Color.green : Color.red;
         private void OnDestroy()
         {
-            _unitSelectionViewModel.OnGameStarted -= ShowPanel;
+            _battleStarter.OnBattleStart -= ShowPanel;
         }
     }
 }

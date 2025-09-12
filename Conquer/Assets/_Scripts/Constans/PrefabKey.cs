@@ -3,5 +3,7 @@ public enum PrefabKey
     LoadingPrefab,
     MonsterIdel,
     MonsterSelectionIcon,
-    PlayerStartProperties
+    PlayerStartProperties,
+    ExtractorSetup,
+    BattleFieldExtractor,
 }

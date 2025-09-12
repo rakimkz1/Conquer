@@ -18,6 +18,7 @@ namespace Monsters
         private RetreatState _retreatState;
         private OutOfBattleState _outOfBattleState;
         private WaitEnterToBattle _waitEnterToBattle;
+        private JustStayState _justStayState;
         public TransitionGraphBuilder(BattleMonsterStateMachine stateMachine, BattleMonster monster)
         {
             _stateMachine = stateMachine;
@@ -38,7 +39,9 @@ namespace Monsters
             _retreatState = new RetreatState();
             _outOfBattleState = new OutOfBattleState();
             _waitEnterToBattle = new WaitEnterToBattle();
-            _stateMachine.SwichState(_moveDefencePosition);
+            _justStayState = new JustStayState();
+
+            _stateMachine.SwichState(_outOfBattleState);
         }
 
         private void SetTransitions()
@@ -49,7 +52,7 @@ namespace Monsters
             });
             _stateMachine.AddAnyTransition(_moveToTargetState, () =>
             {
-                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Attack && _stateMachine.currentState != _attackPreparationState && _stateMachine.currentState != _attackState && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState;
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Attack && _stateMachine.currentState != _attackPreparationState && !_monster.IsTargetAttackRange() && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState;
             });
             _stateMachine.AddAnyTransition(_moveDefencePosition, () =>
             {
@@ -66,6 +69,10 @@ namespace Monsters
             _stateMachine.AddTransition(_attackPreparationState, _attackState, () =>
             {
                 return _monster.isReadyToAttack();
+            });
+            _stateMachine.AddTransition(_attackState, _justStayState, () =>
+            {
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Attack && !_monster.isReadyToAttack() && !_monster.isCapableToAttack() && _monster.IsTargetAttackRange(); 
             });
             _stateMachine.AddTransition(_moveDefencePosition, _defenceState, () =>
             {

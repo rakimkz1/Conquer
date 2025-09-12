@@ -1,6 +1,4 @@
 using BattleField;
-using ModestTree;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -15,11 +13,15 @@ public class BattleFieldInstaller : MonoInstaller
     [SerializeField] private ArmyStandRowHandler enemyRowHandler;
     [SerializeField] private EnterToBattleInRowHandler playerRetreatPoint;
     [SerializeField] private EnterToBattleInRowHandler enemyRetreatPoint;
+    [SerializeField] private List<Transform> playerExtractorSpawnPoints;
+    [SerializeField] private List<Transform> enemyExtractorSpawnPoints;
+
 
     public override void InstallBindings()
     {
         Container.Bind<BattleSceneSetting>().FromInstance(BattleSceneSetting).AsSingle();
         BindManagers();
+        BindFactories();
         BindMVVM();
         BindScriptableObjects();
         BindPrefabs();
@@ -30,6 +32,8 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<UnitSelectPanel_ViewModel>().AsSingle();
         Container.Bind<CommandPanel_ViewModel>().AsTransient();
         Container.Bind<CommandPanel_Model>().AsTransient();
+        Container.Bind<UnitBuymentPanel_ModelView>().AsSingle();
+        Container.Bind<UnitBuymentPanel_Model>().AsSingle();
     }
     private void BindManagers()
     {
@@ -39,9 +43,18 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<LevelBuilder>().AsSingle().NonLazy();
         Container.Bind<ArmyCommandHandler>().AsSingle();
         Container.Bind<AttackableUnitsOnSceneCollection>().AsSingle();
-        Container.Bind<MonsterUnitFactory>().AsTransient().WithArguments(monsterUnitPrefab);
-        Container.Bind<EnemyWaveHandler>().AsSingle().NonLazy();
+        Container.Bind<MonsterSpawnHandler>().AsSingle();
+        Container.Bind<UnitsCommandKeeper>().AsSingle();
+        Container.Bind<ManaHandler>().AsSingle();
+        Container.Bind<BattleStarter>().AsSingle();
     }
+
+    private void BindFactories()
+    {
+        Container.Bind<MonsterUnitFactory>().AsTransient().WithArguments(monsterUnitPrefab);
+        Container.Bind<ExtractorFactory>().AsSingle().NonLazy();
+    }
+
     private void BindPrefabs()
     {
         Container.Bind<ArmyStandRowHandler>().WithId("playerArmyRow").FromInstance(playerRowHandler).AsCached();
@@ -50,6 +63,8 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<Transform>().WithId("enemyRetreatPoint").FromInstance(enemyRetreatPoint.gameObject.transform).AsCached();
         Container.Bind<EnterToBattleInRowHandler>().WithId("playerEnterToBattleInRow").FromInstance(playerRetreatPoint).AsCached();
         Container.Bind<EnterToBattleInRowHandler>().WithId("enemyEnterToBattleInRow").FromInstance(enemyRetreatPoint).AsCached();
+        Container.Bind<List<Transform>>().WithId("playerExtractorSpawnPoint").FromInstance(playerExtractorSpawnPoints).AsCached();
+        Container.Bind<List<Transform>>().WithId("enemyExtractorSpawnPoint").FromInstance(enemyExtractorSpawnPoints).AsCached();
     }
     private void BindScriptableObjects()
     {

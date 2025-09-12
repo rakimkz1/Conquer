@@ -1,4 +1,5 @@
 ﻿using BattleField;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Monsters
     {
         private AttackableUnitsOnSceneCollection _targetCollection;
         public IAttackTarget currentAttackTarget;
+        public event Action OnTargetDead;
 
         public AttackTargetFinder(AttackableUnitsOnSceneCollection targetCollection)
         {
@@ -45,9 +47,9 @@ namespace Monsters
             currentAttackTarget.OnDead += OnEnemyIsDead;
         }
 
-        public void OnEnemyIsDead()
+        public void OnEnemyIsDead(IAttackTarget monster)
         {
-
+            OnTargetDead?.Invoke();
         }
     }
 }

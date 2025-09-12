@@ -1,8 +1,6 @@
-﻿
-using JetBrains.Annotations;
+﻿using Game_Setup;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 namespace BattleField
@@ -10,17 +8,21 @@ namespace BattleField
     public class LevelBuilder
     {
         private DataTransferScene _dataTransfer;
+        private ResourceManager _resourceManager;
         public BattleSceneSetting CurrentSceneSettings { get; private set; }
-        public List<MonsterIdelData> AllMonstersUnits { get; private set; }
-        private MonsterUnitFactory _factory;
-        private EnemyWaveHandler _waveHandler;
+        private PlayerStartProperties _playerStartProperties;
+        private ArmyCommandHandler _commandHandler;
+        private List<MonsterIdelData> _selectedUnitList;
+        private ExtractorFactory _extractorFactory;
 
         [Inject]
-        public LevelBuilder(DataTransferScene dataTransfer, MonsterUnitFactory factory, BattleSceneSetting sceneSetting)
+        public LevelBuilder(DataTransferScene dataTransfer, ResourceManager resourceManager,BattleSceneSetting sceneSetting, ArmyCommandHandler commandHandler, ExtractorFactory extractorFactory)
         {
             _dataTransfer = dataTransfer;
-            _factory = factory;
+            _resourceManager = resourceManager;
             CurrentSceneSettings = sceneSetting;
+            _commandHandler = commandHandler;
+            _extractorFactory = extractorFactory;
             Initialize();
         }
 
@@ -28,19 +30,26 @@ namespace BattleField
         {
             string key = SceneTransferKeys.CURRENT_BATTLE_SETTING;
             //CurrentSceneSettings = _dataTransfer.Get<BattleSceneSetting>(key) as BattleSceneSetting;
+            _resourceManager.LoadAsset<PlayerStartProperties>(_resourceManager.so_Keys.GetKey(PrefabKey.PlayerStartProperties),item =>
+            {
+                _playerStartProperties = item;
+                SpawnExtractors();
+            });
         }
 
-        public void SetAllMonsterUnit(List<MonsterIdelData> list)
+        public void SetAllMonsterUnit(List<MonsterIdelData> monsterIdelDatas)
         {
-            AllMonstersUnits = new List<MonsterIdelData>();
-            AllMonstersUnits.AddRange(list);
-            SpawnMonsters();
+            _selectedUnitList = monsterIdelDatas;
         }
-        public void SpawnMonsters()
+        public List<MonsterIdelData> GetSelectedUnits() => _selectedUnitList;
+
+        public void SpawnExtractors()
         {
-            for(int i = 0; i < AllMonstersUnits.Count; i++)
+            int extractorNumber = _playerStartProperties.PlayerExtractorNumber;
+
+            for(int i = 0;i < extractorNumber; i++)
             {
-                _factory.Create(false, AllMonstersUnits[i], Vector3.zero);
+                _extractorFactory.Create();
             }
         }
     }

@@ -40,9 +40,9 @@ namespace BattleField {
         {
             for(int  i = 0; i < settedTypeToCommand.Length; i++)
             {
-                if (!settedTypeToCommand[i] || !_commandHandler.OnCommand.ContainsKey((MonsterType)i))
+                if (!settedTypeToCommand[i])
                     continue;
-                _commandHandler.OnCommand[(MonsterType)i]?.Invoke(commandType);
+                _commandHandler.SayCommandPlayer((MonsterType)i, commandType);
             }
         }
     }

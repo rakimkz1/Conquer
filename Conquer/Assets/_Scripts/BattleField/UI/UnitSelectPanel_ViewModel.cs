@@ -15,20 +15,21 @@ namespace BattleField
         public event Action OnShowStartBattleButton;
         public event Action OnHideStartBatlleButton;
         public event Action HideWholeSelectionPanel;
-        public event Action OnGameStarted;
 
         private LevelBuilder _levelBuilder;
-        public UnitSelectPanel_ViewModel(UnitSelectPanel_Model model, LevelBuilder levelBuilder) : base(model)
+        private BattleStarter _battleStarter;
+        public UnitSelectPanel_ViewModel(UnitSelectPanel_Model model, LevelBuilder levelBuilder, BattleStarter battleStarter) : base(model)
         {
             _levelBuilder = levelBuilder;
             Initialize();
+            _battleStarter = battleStarter;
         }
 
         public void PressStartBattleButton()
         {
             _levelBuilder.SetAllMonsterUnit(selectedMonsters.ToList());
             HideWholeSelectionPanel?.Invoke();
-            OnGameStarted?.Invoke();
+            _battleStarter.StartBattle();
         }
 
         private void Initialize()

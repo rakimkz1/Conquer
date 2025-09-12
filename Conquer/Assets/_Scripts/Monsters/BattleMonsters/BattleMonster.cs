@@ -19,31 +19,34 @@ namespace Monsters
         [Header("Properties")]
         public int monsterLevel;
         public MonsterType monsterType;
-        public event Action OnDead;
+        public event Action<IAttackTarget> OnDead;
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
         public AttackableUnitsOnSceneCollection _targetCollection;
-        private ArmyCommandHandler _commandHandler;
+        private UnitsCommandKeeper _commandKeeper;
 
         [Inject]
-        public void Construct(AttackableUnitsOnSceneCollection targetCollection, ArmyCommandHandler commandHandler)
+        public void Construct(AttackableUnitsOnSceneCollection targetCollection, UnitsCommandKeeper commandKeeper)
         {
             _targetCollection = targetCollection;
-            _commandHandler = commandHandler;
+            _commandKeeper = commandKeeper;
         }
-        private void Start()
+        public void Init()
         {
             targetFinder = new AttackTargetFinder(_targetCollection);
-            stateMachine = new BattleMonsterStateMachine(this);
+            stateMachine = new BattleMonsterStateMachine(this, _commandKeeper);
             if (isEnemyUnit)
+            {
+                _commandKeeper.OnEnemyCommand += ListenArmyCommand;
                 _targetCollection.AddEnemyUnit(this);
+            }
             else
+            {
+                _commandKeeper.OnPlayerCommand += ListenArmyCommand;
                 _targetCollection.AddPlayerUnit(this);
-            
-            if (!_commandHandler.OnCommand.ContainsKey(monsterType))
-                _commandHandler.OnCommand[monsterType] = null;
+            }
 
-            _commandHandler.OnCommand[monsterType] += ListenArmyCommand;
+            healthHandler.OnDead += Dead;
         }
         private void Update()
         {
@@ -52,7 +55,8 @@ namespace Monsters
             stateMachine.CheckTransitions();
             targetPosition = transform.position;
         }
-        public void ListenArmyCommand(ArmyCommandTypes types) => stateMachine.ListenArmyCommand(types);
+        public void ListenArmyCommand(ArmyCommandTypes commandType, MonsterType monsterType) => stateMachine.ListenArmyCommand(commandType, monsterType);
+        public void TakeDamage(float damage) => healthHandler.TakeDamage(damage);
         public void FindAttackTarget() => targetFinder.FindAttackTarget(!isEnemyUnit, transform.position);
         public bool IsTargetAttackRange() => attackHandler.IsTargetAttackRange();
         public bool isCapableToAttack() => attackHandler.isCapableToAttack;
@@ -68,7 +72,23 @@ namespace Monsters
 
         public void Dead()
         {
-            _commandHandler.OnCommand[monsterType] -= ListenArmyCommand;
+            OnDead?.Invoke(this);
+            if (isEnemyUnit)
+            {
+                _commandKeeper.OnEnemyCommand -= ListenArmyCommand;
+                _targetCollection.RemoveEnemyUnit(this);
+            }
+            else
+            {
+                _commandKeeper.OnPlayerCommand -= ListenArmyCommand;
+                _targetCollection.RemovePlayerUnit(this);
+            }
+            Destroy(gameObject);
+        }
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackHandler.attackDistance);
         }
 
     }

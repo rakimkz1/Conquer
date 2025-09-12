@@ -30,6 +30,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4af2aa428a12d4141ac3d471ebe76405
+    m_Address: Assets/Data/ScriptableObject/PlayerSetup/ExtractorSetup.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f11ee7d5b3e4f44bb02fcf1a58f8860
+    m_Address: Assets/Prefabs/BattleField/Extractor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a6b4c9fe7e1f264eab59e4482ea0cc3
     m_Address: Assets/Scenes/Menu.unity
     m_ReadOnly: 0

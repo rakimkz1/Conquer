@@ -21,14 +21,17 @@ public class Row
             if(monster.transform.position.y > rowMembersOrder[i].transform.position.y)
             {
                 rowMembersOrder.Insert(i, monster);
+                monster.OnDead += Remove;
                 return true;
             }
         }
         rowMembersOrder.Add(monster);
+        monster.OnDead += Remove;
         return true;
     }
-    public void Remove(BattleMonster monster)
+    public void Remove(IAttackTarget monster)
     {
-        rowMembersOrder.Remove(monster);
+        monster.OnDead -= Remove;
+        rowMembersOrder.Remove(monster as BattleMonster);
     }
 }

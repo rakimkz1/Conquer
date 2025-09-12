@@ -8,5 +8,6 @@ namespace Game_Setup
     {
         public float RetreatHealColdown;
         public float RetreatHealAmount;
+        public int PlayerExtractorNumber;
     }
 }

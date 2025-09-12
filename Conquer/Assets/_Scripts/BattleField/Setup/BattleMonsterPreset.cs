@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BattleField
 {
@@ -14,5 +15,14 @@ namespace BattleField
         public float attackPreparationTime;
         public float attackPriority;
         public float maxHealth;
+        public AttackProperties attackProperties;
+
+        [Serializable] 
+        public class AttackProperties
+        {
+            public float Damage;
+            public float MissileSpeed;
+            public float DamageAreaRadius;
+        }
     }
 }
