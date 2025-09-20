@@ -14,6 +14,7 @@ namespace BattleField
         private ExtractorManaProducer _manaProducer;
         private BattleStarter _battleStarter;
         public event Action<IAttackTarget> OnDead;
+        public event Action<IAttackTarget> OnExitTargetCollection;
 
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }

@@ -22,6 +22,8 @@ namespace BattleField
         public float powerScale { get; set; }
 
         public event Action<IAttackTarget> OnDead;
+        public event Action<IAttackTarget> OnExitTargetCollection;
+
         [Inject]
         public void Construct(EnemyManaHandler enemyManaHandler, BattleStarter battleStarter)
         {
