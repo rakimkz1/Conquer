@@ -1,5 +1,4 @@
 using BattleField;
-using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using Zenject;
@@ -25,6 +24,7 @@ namespace Monsters
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
         public float powerScale { get; set; }
+        public bool isDead { get; set; }
 
         public AttackableUnitsOnSceneCollection _targetCollection;
         private UnitsCommandKeeper _commandKeeper;
@@ -91,7 +91,7 @@ namespace Monsters
             Debug.Log(count);
             OnDead?.Invoke(this);
             OnDead = null;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         [ContextMenu("Get current state")]

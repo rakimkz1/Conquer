@@ -20,6 +20,7 @@ namespace BattleField
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
         public float powerScale { get; set; }
+        public bool isDead { get; set; }
 
         public event Action<IAttackTarget> OnDead;
         public event Action<IAttackTarget> OnExitTargetCollection;

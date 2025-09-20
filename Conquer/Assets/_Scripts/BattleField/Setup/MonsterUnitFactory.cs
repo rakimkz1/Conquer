@@ -3,6 +3,7 @@ using Game_Setup;
 using Monsters;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using Zenject;
 
@@ -37,7 +38,7 @@ namespace BattleField
             LoadResources();
         }
 
-        public void Create(bool isEnemy, MonsterIdelData type, ref Action OnSpawnEnd)
+        public BattleMonster Create(bool isEnemy, MonsterIdelData type, ref Action OnSpawnEnd)
         {
             GameObject target = _container.InstantiatePrefab(_monsterPrefab);
             BattleMonster monster = target.GetComponent<BattleMonster>();
@@ -48,9 +49,27 @@ namespace BattleField
             _preset = FindMonsterPreset(type);
             monster.isEnemyUnit = isEnemy;
             monster.powerScale = _preset.powerScale;
+            monster.isDead = false;
             SetMonsterSetting(type, monster);
 
             OnSpawnEnd += monster.Init;
+            return monster;
+        }
+        public BattleMonster Spawn(BattleMonster target, bool isEnemy, MonsterIdelData type, ref Action OnSpawnEnd)
+        {
+            if (isEnemy)
+                target.transform.position = enemyRetreatPoint.position;
+            else
+                target.transform.position = playerRetreatPoint.position;
+            _preset = FindMonsterPreset(type);
+            target.isEnemyUnit = isEnemy;
+            target.powerScale = _preset.powerScale;
+            target.isDead = false;
+            target.gameObject.SetActive(true);
+            SetMonsterSetting(type, target);
+
+            OnSpawnEnd += target.Init;
+            return target;
         }
         private void SetMonsterSetting(MonsterIdelData type, BattleMonster monster)
         {
@@ -140,5 +159,6 @@ namespace BattleField
             }
             return null;
         }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Monsters;
 
 namespace BattleField
 {
@@ -13,6 +14,7 @@ namespace BattleField
         private List<MonsterIdelData> _enemyMonsterList = new();
         private LevelBuilder _levelBuilder;
         private event Action OnMonsterSpawn;
+        private Queue<BattleMonster> _unitPool = new Queue<BattleMonster>();
         public MonsterSpawnHandler(MonsterUnitFactory factory, BattleStarter battleStarter, LevelBuilder levelBuilder, UnitSelectPanel_ViewModel unitSelection)
         {
             _factory = factory;
@@ -47,9 +49,25 @@ namespace BattleField
             if (!isSpawnable(isEnemy))
                 return;
             MonsterIdelData randomUnit = GetRandomUnit(isEnemy);
-            _factory.Create(isEnemy, randomUnit, ref OnMonsterSpawn);
+
+            if (_unitPool.Count == 0)
+            {
+                BattleMonster target = _factory.Create(isEnemy, randomUnit, ref OnMonsterSpawn);
+                target.OnDead += AddToPool;
+            }
+            else
+            {
+                BattleMonster target = _unitPool.Dequeue();
+                _factory.Spawn(target, isEnemy, randomUnit, ref OnMonsterSpawn);
+                target.OnDead += AddToPool;
+            }
             OnMonsterSpawn?.Invoke();
             OnMonsterSpawn = null;
+        }
+
+        private void AddToPool(IAttackTarget target)
+        {
+            _unitPool.Enqueue(target as BattleMonster);
         }
         private MonsterIdelData GetRandomUnit(bool isEnemy)
         {

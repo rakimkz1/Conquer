@@ -53,7 +53,6 @@ namespace Monsters
 
         public void OnEnemyIsLost(IAttackTarget monster)
         {
-            Debug.Log("Find new Target");
             FindAttackTarget();
         }
     }

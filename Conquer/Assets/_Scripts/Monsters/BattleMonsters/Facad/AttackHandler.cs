@@ -13,8 +13,7 @@ namespace Monsters
         private IMonsterAttackType attackType;
         private BattleMonster monster;
         private float attackSpeed;
-        //this need to be private
-        public float attackDistance;
+        private float attackDistance;
         private float attackPreparationTime;
         private float speed;
 
@@ -47,7 +46,7 @@ namespace Monsters
         }
         public bool IsTargetAttackRange()
         {
-            if (monster.targetFinder.currentAttackTarget == null)
+            if (monster.targetFinder.currentAttackTarget == null || monster.targetFinder.currentAttackTarget.isDead)
                 return false;
             float distance = Vector3.Distance(monster.transform.position, monster.targetFinder.currentAttackTarget.targetPosition);
             if (distance < attackDistance)

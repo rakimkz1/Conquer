@@ -19,6 +19,7 @@ namespace BattleField
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
         public float powerScale { get; set; }
+        public bool isDead { get; set; }
 
         [Inject]
         private void Construct(ManaHandler manaHandler, AttackableUnitsOnSceneCollection targetCollection, BattleStarter battleStarter)
