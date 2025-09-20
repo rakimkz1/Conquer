@@ -8,18 +8,19 @@ namespace Monsters
     public class AttackTargetFinder
     {
         private AttackableUnitsOnSceneCollection _targetCollection;
+        private BattleMonster _monster;
         public IAttackTarget currentAttackTarget;
-        public event Action OnTargetDead;
 
-        public AttackTargetFinder(AttackableUnitsOnSceneCollection targetCollection)
+        public AttackTargetFinder(AttackableUnitsOnSceneCollection targetCollection, BattleMonster monster)
         {
             _targetCollection = targetCollection;
+            _monster = monster;
         }
 
-        public void FindAttackTarget(bool isFindEnemy, Vector3 pos)
+        public void FindAttackTarget()
         {
             List<IAttackTarget> targetList;
-            if (isFindEnemy)
+            if (!_monster.isEnemyUnit)
                 targetList = _targetCollection.enemyUnits;
             else
                 targetList = _targetCollection.playerUnits;
@@ -28,7 +29,7 @@ namespace Monsters
             IAttackTarget suitableTarget = targetList[0];
             for(int i = 0; i < targetList.Count; i++)
             {
-                float dis = Vector3.Distance(pos, targetList[i].targetPosition) * targetList[i].attackPriority;
+                float dis = Vector3.Distance(_monster.targetPosition, targetList[i].targetPosition) * targetList[i].attackPriority;
                 if(dis < minDistance)
                 {
                     minDistance = dis;
@@ -41,15 +42,19 @@ namespace Monsters
         private void SetAttackTarget(IAttackTarget newAttackTarget)
         {
             if (currentAttackTarget != null)
-                currentAttackTarget.OnDead -= OnEnemyIsDead;
-
+            {
+                currentAttackTarget.OnExitTargetCollection -= OnEnemyIsLost;
+                currentAttackTarget.OnDead -= OnEnemyIsLost;
+            }
             currentAttackTarget = newAttackTarget;
-            currentAttackTarget.OnDead += OnEnemyIsDead;
+            currentAttackTarget.OnExitTargetCollection += OnEnemyIsLost;
+            currentAttackTarget.OnDead += OnEnemyIsLost;
         }
 
-        public void OnEnemyIsDead(IAttackTarget monster)
+        public void OnEnemyIsLost(IAttackTarget monster)
         {
-            OnTargetDead?.Invoke();
+            Debug.Log("Find new Target");
+            FindAttackTarget();
         }
     }
 }

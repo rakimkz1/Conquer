@@ -13,6 +13,7 @@ namespace BattleField
         public int enemyExtractorNumber;
         public int unitManaCost;
         public List<WaveUnit> enemyWaves = new();
+        public EnemyAIProperties enemyAIProperties;
         
         public List<MonsterIdelData> GetMonstersList()
         {

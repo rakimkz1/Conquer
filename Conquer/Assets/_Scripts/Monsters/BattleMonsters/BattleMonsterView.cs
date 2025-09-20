@@ -1,0 +1,21 @@
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+using UniRx;
+namespace Monsters
+{
+    public class BattleMonsterView : MonoBehaviour
+    {
+        [SerializeField] private Image _monsterHealthBar;
+        private BattleMonster _battleMonster;
+        private void Start()
+        {
+            _battleMonster = GetComponent<BattleMonster>();
+            _battleMonster.healthHandler.unitHealth.Subscribe(ShowUnitHealth);
+        }
+        public void ShowUnitHealth(float health)
+        {
+            _monsterHealthBar.fillAmount = health / _battleMonster.healthHandler.maxHealth;
+        }
+    }
+}

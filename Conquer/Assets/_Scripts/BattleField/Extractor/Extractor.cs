@@ -17,6 +17,7 @@ namespace BattleField
 
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
+        public float powerScale { get; set; }
 
         [Inject]
         private void Construct(ManaHandler manaHandler, AttackableUnitsOnSceneCollection targetCollection, BattleStarter battleStarter)
@@ -32,25 +33,24 @@ namespace BattleField
             _targetCollection.AddPlayerUnit(this);
         }
 
-        public void SetProperties(float manaPerPeriod, float manaPerClick, float periodTime, float maxHealth, float repairmentAmount)
+        public void SetProperties(float manaPerPeriod, float manaPerClick, float periodTime, float maxHealth, float repairmentAmount, float attackPriority)
         {
             _healthHandler = new ExtractorHealthHandler(maxHealth, repairmentAmount);
             _healthHandler.OnDead += ()=> OnDead?.Invoke(this);
             _manaProducer = new ExtractorManaProducer(manaPerPeriod, manaPerClick, periodTime, _manaHandler);
+            this.attackPriority = attackPriority;
             _battleStarter.OnBattleStart += _manaProducer.StartProduceMana;
         }
         public void TakeDamage(float damage) => _healthHandler.TakeDamage(damage);
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Clicked E");
             if(eventData.pointerCurrentRaycast.gameObject.GetComponent<Extractor>() == this)
                 Clicked();
         }
 
         private void Clicked()
         {
-            Debug.Log("Clicked");
             if (_healthHandler.isWorking)
                 _manaProducer.ProduceManaClick();
             else

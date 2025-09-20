@@ -10,5 +10,6 @@ namespace BattleField
         public float periodTime;
         public float maxHealth;
         public float repairmentAmount;
+        public float extractorAttackPrority;
     }
 }

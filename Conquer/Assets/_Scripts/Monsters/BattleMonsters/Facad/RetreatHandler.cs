@@ -1,4 +1,5 @@
 ﻿using BattleField;
+using System;
 using UnityEngine;
 
 namespace Monsters
@@ -10,6 +11,7 @@ namespace Monsters
         private Transform outOfBattlePoint;
         private float speed;
 
+        public event Action OnRetreat;  
         public bool isAllowedToEnterBattle { get; private set; }
         public RetreatHandler(BattleMonster battleMonster, EnterToBattleInRowHandler enterToBattleInRowHandler, Transform outOfBattlePoint, float speed)
         {
@@ -30,6 +32,7 @@ namespace Monsters
             else
                 monster._targetCollection.RemovePlayerUnit(monster);
             monster.healthHandler.GoOutOfBattle();
+            OnRetreat?.Invoke();
             enterToBattleInRowHandler.Add(monster);
         }
         public void EnterToBattleFromRetreat()

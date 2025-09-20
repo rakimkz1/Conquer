@@ -18,8 +18,13 @@ MonoBehaviour:
   provocationDistance: 2.18
   maxTracingDistance: 2
   speed: 1.73
+  powerScale: 12
   attackDistance: 0.59
   attackSpeed: 0.89
   attackPreparationTime: 1.32
   attackPriority: 0.45
   maxHealth: 150
+  attackProperties:
+    Damage: 40
+    MissileSpeed: 0
+    DamageAreaRadius: 1

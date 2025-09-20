@@ -55,6 +55,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe14b95766ca8674694693b279bcc6a7
+    m_Address: Assets/Prefabs/BattleField/EnemyExtractor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff4cf0cd86a7bda43b93b3993123f2c3
     m_Address: Assets/Prefabs/BattleField/SelectionIcon.prefab
     m_ReadOnly: 0

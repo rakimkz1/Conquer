@@ -18,7 +18,7 @@ namespace BattleField
 
         public void OnBuyUnitPress()
         {
-            if (_manaHandler.SpendMana((float)unitCost.Value))
+            if (_manaHandler.SpendMana((float)unitCost.Value) && _monsterSpawnHandler.isSpawnable(false))
                 _monsterSpawnHandler.Spawn(false);
         }
     }

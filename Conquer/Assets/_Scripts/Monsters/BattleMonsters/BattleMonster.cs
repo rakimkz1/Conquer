@@ -20,8 +20,12 @@ namespace Monsters
         public int monsterLevel;
         public MonsterType monsterType;
         public event Action<IAttackTarget> OnDead;
+        public event Action<IAttackTarget> OnExitTargetCollection;
+
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
+        public float powerScale { get; set; }
+
         public AttackableUnitsOnSceneCollection _targetCollection;
         private UnitsCommandKeeper _commandKeeper;
 
@@ -33,7 +37,7 @@ namespace Monsters
         }
         public void Init()
         {
-            targetFinder = new AttackTargetFinder(_targetCollection);
+            targetFinder = new AttackTargetFinder(_targetCollection, this);
             stateMachine = new BattleMonsterStateMachine(this, _commandKeeper);
             if (isEnemyUnit)
             {
@@ -47,6 +51,7 @@ namespace Monsters
             }
 
             healthHandler.OnDead += Dead;
+            retreatHandler.OnRetreat += () => OnExitTargetCollection?.Invoke(this);
         }
         private void Update()
         {
@@ -57,7 +62,7 @@ namespace Monsters
         }
         public void ListenArmyCommand(ArmyCommandTypes commandType, MonsterType monsterType) => stateMachine.ListenArmyCommand(commandType, monsterType);
         public void TakeDamage(float damage) => healthHandler.TakeDamage(damage);
-        public void FindAttackTarget() => targetFinder.FindAttackTarget(!isEnemyUnit, transform.position);
+        public void FindAttackTarget() => targetFinder.FindAttackTarget();
         public bool IsTargetAttackRange() => attackHandler.IsTargetAttackRange();
         public bool isCapableToAttack() => attackHandler.isCapableToAttack;
         public bool isReadyToAttack() => attackHandler.isReadyToAttack;
@@ -72,7 +77,6 @@ namespace Monsters
 
         public void Dead()
         {
-            OnDead?.Invoke(this);
             if (isEnemyUnit)
             {
                 _commandKeeper.OnEnemyCommand -= ListenArmyCommand;
@@ -83,13 +87,23 @@ namespace Monsters
                 _commandKeeper.OnPlayerCommand -= ListenArmyCommand;
                 _targetCollection.RemovePlayerUnit(this);
             }
+            int count = OnDead?.GetInvocationList().Length ?? 0;
+            Debug.Log(count);
+            OnDead?.Invoke(this);
+            OnDead = null;
             Destroy(gameObject);
         }
-        private void OnDrawGizmosSelected()
+
+        [ContextMenu("Get current state")]
+        private void GetCurrentState()
+        {
+            Debug.Log($"current state: {stateMachine.currentState.ToString()}");
+        }
+        private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackHandler.attackDistance);
+            if (targetFinder != null && targetFinder.currentAttackTarget != null)
+                Gizmos.DrawWireSphere(targetFinder.currentAttackTarget.targetPosition, 0.2f);
         }
-
     }
 }

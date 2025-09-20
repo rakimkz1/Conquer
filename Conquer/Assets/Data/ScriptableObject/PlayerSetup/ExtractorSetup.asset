@@ -17,3 +17,4 @@ MonoBehaviour:
   periodTime: 2
   maxHealth: 100
   repairmentAmount: 10
+  extractorAttackPrority: 1

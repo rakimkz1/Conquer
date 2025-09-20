@@ -33,14 +33,24 @@ namespace BattleField
             _enemyMonsterList.AddRange(_levelBuilder.CurrentSceneSettings.GetMonstersList());
         }
 
+        public bool isSpawnable(bool isEnemy)
+        {
+            if (isEnemy && _enemyMonsterList.Count == 0)
+                return false;
+            if (!isEnemy && _selectedMonsterList.Count == 0)
+                return false;
+            return true;
+        }
+
         public void Spawn(bool isEnemy)
         {
+            if (!isSpawnable(isEnemy))
+                return;
             MonsterIdelData randomUnit = GetRandomUnit(isEnemy);
             _factory.Create(isEnemy, randomUnit, ref OnMonsterSpawn);
             OnMonsterSpawn?.Invoke();
             OnMonsterSpawn = null;
         }
-
         private MonsterIdelData GetRandomUnit(bool isEnemy)
         {
             MonsterIdelData answer;

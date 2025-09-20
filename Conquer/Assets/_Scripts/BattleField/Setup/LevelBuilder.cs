@@ -1,6 +1,9 @@
-﻿using Game_Setup;
+﻿using Cysharp.Threading.Tasks;
+using Game_Setup;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace BattleField
@@ -43,14 +46,16 @@ namespace BattleField
         }
         public List<MonsterIdelData> GetSelectedUnits() => _selectedUnitList;
 
-        public void SpawnExtractors()
+        public async UniTask SpawnExtractors()
         {
             int extractorNumber = _playerStartProperties.PlayerExtractorNumber;
+            int enemyExtractorNumber = CurrentSceneSettings.enemyExtractorNumber;
 
             for(int i = 0;i < extractorNumber; i++)
-            {
-                _extractorFactory.Create();
-            }
+                await _extractorFactory.Create(false);
+
+            for (int i = 0; i < enemyExtractorNumber; i++)
+                await _extractorFactory.Create(true);
         }
     }
 }

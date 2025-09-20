@@ -46,13 +46,18 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<MonsterSpawnHandler>().AsSingle();
         Container.Bind<UnitsCommandKeeper>().AsSingle();
         Container.Bind<ManaHandler>().AsSingle();
+        Container.Bind<EnemyManaHandler>().AsSingle();
         Container.Bind<BattleStarter>().AsSingle();
+        Container.Bind<EnemyUnitBuymentHandler>().AsSingle();
+        Container.Bind<AIPowerCanculator>().AsSingle();
+        Container.Bind<EnemyCommandHandler>().AsSingle();
     }
 
     private void BindFactories()
     {
         Container.Bind<MonsterUnitFactory>().AsTransient().WithArguments(monsterUnitPrefab);
         Container.Bind<ExtractorFactory>().AsSingle().NonLazy();
+        Container.Bind<EnemyAIFactory>().AsSingle().NonLazy();
     }
 
     private void BindPrefabs()

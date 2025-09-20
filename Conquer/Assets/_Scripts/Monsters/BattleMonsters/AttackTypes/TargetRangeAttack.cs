@@ -29,7 +29,6 @@ namespace Monsters
         
         public void Attack()
         {
-            Debug.Log("Shoot");
             ShootAttack();
         }
 
@@ -37,8 +36,8 @@ namespace Monsters
         {
             float flyingTime = FindFlyTime();
             await UniTask.Delay((int)(flyingTime * 1000f));
-            Debug.Log("Hit");
-            _attackTarget.TakeDamage(Damage);
+            if (_attackTarget != null)
+                _attackTarget.TakeDamage(Damage);
         }
 
         private float FindFlyTime()

@@ -18,6 +18,7 @@ MonoBehaviour:
   provocationDistance: 2.18
   maxTracingDistance: 5
   speed: 2.74
+  powerScale: 15
   attackDistance: 8
   attackSpeed: 0.89
   attackPreparationTime: 3.17

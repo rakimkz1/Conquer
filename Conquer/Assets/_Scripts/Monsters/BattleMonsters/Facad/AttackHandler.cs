@@ -36,7 +36,7 @@ namespace Monsters
             else
                 attackType.InitAttack(monster.targetFinder.currentAttackTarget.targetPosition, monster.targetPosition);
 
-                attackType.Attack();
+            attackType.Attack();
             WaitAttackColdown();
         }
         private async UniTask WaitAttackColdown()
@@ -70,7 +70,7 @@ namespace Monsters
             isReadyToAttack = false;
             try
             {
-                await UniTask.Delay((int)(attackPreparationTime * 1000f));
+                await UniTask.Delay((int)(attackPreparationTime * 1000f), cancellationToken: _cancel.Token);
             }
             catch { return; }
             isReadyToAttack = true;

@@ -79,7 +79,6 @@ namespace BattleField
                 Vector3 pos = transform.position + (spaceBetweenUnitInRow * (row.rowMembersOrder.Count - 1) * 0.5f - i * spaceBetweenUnitInRow) * Vector3.up;
                 onAllowedEnterMap[row.rowMembersOrder[i]]?.Invoke(pos);
             }
-            Debug.Log($"Allow To Enter {row.type.ToString()}");
         }
 
         private void AddNewRow(BattleMonster monster)
@@ -93,20 +92,6 @@ namespace BattleField
                 return;
             }
             onAllowedEnterMap.Add(monster, monster.retreatHandler.AllowedEnterToBattle);
-        }
-
-        [ContextMenu("CkeckInfo")]
-        public void CheckInfo()
-        {
-            for(int i=0;i<retreatedUnitsList.Count; i++)
-            {
-                string answer = "";
-                for(int j =0; j < retreatedUnitsList[i].rowMembersOrder.Count; j++)
-                {
-                    answer += $" {retreatedUnitsList[i].rowMembersOrder[j].monsterType.ToString()} ";
-                }
-                Debug.Log(answer);
-            }
         }
     }
 }

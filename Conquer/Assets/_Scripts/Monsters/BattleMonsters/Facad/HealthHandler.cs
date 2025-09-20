@@ -38,9 +38,11 @@ namespace Monsters
             _cancelToken = new CancellationTokenSource();
             while (!_cancelToken.IsCancellationRequested)
             {
-                try{
+                try
+                {
                     await UniTask.Delay((int)(retreatHealColdown * 1000f), cancellationToken: _cancelToken.Token);
-                    HealUnit(retreadHealAmount);
+                    if(_cancelToken.IsCancellationRequested == false)
+                        HealUnit(retreadHealAmount);
                 }
                 catch { }
             }
@@ -55,7 +57,10 @@ namespace Monsters
         {
             unitHealth.Value -= damage;
             if (unitHealth.Value <= 0f)
+            {
                 OnDead?.Invoke();
+                OnDead = null;
+            }
         }
 
         public void HealUnit(float healthAmount)

@@ -9,6 +9,8 @@ public class Wall : MonoBehaviour, IAttackTarget
     public bool isEnemyWall;
     public float attackPriority { get; set; }
     public Vector3 targetPosition { get; set; }
+    public float powerScale { get; set; }
+
     public event Action<IAttackTarget> OnDead;
 
     private AttackableUnitsOnSceneCollection _targetCollection;

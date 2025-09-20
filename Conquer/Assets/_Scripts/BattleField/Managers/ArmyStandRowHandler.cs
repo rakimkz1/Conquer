@@ -13,6 +13,7 @@ public partial class ArmyStandRowHandler : MonoBehaviour
 
     public Row Add(BattleMonster monster)
     {
+        if (monster == null) return null;
         OnArmyRowChanged?.Invoke();
         for(int i = 0; i < rows.Count; i++)
         {
@@ -39,6 +40,7 @@ public partial class ArmyStandRowHandler : MonoBehaviour
 
     public void Remove(Row targetRow, BattleMonster monster)
     {
+        if (monster == null) return;
         int index = rows.IndexOf(targetRow);
         rows[index].Remove(monster);
         if (rows[index].rowMembersOrder.Count == 0)

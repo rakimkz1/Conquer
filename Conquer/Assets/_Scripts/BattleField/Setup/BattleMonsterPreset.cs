@@ -10,6 +10,7 @@ namespace BattleField
         public float provocationDistance;
         public float maxTracingDistance;
         public float speed;
+        public float powerScale;
         public float attackDistance;
         public float attackSpeed;
         public float attackPreparationTime;

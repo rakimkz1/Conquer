@@ -25,3 +25,5 @@ MonoBehaviour:
     prefabLocation: Assets/Data/ScriptableObject/PlayerSetup/ExtractorSetup.asset
   - key: 5
     prefabLocation: Assets/Prefabs/BattleField/Extractor.prefab
+  - key: 6
+    prefabLocation: Assets/Prefabs/BattleField/EnemyExtractor.prefab

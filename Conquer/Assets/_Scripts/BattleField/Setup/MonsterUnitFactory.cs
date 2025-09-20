@@ -47,6 +47,7 @@ namespace BattleField
                 target.transform.position = playerRetreatPoint.position;
             _preset = FindMonsterPreset(type);
             monster.isEnemyUnit = isEnemy;
+            monster.powerScale = _preset.powerScale;
             SetMonsterSetting(type, monster);
 
             OnSpawnEnd += monster.Init;
@@ -63,6 +64,7 @@ namespace BattleField
             SetRetreatHandler(monster);
             AddToCollections(monster);
             monster.healthHandler.maxHealth = _preset.maxHealth;
+            monster.healthHandler.unitHealth.Value = _preset.maxHealth;
         }
 
 
