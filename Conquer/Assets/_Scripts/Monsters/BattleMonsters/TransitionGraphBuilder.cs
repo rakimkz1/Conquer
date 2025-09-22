@@ -11,6 +11,7 @@ namespace Monsters
         private AttackState _attackState;
         private AttackPreparationState _attackPreparationState;
         private DefenceState _defenceState;
+        private TraceTargetFromDefence _traceTargetFromDefence;
         private MoveToDefencePosition _moveDefencePosition;
         private MoveToTargetState _moveToTargetState;
         private ReturnToPositionState _returnToPositionState;
@@ -32,6 +33,7 @@ namespace Monsters
             _attackState = new AttackState();
             _attackPreparationState = new AttackPreparationState();
             _defenceState = new DefenceState();
+            _traceTargetFromDefence = new TraceTargetFromDefence();
             _moveDefencePosition = new MoveToDefencePosition();
             _moveToTargetState = new MoveToTargetState();
             _returnToPositionState = new ReturnToPositionState();
@@ -56,7 +58,7 @@ namespace Monsters
             });
             _stateMachine.AddAnyTransition(_moveDefencePosition, () =>
             {
-                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence && _stateMachine.currentState != _defenceState && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState;
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence && _stateMachine.currentState != _defenceState && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState && _stateMachine.currentState != _traceTargetFromDefence && !_monster.IsDefenceProvocationDistance();
             });
             _stateMachine.AddAnyTransition(_idelState, () =>
             {
@@ -76,7 +78,7 @@ namespace Monsters
             });
             _stateMachine.AddTransition(_moveDefencePosition, _defenceState, () =>
             {
-                return _monster.IsOnDefencePosition();
+                return _monster.IsOnDefencePosition() && !_monster.IsDefenceProvocationDistance();
             });
             _stateMachine.AddTransition(_moveDefencePosition, _moveDefencePosition, () =>
             {
@@ -85,6 +87,14 @@ namespace Monsters
             _stateMachine.AddTransition(_defenceState, _moveDefencePosition, () =>
             {
                 return _monster.isRowPlaceChanged();
+            });
+            _stateMachine.AddTransition(_defenceState, _traceTargetFromDefence, () => 
+            {
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence && _monster.IsDefenceProvocationDistance();
+            });
+            _stateMachine.AddTransition(_traceTargetFromDefence, _moveDefencePosition, () =>
+            {
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence && !_monster.IsDefenceTargetInTracingDistance();
             });
             _stateMachine.AddTransition(_idelState, _traceTargetFromKeepingPosition, () =>
             {

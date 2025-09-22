@@ -30,7 +30,6 @@ namespace BattleField
         {
             _enemyManaHandler = enemyManaHandler;
             _battleStarter = battleStarter;
-            targetPosition = transform.position;
             _battleStarter.OnBattleStart += StartManaProducing;
         }
 

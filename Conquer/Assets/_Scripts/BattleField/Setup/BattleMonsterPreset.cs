@@ -9,6 +9,8 @@ namespace BattleField
         public MonsterIdelData data;
         public float provocationDistance;
         public float maxTracingDistance;
+        public float defenceProvocationDistance;
+        public float defenceTraceDistance;
         public float speed;
         public float powerScale;
         public float attackDistance;

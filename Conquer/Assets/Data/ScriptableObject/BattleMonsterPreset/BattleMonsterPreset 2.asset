@@ -17,12 +17,14 @@ MonoBehaviour:
     monsterType: 1
   provocationDistance: 2.18
   maxTracingDistance: 0.5
+  defenceProvocationDistance: 12
+  defenceTraceDistance: 13
   speed: 4.54
   powerScale: 10
   attackDistance: 0.59
   attackSpeed: 0.89
   attackPreparationTime: 1.32
-  attackPriority: 0.45
+  attackPriority: 1
   maxHealth: 100
   attackProperties:
     Damage: 40

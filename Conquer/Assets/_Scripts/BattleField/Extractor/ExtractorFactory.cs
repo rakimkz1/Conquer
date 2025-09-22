@@ -72,6 +72,7 @@ namespace BattleField
         {
             enemyExtractor.SetProperties(_extractorSetup.periodTime, _extractorSetup.manaPerPeriod, _extractorSetup.maxHealth, _extractorSetup.extractorAttackPrority);
             enemyExtractor.transform.position = enemyExtractorSpawnPoints[_enemyExtactorsNumber].position;
+            enemyExtractor.targetPosition = enemyExtractor.transform.position;
             _enemyExtactorsNumber++;
         }
 
@@ -79,6 +80,7 @@ namespace BattleField
         {
             extractor.SetProperties(_extractorSetup.manaPerPeriod, _extractorSetup.manaPerClick, _extractorSetup.periodTime, _extractorSetup.maxHealth, _extractorSetup.repairmentAmount, _extractorSetup.extractorAttackPrority);
             extractor.transform.position = playerExtractorSpawnPoints[_playerExtractorsNumber].position;
+            extractor.targetPosition = extractor.transform.position;
             _playerExtractorsNumber++;
         }
     }

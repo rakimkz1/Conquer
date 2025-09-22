@@ -1,7 +1,9 @@
 ﻿using BattleField;
-using System;
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using System.Linq;
 
 namespace Monsters
 {
@@ -10,13 +12,14 @@ namespace Monsters
         private AttackableUnitsOnSceneCollection _targetCollection;
         private BattleMonster _monster;
         public IAttackTarget currentAttackTarget;
-
+        private CancellationTokenSource _cancellation;
         public AttackTargetFinder(AttackableUnitsOnSceneCollection targetCollection, BattleMonster monster)
         {
             _targetCollection = targetCollection;
             _monster = monster;
+            _monster.OnDead += StopScan;
+            TargetLoopScan();
         }
-
         public void FindAttackTarget()
         {
             List<IAttackTarget> targetList;
@@ -25,20 +28,10 @@ namespace Monsters
             else
                 targetList = _targetCollection.playerUnits;
 
-            float minDistance = 10000000f;
-            IAttackTarget suitableTarget = targetList[0];
-            for(int i = 0; i < targetList.Count; i++)
-            {
-                float dis = Vector3.Distance(_monster.targetPosition, targetList[i].targetPosition) * targetList[i].attackPriority;
-                if(dis < minDistance)
-                {
-                    minDistance = dis;
-                    suitableTarget = targetList[i];
-                }
-            }
+            IAttackTarget suitableTarget = targetList.Aggregate((a, b) => 
+            Vector3.Distance(_monster.targetPosition, a.targetPosition) < Vector3.Distance(_monster.targetPosition, b.targetPosition)? a : b);
             SetAttackTarget(suitableTarget);
         }
-
         private void SetAttackTarget(IAttackTarget newAttackTarget)
         {
             if (currentAttackTarget != null)
@@ -49,6 +42,25 @@ namespace Monsters
             currentAttackTarget = newAttackTarget;
             currentAttackTarget.OnExitTargetCollection += OnEnemyIsLost;
             currentAttackTarget.OnDead += OnEnemyIsLost;
+        }
+
+        private async void TargetLoopScan()
+        {
+            _cancellation = new CancellationTokenSource();
+            while (!_cancellation.IsCancellationRequested)
+            {
+                FindAttackTarget();
+                try
+                {
+                    await UniTask.Delay(UnityEngine.Random.Range(800, 1200), cancellationToken: _cancellation.Token);
+                }
+                catch { return; }
+            }
+        }
+
+        public void StopScan(IAttackTarget target)
+        {
+            _cancellation?.Cancel();
         }
 
         public void OnEnemyIsLost(IAttackTarget monster)

@@ -70,6 +70,12 @@ namespace Monsters
         public bool isRowPlaceChanged() => defenceHandler.isRowPlaceChanged;
         public bool IsTargetProvocationDistance() => standPositionHandler.IsTargetInTracingDistance();
         public bool IsTargetInTracingDistance() => standPositionHandler.IsTargetInTracingDistance();
+        public bool IsDefenceProvocationDistance()
+        {
+            return defenceHandler.IsDefenceProvocationDistance();
+        }
+
+        public bool IsDefenceTargetInTracingDistance() => defenceHandler.IsDefenceTargetTracingDistance();
         public bool isMonsterInKeepingPosition() => standPositionHandler.isMonsterInKeepingPosition;
         public bool IsOutOfBattle() => retreatHandler.IsOutOfBattle();
         public bool isAllowedToEnterBattle() => retreatHandler.isAllowedToEnterBattle;
@@ -88,22 +94,19 @@ namespace Monsters
                 _targetCollection.RemovePlayerUnit(this);
             }
             int count = OnDead?.GetInvocationList().Length ?? 0;
-            Debug.Log(count);
             OnDead?.Invoke(this);
             OnDead = null;
             gameObject.SetActive(false);
         }
-
-        [ContextMenu("Get current state")]
-        private void GetCurrentState()
-        {
-            Debug.Log($"current state: {stateMachine.currentState.ToString()}");
-        }
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            if (targetFinder != null && targetFinder.currentAttackTarget != null)
-                Gizmos.DrawWireSphere(targetFinder.currentAttackTarget.targetPosition, 0.2f);
+            Gizmos.DrawWireSphere(transform.position, defenceHandler._defenceProvocationDistance);
+        }
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(targetFinder.currentAttackTarget.targetPosition, 3f);
         }
     }
 }

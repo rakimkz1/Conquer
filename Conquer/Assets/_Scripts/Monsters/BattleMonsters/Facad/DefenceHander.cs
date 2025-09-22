@@ -1,7 +1,5 @@
 ﻿using BattleField;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace Monsters
 {
@@ -13,12 +11,17 @@ namespace Monsters
         private float speed;
         private Row _denfenceStandRow;
         private Vector3 _defencePosition;
+        private float _defenceTracingDistance;
+        // need to be private
+        public float _defenceProvocationDistance;
 
-        public DefenceHander(BattleMonster battleMonster, ArmyStandRowHandler rowHandler, float speed)
+        public DefenceHander(BattleMonster battleMonster, ArmyStandRowHandler rowHandler, float speed, float defenceTracingDistance, float defenceProvocationDistance)
         {
             monster = battleMonster;
             this.rowHandler = rowHandler;
             this.speed = speed;
+            _defenceTracingDistance = defenceTracingDistance;
+            _defenceProvocationDistance = defenceProvocationDistance;
         }
 
         public void SetRow()
@@ -57,6 +60,22 @@ namespace Monsters
         {
             if (_defencePosition == monster.transform.position) return true;
             return false;
+        }
+
+        public bool IsDefenceTargetTracingDistance()
+        {
+            if (monster.targetFinder.currentAttackTarget == null)
+                return false;
+            float distance = Vector3.Distance(_defencePosition, monster.targetFinder.currentAttackTarget.targetPosition);
+            return distance < _defenceTracingDistance ? true : false; 
+        }
+
+        public bool IsDefenceProvocationDistance()
+        {
+            if (monster.targetFinder.currentAttackTarget == null)
+                return false;
+            float distance = Vector3.Distance(_defencePosition, monster.targetFinder.currentAttackTarget.targetPosition);
+            return distance < _defenceProvocationDistance ? true : false;
         }
     }
 }

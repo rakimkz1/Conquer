@@ -123,7 +123,7 @@ namespace BattleField
         private void SetDefenceHandler(BattleMonster monster)
         {
             ArmyStandRowHandler rowHandler = monster.isEnemyUnit ? enemyArmyRow : playerArmyRow;
-            monster.defenceHandler = new DefenceHander(monster, rowHandler, _preset.speed);
+            monster.defenceHandler = new DefenceHander(monster, rowHandler, _preset.speed, _preset.defenceTraceDistance, _preset.defenceProvocationDistance);
         }
         private void SetStandHandler(BattleMonster monster)
         {

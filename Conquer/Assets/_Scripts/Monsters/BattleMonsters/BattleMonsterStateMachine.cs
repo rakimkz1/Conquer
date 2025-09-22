@@ -49,7 +49,8 @@ namespace Monsters
             {
                 if (state.Condition() && currentState != state.TargetState)
                 {
-                    //Debug.Log(state.TargetState.ToString());
+                    //if(!_monster.isEnemyUnit)
+                    //    Debug.Log(state.TargetState.ToString());
                     SwichState(state.TargetState);
                     return;
                 }
@@ -65,7 +66,8 @@ namespace Monsters
             {
                 if (stateTransitions[i].Condition())
                 {
-                    //Debug.Log($"Swich from {currentState.ToString()}  to {stateTransitions[i].TargetState.ToString()}");
+                    //if(!_monster.isEnemyUnit)
+                    //    Debug.Log($"Swich from {currentState.ToString()}  to {stateTransitions[i].TargetState.ToString()}");
                     SwichState(stateTransitions[i].TargetState);
                     return;
                 }
@@ -77,5 +79,6 @@ namespace Monsters
             if(monsterType == _monster.monsterType)
                 currentArmyCommand = types;
         }
+        
     }
 }
