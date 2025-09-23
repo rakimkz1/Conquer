@@ -14,6 +14,8 @@ namespace Monsters
         public DefenceHander defenceHandler;
         public StandPositionHandler standPositionHandler;
         public RetreatHandler retreatHandler;
+        public EvadeObstacalseHanlder evadeHandler;
+        public GridMovementHandler movementHandler;
         public bool isEnemyUnit;
         [Header("Properties")]
         public int monsterLevel;
@@ -39,6 +41,7 @@ namespace Monsters
         {
             targetFinder = new AttackTargetFinder(_targetCollection, this);
             stateMachine = new BattleMonsterStateMachine(this, _commandKeeper);
+            movementHandler = new GridMovementHandler();
             if (isEnemyUnit)
             {
                 _commandKeeper.OnEnemyCommand += ListenArmyCommand;
@@ -98,15 +101,10 @@ namespace Monsters
             OnDead = null;
             gameObject.SetActive(false);
         }
-        private void OnDrawGizmos()
+        [ContextMenu("Get current state")]
+        private void GetInfo()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, defenceHandler._defenceProvocationDistance);
-        }
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(targetFinder.currentAttackTarget.targetPosition, 3f);
+            Debug.Log(stateMachine.currentState.ToString());
         }
     }
 }

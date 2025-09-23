@@ -45,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8efd73414681fc947a64915b957db66f
+    m_Address: Assets/Data/ScriptableObject/PlayerSetup/BattleMonsterCommanPreset.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a74bf550456c70b468903fed8b71379d
     m_Address: Assets/Scenes/EntryPoint.unity
     m_ReadOnly: 0

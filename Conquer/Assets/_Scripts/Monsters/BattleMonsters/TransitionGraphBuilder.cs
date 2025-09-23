@@ -20,6 +20,7 @@ namespace Monsters
         private OutOfBattleState _outOfBattleState;
         private WaitEnterToBattle _waitEnterToBattle;
         private JustStayState _justStayState;
+        private EvadeObstacleState _evadeObstacle;
         public TransitionGraphBuilder(BattleMonsterStateMachine stateMachine, BattleMonster monster)
         {
             _stateMachine = stateMachine;
@@ -42,6 +43,7 @@ namespace Monsters
             _outOfBattleState = new OutOfBattleState();
             _waitEnterToBattle = new WaitEnterToBattle();
             _justStayState = new JustStayState();
+            _evadeObstacle = new EvadeObstacleState();
 
             _stateMachine.SwichState(_outOfBattleState);
         }
@@ -54,11 +56,11 @@ namespace Monsters
             });
             _stateMachine.AddAnyTransition(_moveToTargetState, () =>
             {
-                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Attack && _stateMachine.currentState != _attackPreparationState && !_monster.IsTargetAttackRange() && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState;
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Attack && _stateMachine.currentState != _attackPreparationState && !_monster.IsTargetAttackRange() && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState && !_monster.evadeHandler.IsEvadingObstacle;
             });
             _stateMachine.AddAnyTransition(_moveDefencePosition, () =>
             {
-                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence && _stateMachine.currentState != _defenceState && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState && _stateMachine.currentState != _traceTargetFromDefence && !_monster.IsDefenceProvocationDistance();
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence && _stateMachine.currentState != _defenceState && _stateMachine.currentState != _waitEnterToBattle && _stateMachine.currentState != _outOfBattleState && _stateMachine.currentState != _traceTargetFromDefence && !_monster.IsDefenceProvocationDistance() && !_monster.evadeHandler.IsEvadingObstacle;
             });
             _stateMachine.AddAnyTransition(_idelState, () =>
             {
@@ -66,7 +68,7 @@ namespace Monsters
             });
             _stateMachine.AddAnyTransition(_retreatState, () =>
             {
-                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Retreat && _stateMachine.currentState != _outOfBattleState && _stateMachine.currentState != _waitEnterToBattle;
+                return _stateMachine.currentArmyCommand == ArmyCommandTypes.Retreat && _stateMachine.currentState != _outOfBattleState && _stateMachine.currentState != _waitEnterToBattle && !_monster.evadeHandler.IsEvadingObstacle;
             });
             _stateMachine.AddTransition(_attackPreparationState, _attackState, () =>
             {
@@ -123,6 +125,10 @@ namespace Monsters
             _stateMachine.AddTransition(_waitEnterToBattle, _moveDefencePosition, () =>
             {
                 return _monster.isAllowedToEnterBattle() && _stateMachine.currentArmyCommand == ArmyCommandTypes.Defence;
+            });
+            _stateMachine.AddTransition(_moveToTargetState, _evadeObstacle, () =>
+            {
+                return _monster.evadeHandler.IsEvadingObstacle;
             });
         }
     }

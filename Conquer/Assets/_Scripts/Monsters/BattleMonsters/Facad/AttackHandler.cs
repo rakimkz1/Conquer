@@ -56,8 +56,9 @@ namespace Monsters
 
         public void MoveToTarget()
         {
-            Vector3 dir = (monster.targetFinder.currentAttackTarget.targetPosition - monster.transform.position).normalized;
-            monster.transform.Translate(dir * speed * Time.deltaTime);
+            Vector2 pos = monster.transform.position;
+            Vector2 target = monster.targetFinder.currentAttackTarget.targetPosition;
+            monster.transform.position = monster.movementHandler.MoveToTarget(pos, target, speed, Time.deltaTime);
         }
         public void StopPreparation()
         {

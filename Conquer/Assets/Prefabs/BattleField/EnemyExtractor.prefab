@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4135530796440911795}
   - component: {fileID: 4451621767476703698}
   - component: {fileID: 8646156485853763880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyExtractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

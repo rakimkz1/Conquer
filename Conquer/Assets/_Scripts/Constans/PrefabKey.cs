@@ -6,5 +6,6 @@ public enum PrefabKey
     PlayerStartProperties,
     ExtractorSetup,
     BattleFieldExtractor,
-    BattleFieldEnemyExtractor
+    BattleFieldEnemyExtractor,
+    BattleMonsterCommanPreset,
 }

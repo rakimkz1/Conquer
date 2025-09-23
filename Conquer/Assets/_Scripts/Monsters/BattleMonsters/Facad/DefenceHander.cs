@@ -54,7 +54,8 @@ namespace Monsters
 
         public void MoveToDefencePosition()
         {
-            monster.transform.position = Vector3.MoveTowards(monster.transform.position, _defencePosition, speed * Time.deltaTime);
+            Vector2 pos = monster.transform.position;
+            monster.transform.position = monster.movementHandler.MoveToTarget(pos, _defencePosition, speed, Time.deltaTime);
         }
         public bool IsOnDefencePosition()
         {

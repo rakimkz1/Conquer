@@ -19,6 +19,7 @@ namespace BattleField
         private ResourceManager _resourceManager;
         private PlayerStartProperties so_playerStartProperties;
         private BattleMonsterPreset _preset;
+        private BattleMonsterCommanPreset _commanPreset;
         private AttackableUnitsOnSceneCollection _targetCollection;
         [Inject(Id = "playerArmyRow")] private ArmyStandRowHandler playerArmyRow;
         [Inject(Id = "enemyArmyRow")] private ArmyStandRowHandler enemyArmyRow;
@@ -81,6 +82,7 @@ namespace BattleField
             SetDefenceHandler(monster);
             SetStandHandler(monster);
             SetRetreatHandler(monster);
+            SetEvadeObstacleHandler(monster);
             AddToCollections(monster);
             monster.healthHandler.maxHealth = _preset.maxHealth;
             monster.healthHandler.unitHealth.Value = _preset.maxHealth;
@@ -135,6 +137,11 @@ namespace BattleField
             Transform pointPos = monster.isEnemyUnit ? enemyRetreatPoint : playerRetreatPoint;
             monster.retreatHandler = new RetreatHandler(monster, enterBattle, pointPos, _preset.speed);
         }
+        private void SetEvadeObstacleHandler(BattleMonster monster)
+        {
+            EvadeObstacalseHanlder obstacleHandler = new EvadeObstacalseHanlder(_preset.speed, _commanPreset.ObstacleCheckDistance, monster, _commanPreset.ObstacleEvadingTime, _commanPreset.ObstacleEvadeColdown, _commanPreset.StopObstacleTime);
+            monster.evadeHandler = obstacleHandler;
+        }
         private void AddToCollections(BattleMonster monster)
         {
             if (monster.isEnemyUnit)
@@ -147,6 +154,10 @@ namespace BattleField
             _resourceManager.LoadAsset<PlayerStartProperties>(_resourceManager.so_Keys.GetKey(PrefabKey.PlayerStartProperties),value =>
             {
                 so_playerStartProperties = value;
+            });
+            _resourceManager.LoadAsset<BattleMonsterCommanPreset>(_resourceManager.so_Keys.GetKey(PrefabKey.BattleMonsterCommanPreset), item =>
+            {
+                _commanPreset = item;
             });
         }
 

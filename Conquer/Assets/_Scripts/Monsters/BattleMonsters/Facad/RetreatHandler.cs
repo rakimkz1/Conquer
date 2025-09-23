@@ -22,7 +22,8 @@ namespace Monsters
         }
         public void MoveToRetreatPoint()
         {
-            monster.transform.position = Vector3.MoveTowards(monster.transform.position, outOfBattlePoint.position, speed * Time.deltaTime);
+            Vector2 pos = monster.transform.position;
+            monster.transform.position = monster.movementHandler.MoveToTarget(pos, outOfBattlePoint.position, speed, Time.deltaTime);
         }
 
         public void GoOutOfBattle()
