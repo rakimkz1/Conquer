@@ -28,8 +28,7 @@ namespace Monsters
 
         public void ReturnToPosition()
         {
-            Vector2 pos = monster.transform.position;
-            monster.transform.position = monster.movementHandler.MoveToTarget(pos, _keepingPosition, speed, Time.deltaTime);
+            monster.movementHandler.MoveToTarget(monster.transform, _keepingPosition, speed, Time.deltaTime);
             if (monster.transform.position == _keepingPosition)
                 isMonsterInKeepingPosition = true;
         }

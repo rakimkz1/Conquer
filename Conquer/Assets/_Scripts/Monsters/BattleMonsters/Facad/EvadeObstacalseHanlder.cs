@@ -83,9 +83,8 @@ namespace Monsters
 
         public void EvadeTheObstacle()
         {
-            Vector3 pos = _monster.transform.position;
             Vector3 dir = Vector3.up * (_monster.targetPosition.y > 0f ? 1f : -1f);
-            _monster.transform.position = _monster.movementHandler.MoveToTarget(pos, pos + dir, _speed * 0.6f, Time.deltaTime);
+            _monster.movementHandler.MoveToTarget(_monster.transform, _monster.transform.position + dir, _speed * 0.6f, Time.deltaTime);
         }
 
         public void StopChecking(IAttackTarget target)
