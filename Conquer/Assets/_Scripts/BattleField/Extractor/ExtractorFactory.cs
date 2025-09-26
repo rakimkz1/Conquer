@@ -59,8 +59,8 @@ namespace BattleField
 
         private void CreateExtractor()
         {
-            Extractor extractor = _container.InstantiatePrefab(_extractorPrefab).GetComponent<Extractor>();
-            SetProperties(extractor);
+            GameObject extractor = _container.InstantiatePrefab(_extractorPrefab);
+            SetProperties(extractor.GetComponent<Extractor>());
         }
         private void CreateEnemyExtractor()
         {
@@ -73,6 +73,7 @@ namespace BattleField
             enemyExtractor.SetProperties(_extractorSetup.periodTime, _extractorSetup.manaPerPeriod, _extractorSetup.maxHealth, _extractorSetup.extractorAttackPrority);
             enemyExtractor.transform.position = enemyExtractorSpawnPoints[_enemyExtactorsNumber].position;
             enemyExtractor.targetPosition = enemyExtractor.transform.position;
+            enemyExtractor.gameObject.GetComponent<EnemyExtractorView>().Init(enemyExtractor);
             _enemyExtactorsNumber++;
         }
 
@@ -81,6 +82,7 @@ namespace BattleField
             extractor.SetProperties(_extractorSetup.manaPerPeriod, _extractorSetup.manaPerClick, _extractorSetup.periodTime, _extractorSetup.maxHealth, _extractorSetup.repairmentAmount, _extractorSetup.extractorAttackPrority);
             extractor.transform.position = playerExtractorSpawnPoints[_playerExtractorsNumber].position;
             extractor.targetPosition = extractor.transform.position;
+            extractor.gameObject.GetComponent<ExtractorView>().Init(extractor);
             _playerExtractorsNumber++;
         }
     }

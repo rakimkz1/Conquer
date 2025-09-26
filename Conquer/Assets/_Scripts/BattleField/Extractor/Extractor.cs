@@ -10,7 +10,7 @@ namespace BattleField
     {
         private ManaHandler _manaHandler;
         private AttackableUnitsOnSceneCollection _targetCollection;
-        private ExtractorHealthHandler _healthHandler;
+        public ExtractorHealthHandler _healthHandler;
         private ExtractorManaProducer _manaProducer;
         private BattleStarter _battleStarter;
         public event Action<IAttackTarget> OnDead;
@@ -37,8 +37,8 @@ namespace BattleField
 
         public void SetProperties(float manaPerPeriod, float manaPerClick, float periodTime, float maxHealth, float repairmentAmount, float attackPriority)
         {
-            _healthHandler = new ExtractorHealthHandler(maxHealth, repairmentAmount);
-            _healthHandler.OnDead += ()=> OnDead?.Invoke(this);
+            _healthHandler = new ExtractorHealthHandler(this,maxHealth, repairmentAmount, _targetCollection);
+            _healthHandler.OnDead += () => OnDead?.Invoke(this);
             _manaProducer = new ExtractorManaProducer(manaPerPeriod, manaPerClick, periodTime, _manaHandler);
             this.attackPriority = attackPriority;
             _battleStarter.OnBattleStart += _manaProducer.StartProduceMana;

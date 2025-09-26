@@ -38,9 +38,13 @@ namespace Monsters
         public void EnterToBattleFromRetreat()
         {
             if (monster.isEnemyUnit)
+            {
                 monster._targetCollection.AddEnemyUnit(monster);
+            }
             else
+            {
                 monster._targetCollection.AddPlayerUnit(monster);
+            }
             monster.healthHandler.EnterToBattle();
         }
 

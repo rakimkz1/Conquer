@@ -30,12 +30,14 @@ namespace Monsters
 
         public AttackableUnitsOnSceneCollection _targetCollection;
         private UnitsCommandKeeper _commandKeeper;
+        private GameOverHandler _gameOverHandler;
 
         [Inject]
-        public void Construct(AttackableUnitsOnSceneCollection targetCollection, UnitsCommandKeeper commandKeeper)
+        public void Construct(AttackableUnitsOnSceneCollection targetCollection, UnitsCommandKeeper commandKeeper, GameOverHandler gameOverHandler)
         {
             _targetCollection = targetCollection;
             _commandKeeper = commandKeeper;
+            _gameOverHandler = gameOverHandler;
         }
         public void Init()
         {
@@ -55,7 +57,9 @@ namespace Monsters
 
             healthHandler.OnDead += Dead;
             retreatHandler.OnRetreat += () => OnExitTargetCollection?.Invoke(this);
+            _gameOverHandler.OnGameOver += StopFighting;
         }
+
         private void Update()
         {
             stateMachine.currentState?.OnWork(this);
@@ -96,15 +100,30 @@ namespace Monsters
                 _commandKeeper.OnPlayerCommand -= ListenArmyCommand;
                 _targetCollection.RemovePlayerUnit(this);
             }
-            int count = OnDead?.GetInvocationList().Length ?? 0;
             OnDead?.Invoke(this);
             OnDead = null;
             gameObject.SetActive(false);
         }
-        [ContextMenu("Get current state")]
-        private void GetInfo()
+        private void StopFighting()
         {
-            Debug.Log(stateMachine.currentState.ToString());
+            gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            movementHandler.Dispose();
+        }
+
+        [ContextMenu("Get Info")]
+        private void GetCurrentInfo()
+        {
+            Debug.Log($"is Player unit {_targetCollection.playerUnits.Contains(this)}  enemy unit {_targetCollection.enemyUnits.Contains(this)}");
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(targetFinder.currentAttackTarget.targetPosition, 0.4f);
         }
     }
 }

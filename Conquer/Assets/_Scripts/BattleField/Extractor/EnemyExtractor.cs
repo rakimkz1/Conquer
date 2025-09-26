@@ -17,6 +17,7 @@ namespace BattleField
         private EnemyManaHandler _enemyManaHandler;
         private CancellationTokenSource _cancellation;
         private BattleStarter _battleStarter;
+        private AttackableUnitsOnSceneCollection _targetCollection;
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
         public float powerScale { get; set; }
@@ -24,13 +25,21 @@ namespace BattleField
 
         public event Action<IAttackTarget> OnDead;
         public event Action<IAttackTarget> OnExitTargetCollection;
+        public event Action<float> OnDamage;
 
         [Inject]
-        public void Construct(EnemyManaHandler enemyManaHandler, BattleStarter battleStarter)
+        public void Construct(EnemyManaHandler enemyManaHandler, BattleStarter battleStarter, AttackableUnitsOnSceneCollection targetCollection)
         {
             _enemyManaHandler = enemyManaHandler;
             _battleStarter = battleStarter;
+            _targetCollection = targetCollection;
+            Init();
+        }
+
+        private void Init()
+        {
             _battleStarter.OnBattleStart += StartManaProducing;
+            _targetCollection.AddEnemyUnit(this);
         }
 
         public void SetProperties(float periodTime, float manaPerPeriod, float maxHealth, float extractorAttackPriotity)
@@ -64,6 +73,7 @@ namespace BattleField
         public void TakeDamage(float damage)
         {
             health -= damage;
+            OnDamage?.Invoke(health);
             if (health <= 0f)
                 Dead();
         }
@@ -71,6 +81,7 @@ namespace BattleField
         private void Dead()
         {
             OnDead?.Invoke(this);
+            _targetCollection.RemoveEnemyUnit(this);
             isBroken = true;
             StopManaProducing();
         }

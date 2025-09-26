@@ -52,7 +52,7 @@ namespace Monsters
                 FindAttackTarget();
                 try
                 {
-                    await UniTask.Delay(UnityEngine.Random.Range(800, 1200), cancellationToken: _cancellation.Token);
+                    await UniTask.Delay(UnityEngine.Random.Range(400, 800), cancellationToken: _cancellation.Token);
                 }
                 catch { return; }
             }

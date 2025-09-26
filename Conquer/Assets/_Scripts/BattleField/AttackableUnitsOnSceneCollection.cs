@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UniRx;
+using UnityEngine;
 
 namespace BattleField
 {
@@ -23,12 +24,16 @@ namespace BattleField
 
         public void AddEnemyUnit(IAttackTarget enemyUnit)
         {
+            if (enemyUnits.Contains(enemyUnit))
+                return;
             enemyUnits.Add(enemyUnit);
             OnEnemyAdded?.Invoke(enemyUnit);
         }
 
         public void AddPlayerUnit(IAttackTarget playerUnit)
         {
+            if (playerUnits.Contains(playerUnit))
+                return;
             playerUnits.Add(playerUnit);
             OnPlayerAdded?.Invoke(playerUnit);
         }

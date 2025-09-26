@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExtractorSetup
   m_EditorClassIdentifier: 
   manaPerPeriod: 10
-  manaPerClick: 2
+  manaPerClick: 10
   periodTime: 2
   maxHealth: 100
   repairmentAmount: 10

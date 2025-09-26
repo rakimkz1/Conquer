@@ -2,20 +2,17 @@
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
-using static UnityEditor.PlayerSettings;
 
 namespace Monsters
 {
-    public class GridMovementHandler
+    public class GridMovementHandler : IDisposable
     {
         private Vector3 _diraction;
-        private Transform[] transforms = new Transform[1];
         private TransformAccessArray transformAccess;
         public void MoveToTarget(Transform pos, Vector3 target, float speed, float deltaTime)
         {
-            transforms[0] = pos;
             Vector3 initialPos = pos.position;
-            transformAccess = new TransformAccessArray(transforms);
+            transformAccess = new TransformAccessArray(new Transform[] { pos });
             MoveJob job = new MoveJob
             {
                 target = target,
@@ -24,9 +21,16 @@ namespace Monsters
             };
             JobHandle handler = job.Schedule(transformAccess);
             handler.Complete();
+            transformAccess.Dispose();
             _diraction = pos.position - initialPos;
         }
         public Vector3 GetDiraction() => _diraction;
+
+        public void Dispose()
+        {
+            if(transformAccess.isCreated)
+                transformAccess.Dispose();
+        }
 
         public struct MoveJob : IJobParallelForTransform
         {

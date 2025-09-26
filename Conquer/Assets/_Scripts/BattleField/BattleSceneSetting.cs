@@ -12,6 +12,7 @@ namespace BattleField
         public int enemysWallHealth;
         public int enemyExtractorNumber;
         public int unitManaCost;
+        public float enemyBaseHealth;
         public List<WaveUnit> enemyWaves = new();
         public EnemyAIProperties enemyAIProperties;
         

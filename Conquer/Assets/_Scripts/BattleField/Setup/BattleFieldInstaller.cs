@@ -15,6 +15,8 @@ public class BattleFieldInstaller : MonoInstaller
     [SerializeField] private EnterToBattleInRowHandler enemyRetreatPoint;
     [SerializeField] private List<Transform> playerExtractorSpawnPoints;
     [SerializeField] private List<Transform> enemyExtractorSpawnPoints;
+    [SerializeField] private Base enemyBase;
+    [SerializeField] private Base playerBase;
 
 
     public override void InstallBindings()
@@ -51,6 +53,7 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<EnemyUnitBuymentHandler>().AsSingle();
         Container.Bind<AIPowerCanculator>().AsSingle();
         Container.Bind<EnemyCommandHandler>().AsSingle();
+        Container.Bind<GameOverHandler>().AsSingle().NonLazy();
     }
 
     private void BindFactories()
@@ -70,6 +73,8 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<EnterToBattleInRowHandler>().WithId("enemyEnterToBattleInRow").FromInstance(enemyRetreatPoint).AsCached();
         Container.Bind<List<Transform>>().WithId("playerExtractorSpawnPoint").FromInstance(playerExtractorSpawnPoints).AsCached();
         Container.Bind<List<Transform>>().WithId("enemyExtractorSpawnPoint").FromInstance(enemyExtractorSpawnPoints).AsCached();
+        Container.Bind<Base>().WithId("enemyBase").FromInstance(enemyBase).AsCached();
+        Container.Bind<Base>().WithId("playerBase").FromInstance(playerBase).AsCached();
     }
     private void BindScriptableObjects()
     {
