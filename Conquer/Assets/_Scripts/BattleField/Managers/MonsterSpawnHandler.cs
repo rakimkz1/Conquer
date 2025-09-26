@@ -82,5 +82,6 @@ namespace BattleField
             _selectedMonsterList.Remove(answer);
             return answer;
         }
+        public List<MonsterIdelData> GetMonsterCollection() => _selectedMonsterList;
     }
 }

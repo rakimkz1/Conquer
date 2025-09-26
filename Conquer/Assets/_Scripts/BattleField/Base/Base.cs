@@ -18,7 +18,7 @@ namespace BattleField
         private BaseHealthHandler _healthHandler;
 
         private LevelBuilder _levelBuilder;
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         private ResourceManager _resourceManager;
         private PlayerStartProperties _playerProperties;
 
@@ -26,7 +26,7 @@ namespace BattleField
         public event Action<IAttackTarget> OnExitTargetCollection;
 
         [Inject]
-        private void Construct(LevelBuilder levelBuilder, AttackableUnitsOnSceneCollection targetCollection, ResourceManager resourceManager)
+        private void Construct(LevelBuilder levelBuilder, AttackableCollection targetCollection, ResourceManager resourceManager)
         {
             _levelBuilder = levelBuilder;
             _targetCollection = targetCollection;

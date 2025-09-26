@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BattleField
 {
-    public class AttackableUnitsOnSceneCollection
+    public class AttackableCollection
     {
         public List<IAttackTarget> enemyUnits {  get; private set; }
         public List<IAttackTarget> playerUnits { get; private set; }
@@ -15,13 +15,11 @@ namespace BattleField
         public event Action <IAttackTarget> OnEnemyRemoved;
         public event Action <IAttackTarget> OnPlayerAdded;
         public event Action <IAttackTarget> OnPlayerRemoved;
-
-        public AttackableUnitsOnSceneCollection()
+        public AttackableCollection()
         {
             enemyUnits = new List<IAttackTarget>();
             playerUnits = new List<IAttackTarget>();
         }
-
         public void AddEnemyUnit(IAttackTarget enemyUnit)
         {
             if (enemyUnits.Contains(enemyUnit))
@@ -29,7 +27,6 @@ namespace BattleField
             enemyUnits.Add(enemyUnit);
             OnEnemyAdded?.Invoke(enemyUnit);
         }
-
         public void AddPlayerUnit(IAttackTarget playerUnit)
         {
             if (playerUnits.Contains(playerUnit))
@@ -37,13 +34,11 @@ namespace BattleField
             playerUnits.Add(playerUnit);
             OnPlayerAdded?.Invoke(playerUnit);
         }
-
         public void RemoveEnemyUnit(IAttackTarget enemyUnit)
         {
             enemyUnits.Remove(enemyUnit);
             OnEnemyRemoved?.Invoke(enemyUnit);
         }
-
         public void RemovePlayerUnit(IAttackTarget playerUnit)
         {
             playerUnits.Remove(playerUnit);

@@ -9,7 +9,7 @@ namespace BattleField
     public class Extractor : MonoBehaviour, IAttackTarget, IPointerClickHandler
     {
         private ManaHandler _manaHandler;
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         public ExtractorHealthHandler _healthHandler;
         private ExtractorManaProducer _manaProducer;
         private BattleStarter _battleStarter;
@@ -22,7 +22,7 @@ namespace BattleField
         public bool isDead { get; set; }
 
         [Inject]
-        private void Construct(ManaHandler manaHandler, AttackableUnitsOnSceneCollection targetCollection, BattleStarter battleStarter)
+        private void Construct(ManaHandler manaHandler, AttackableCollection targetCollection, BattleStarter battleStarter)
         {
             _manaHandler = manaHandler;
             _targetCollection = targetCollection;

@@ -36,6 +36,10 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<CommandPanel_Model>().AsTransient();
         Container.Bind<UnitBuymentPanel_ModelView>().AsSingle();
         Container.Bind<UnitBuymentPanel_Model>().AsSingle();
+        Container.Bind<LosePanel_Model>().AsSingle();
+        Container.Bind<LosePanel_ViewModel>().AsSingle();
+        Container.Bind<WinPanel_Model>().AsSingle();
+        Container.Bind<WinPanel_ViewModel>().AsSingle();
     }
     private void BindManagers()
     {
@@ -44,7 +48,7 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<DataTransferScene>().FromComponentInHierarchy().AsSingle();
         Container.Bind<LevelBuilder>().AsSingle().NonLazy();
         Container.Bind<ArmyCommandHandler>().AsSingle();
-        Container.Bind<AttackableUnitsOnSceneCollection>().AsSingle();
+        Container.Bind<AttackableCollection>().AsSingle();
         Container.Bind<MonsterSpawnHandler>().AsSingle();
         Container.Bind<UnitsCommandKeeper>().AsSingle();
         Container.Bind<ManaHandler>().AsSingle();
@@ -54,6 +58,7 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<AIPowerCanculator>().AsSingle();
         Container.Bind<EnemyCommandHandler>().AsSingle();
         Container.Bind<GameOverHandler>().AsSingle().NonLazy();
+        Container.Bind<UnitsAliveChecker>().AsSingle().NonLazy();
     }
 
     private void BindFactories()

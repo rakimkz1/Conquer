@@ -16,11 +16,11 @@ namespace Monsters
 
         private float _attackRadius;
         private float _missileSpeed;
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         private Vector3 _targetPosition;
         private Vector3 _rangerPosition;
 
-        public AreaRangeAttack(bool isEnemy, float damage, float attackRadius, float missileSpeed, AttackableUnitsOnSceneCollection targetCollection)
+        public AreaRangeAttack(bool isEnemy, float damage, float attackRadius, float missileSpeed, AttackableCollection targetCollection)
         {
             this.isEnemy = isEnemy;
             Damage = damage;

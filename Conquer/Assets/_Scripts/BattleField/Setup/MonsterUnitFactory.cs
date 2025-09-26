@@ -20,14 +20,15 @@ namespace BattleField
         private PlayerStartProperties so_playerStartProperties;
         private BattleMonsterPreset _preset;
         private BattleMonsterCommanPreset _commanPreset;
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         [Inject(Id = "playerArmyRow")] private ArmyStandRowHandler playerArmyRow;
         [Inject(Id = "enemyArmyRow")] private ArmyStandRowHandler enemyArmyRow;
         [Inject(Id = "playerRetreatPoint")] private Transform playerRetreatPoint;
         [Inject(Id = "enemyRetreatPoint")] private Transform enemyRetreatPoint;
         [Inject(Id = "playerEnterToBattleInRow")] private EnterToBattleInRowHandler playerEnterToBattle;
         [Inject(Id = "enemyEnterToBattleInRow")] private EnterToBattleInRowHandler enemyEnterToBattle;
-        public MonsterUnitFactory(DiContainer container, GameObject monsterPrefab, List<BattleMonsterPreset> list, SaveManager saveManager, ResourceManager resourceManager, AttackableUnitsOnSceneCollection targetCollection)
+        public event Action<BattleMonster> OnMonsterCreate;
+        public MonsterUnitFactory(DiContainer container, GameObject monsterPrefab, List<BattleMonsterPreset> list, SaveManager saveManager, ResourceManager resourceManager, AttackableCollection targetCollection)
         {
             _container = container;
             _targetCollection = targetCollection;
@@ -86,6 +87,7 @@ namespace BattleField
             AddToCollections(monster);
             monster.healthHandler.maxHealth = _preset.maxHealth;
             monster.healthHandler.unitHealth.Value = _preset.maxHealth;
+            OnMonsterCreate?.Invoke(monster);
         }
 
 

@@ -5,13 +5,13 @@ namespace BattleField
 {
     public class AIPowerCanculator
     {
-        private AttackableUnitsOnSceneCollection _attackCollecion;
+        private AttackableCollection _attackCollecion;
         private float _armyProportionToDefence;
         private float _armyProportionToRetreat;
         private float _armyProportionToAttack;
         private float enemyArmyPowerScale;
         private float playerArmyPowerScale;
-        public AIPowerCanculator(AttackableUnitsOnSceneCollection attackCollection)
+        public AIPowerCanculator(AttackableCollection attackCollection)
         {
             _attackCollecion = attackCollection;
             _attackCollecion.OnPlayerAdded += target => playerArmyPowerScale += target.powerScale;

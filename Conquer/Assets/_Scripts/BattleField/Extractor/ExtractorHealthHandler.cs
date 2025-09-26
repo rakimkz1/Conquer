@@ -9,13 +9,13 @@ namespace BattleField
         public float maxHealth;
         private float _health;
         private float _repairmentAmount;
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         private Extractor _extractor;
         public bool isWorking;
         public event Action OnDead;
         public event Action OnRepaired;
         public event Action<float> OnDamage;
-        public ExtractorHealthHandler(Extractor extractor,float maxHealth, float repairmentAmount, AttackableUnitsOnSceneCollection targetCollection)
+        public ExtractorHealthHandler(Extractor extractor,float maxHealth, float repairmentAmount, AttackableCollection targetCollection)
         {
             this.maxHealth = maxHealth;
             _health = maxHealth;

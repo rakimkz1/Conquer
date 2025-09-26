@@ -28,12 +28,12 @@ namespace Monsters
         public float powerScale { get; set; }
         public bool isDead { get; set; }
 
-        public AttackableUnitsOnSceneCollection _targetCollection;
+        public AttackableCollection _targetCollection;
         private UnitsCommandKeeper _commandKeeper;
         private GameOverHandler _gameOverHandler;
 
         [Inject]
-        public void Construct(AttackableUnitsOnSceneCollection targetCollection, UnitsCommandKeeper commandKeeper, GameOverHandler gameOverHandler)
+        public void Construct(AttackableCollection targetCollection, UnitsCommandKeeper commandKeeper, GameOverHandler gameOverHandler)
         {
             _targetCollection = targetCollection;
             _commandKeeper = commandKeeper;

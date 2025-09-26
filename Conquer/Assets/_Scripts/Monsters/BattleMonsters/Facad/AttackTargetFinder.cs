@@ -9,11 +9,11 @@ namespace Monsters
 {
     public class AttackTargetFinder
     {
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         private BattleMonster _monster;
         public IAttackTarget currentAttackTarget;
         private CancellationTokenSource _cancellation;
-        public AttackTargetFinder(AttackableUnitsOnSceneCollection targetCollection, BattleMonster monster)
+        public AttackTargetFinder(AttackableCollection targetCollection, BattleMonster monster)
         {
             _targetCollection = targetCollection;
             _monster = monster;

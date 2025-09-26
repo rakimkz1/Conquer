@@ -9,11 +9,11 @@ namespace Monsters
         public bool isEnemy { get; set; }
         public float Damage { get; set; }
         public float _attackRadius;
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         private Vector3 _monsterPosition;
         private Vector3 _targetArea;
 
-        public AreaMeleeAttack(bool isEnemy, float damage, float attackRadius, AttackableUnitsOnSceneCollection targetCollection)
+        public AreaMeleeAttack(bool isEnemy, float damage, float attackRadius, AttackableCollection targetCollection)
         {
             this.isEnemy = isEnemy;
             Damage = damage;

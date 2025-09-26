@@ -17,7 +17,7 @@ namespace BattleField
         private EnemyManaHandler _enemyManaHandler;
         private CancellationTokenSource _cancellation;
         private BattleStarter _battleStarter;
-        private AttackableUnitsOnSceneCollection _targetCollection;
+        private AttackableCollection _targetCollection;
         public float attackPriority { get; set; }
         public Vector3 targetPosition { get; set; }
         public float powerScale { get; set; }
@@ -28,7 +28,7 @@ namespace BattleField
         public event Action<float> OnDamage;
 
         [Inject]
-        public void Construct(EnemyManaHandler enemyManaHandler, BattleStarter battleStarter, AttackableUnitsOnSceneCollection targetCollection)
+        public void Construct(EnemyManaHandler enemyManaHandler, BattleStarter battleStarter, AttackableCollection targetCollection)
         {
             _enemyManaHandler = enemyManaHandler;
             _battleStarter = battleStarter;

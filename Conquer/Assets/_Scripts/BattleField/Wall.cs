@@ -15,10 +15,10 @@ public class Wall : MonoBehaviour, IAttackTarget
     public event Action<IAttackTarget> OnDead;
     public event Action<IAttackTarget> OnExitTargetCollection;
 
-    private AttackableUnitsOnSceneCollection _targetCollection;
+    private AttackableCollection _targetCollection;
 
     [Inject]
-    private void Construct(AttackableUnitsOnSceneCollection targetCollection)
+    private void Construct(AttackableCollection targetCollection)
     {
         _targetCollection = targetCollection;
         Init();
