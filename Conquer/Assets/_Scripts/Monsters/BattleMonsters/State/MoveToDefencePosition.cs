@@ -6,6 +6,7 @@
         {
             target.defenceHandler.SetRow();
             target.defenceHandler.GetDefendePosition();
+            target.viewMonster.animationManager.MoveAnimation();
         }
 
         public void OnExit(BattleMonster target)

@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
-using System;
 namespace Monsters
 {
     public class BattleMonsterView : MonoBehaviour
     {
         [SerializeField] private Image _monsterHealthBar;
+        public BattleMonsterAnimationManager animationManager;
         private BattleMonster _battleMonster;
         private void Start()
         {

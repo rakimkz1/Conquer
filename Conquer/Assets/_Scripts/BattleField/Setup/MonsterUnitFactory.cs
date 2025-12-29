@@ -85,11 +85,11 @@ namespace BattleField
             SetRetreatHandler(monster);
             SetEvadeObstacleHandler(monster);
             AddToCollections(monster);
+            SetSprite(monster, type);
             monster.healthHandler.maxHealth = _preset.maxHealth;
             monster.healthHandler.unitHealth.Value = _preset.maxHealth;
             OnMonsterCreate?.Invoke(monster);
         }
-
 
         private void SetMonsterHealProperties(BattleMonster monster)
         {
@@ -150,6 +150,10 @@ namespace BattleField
                 enemyEnterToBattle.Add(monster);
             else
                 playerEnterToBattle.Add(monster);
+        }
+        private void SetSprite(BattleMonster monster, MonsterIdelData type)
+        {
+            GameObject sprite;
         }
         private async UniTask LoadResources()
         {

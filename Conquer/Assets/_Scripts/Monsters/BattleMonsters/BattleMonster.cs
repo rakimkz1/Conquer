@@ -16,6 +16,7 @@ namespace Monsters
         public RetreatHandler retreatHandler;
         public EvadeObstacalseHanlder evadeHandler;
         public GridMovementHandler movementHandler;
+        public BattleMonsterView viewMonster;
         public bool isEnemyUnit;
         [Header("Properties")]
         public int monsterLevel;
@@ -44,6 +45,7 @@ namespace Monsters
             targetFinder = new AttackTargetFinder(_targetCollection, this);
             stateMachine = new BattleMonsterStateMachine(this, _commandKeeper);
             movementHandler = new GridMovementHandler();
+            viewMonster = GetComponent<BattleMonsterView>();
             if (isEnemyUnit)
             {
                 _commandKeeper.OnEnemyCommand += ListenArmyCommand;

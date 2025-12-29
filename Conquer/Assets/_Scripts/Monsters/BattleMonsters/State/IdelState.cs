@@ -6,6 +6,7 @@
         {
             target.standPositionHandler.TargetLoopCheck();
             target.standPositionHandler.RememberStayingPosition();
+            target.viewMonster.animationManager.IdelAnimation();
         }
 
         public void OnExit(BattleMonster target)

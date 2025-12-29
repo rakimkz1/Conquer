@@ -2,7 +2,10 @@
 {
     public class RetreatState : IBattleMonsterState
     {
-        public void OnEnter(BattleMonster target) { }
+        public void OnEnter(BattleMonster target)
+        {
+            target.viewMonster.animationManager.MoveAnimation();
+        }
 
         public void OnExit(BattleMonster target) { }
 

@@ -5,6 +5,7 @@
         public void OnEnter(BattleMonster target)
         {
             target.attackHandler.WaitAttackPreparation();
+            target.viewMonster.animationManager.AttackAnimation();
         }
 
 

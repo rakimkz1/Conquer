@@ -2,7 +2,10 @@
 {
     public class DefenceState : IBattleMonsterState
     {
-        public void OnEnter(BattleMonster target) { }
+        public void OnEnter(BattleMonster target) 
+        {
+            target.viewMonster.animationManager.IdelAnimation();
+        }
 
         public void OnExit(BattleMonster target)
         {
