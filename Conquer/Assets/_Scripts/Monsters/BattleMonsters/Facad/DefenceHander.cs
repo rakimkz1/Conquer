@@ -66,7 +66,7 @@ namespace Monsters
         {
             if (monster.targetFinder.currentAttackTarget == null)
                 return false;
-            float distance = Vector3.Distance(_defencePosition, monster.targetFinder.currentAttackTarget.targetPosition);
+            float distance = Vector3.Distance(_defencePosition, monster.targetFinder.currentAttackTarget.targetPosition.position);
             return distance < _defenceTracingDistance ? true : false; 
         }
 
@@ -74,7 +74,7 @@ namespace Monsters
         {
             if (monster.targetFinder.currentAttackTarget == null)
                 return false;
-            float distance = Vector3.Distance(_defencePosition, monster.targetFinder.currentAttackTarget.targetPosition);
+            float distance = Vector3.Distance(_defencePosition, monster.targetFinder.currentAttackTarget.targetPosition.position);
             return distance < _defenceProvocationDistance ? true : false;
         }
     }

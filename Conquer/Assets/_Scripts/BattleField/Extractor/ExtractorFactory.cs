@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using System;
-using TMPro;
 
 namespace BattleField
 {
@@ -33,15 +30,15 @@ namespace BattleField
 
         private void SetPrefab()
         {
-            _resourceManager.LoadAsset<GameObject>(_resourceManager.so_Keys.GetKey(PrefabKey.BattleFieldExtractor), item =>
+            _resourceManager.LoadAsset<GameObject>("Assets/Prefabs/BattleField/Extractor.prefab", item =>
             {
                 _extractorPrefab = item;
             });
-            _resourceManager.LoadAsset<ExtractorSetUps>(_resourceManager.so_Keys.GetKey(PrefabKey.ExtractorSetup), item =>
+            _resourceManager.LoadAsset<ExtractorSetUps>("Assets/Data/ScriptableObject/PlayerSetup/ExtractorSetup.asset", item =>
             {
                 _extractorSetup = item;
             });
-            _resourceManager.LoadAsset<GameObject>(_resourceManager.so_Keys.GetKey(PrefabKey.BattleFieldEnemyExtractor), asset =>
+            _resourceManager.LoadAsset<GameObject>("Assets/Prefabs/BattleField/EnemyExtractor.prefab", asset =>
             {
                 _enemyExtractorPrefab = asset;
             });
@@ -72,7 +69,7 @@ namespace BattleField
         {
             enemyExtractor.SetProperties(_extractorSetup.periodTime, _extractorSetup.manaPerPeriod, _extractorSetup.maxHealth, _extractorSetup.extractorAttackPrority);
             enemyExtractor.transform.position = enemyExtractorSpawnPoints[_enemyExtactorsNumber].position;
-            enemyExtractor.targetPosition = enemyExtractor.transform.position;
+            enemyExtractor.targetPosition = enemyExtractor.transform;
             enemyExtractor.gameObject.GetComponent<EnemyExtractorView>().Init(enemyExtractor);
             _enemyExtactorsNumber++;
         }
@@ -81,7 +78,7 @@ namespace BattleField
         {
             extractor.SetProperties(_extractorSetup.manaPerPeriod, _extractorSetup.manaPerClick, _extractorSetup.periodTime, _extractorSetup.maxHealth, _extractorSetup.repairmentAmount, _extractorSetup.extractorAttackPrority);
             extractor.transform.position = playerExtractorSpawnPoints[_playerExtractorsNumber].position;
-            extractor.targetPosition = extractor.transform.position;
+            extractor.targetPosition = extractor.transform;
             extractor.gameObject.GetComponent<ExtractorView>().Init(extractor);
             _playerExtractorsNumber++;
         }

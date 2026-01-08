@@ -25,7 +25,7 @@ namespace Monsters
         public event Action<IAttackTarget> OnExitTargetCollection;
 
         public float attackPriority { get; set; }
-        public Vector3 targetPosition { get; set; }
+        public Transform targetPosition { get; set; }
         public float powerScale { get; set; }
         public bool isDead { get; set; }
 
@@ -67,7 +67,7 @@ namespace Monsters
             stateMachine.currentState?.OnWork(this);
             stateMachine.CheckAnyTransitions();
             stateMachine.CheckTransitions();
-            targetPosition = transform.position;
+            targetPosition = transform;
         }
         public void ListenArmyCommand(ArmyCommandTypes commandType, MonsterType monsterType) => stateMachine.ListenArmyCommand(commandType, monsterType);
         public void TakeDamage(float damage) => healthHandler.TakeDamage(damage);
@@ -125,7 +125,7 @@ namespace Monsters
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(targetFinder.currentAttackTarget.targetPosition, 0.4f);
+            Gizmos.DrawWireSphere(targetFinder.currentAttackTarget.targetPosition.position, 0.4f);
         }
     }
 }

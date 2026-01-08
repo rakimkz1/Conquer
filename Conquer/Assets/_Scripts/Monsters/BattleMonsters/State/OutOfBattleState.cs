@@ -4,7 +4,7 @@
     {
         public void OnEnter(BattleMonster target)
         {
-            target.viewMonster.animationManager.MoveAnimation();
+            target.viewMonster.animationManager?.MoveAnimation();
             target.retreatHandler.GoOutOfBattle();
         }
         public void OnExit(BattleMonster target)

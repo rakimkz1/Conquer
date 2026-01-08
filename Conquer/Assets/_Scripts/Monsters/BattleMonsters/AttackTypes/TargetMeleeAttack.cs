@@ -10,23 +10,24 @@ namespace Monsters
 
         private IAttackTarget _attackTarget;
         private Vector3 _monsterPosition;
+        private MonsterIdelData _monsterData;
         public TargetMeleeAttack(bool isEnemy, float Damage)
         {
             this.isEnemy = isEnemy;
             this.Damage = Damage;
         }
-        public void InitAttack(IAttackTarget attackTarget, Vector3 monsterPosition)
+        public void InitAttack(IAttackTarget attackTarget, Vector3 monsterPosition, MonsterIdelData data)
         {
             _attackTarget = attackTarget;
             _monsterPosition = monsterPosition;
+            _monsterData = data;
         }
 
-        public void InitAttack(Vector3 targetArea, Vector3 monsterPosition) { }
+        public void InitAttack(Vector3 targetArea, Vector3 monsterPosition, MonsterIdelData data) { }
 
         public void Attack()
         {
             _attackTarget.TakeDamage(Damage);
         }
-
     }
 }

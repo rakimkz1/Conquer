@@ -12,7 +12,7 @@ namespace Monsters
         private AttackableCollection _targetCollection;
         private Vector3 _monsterPosition;
         private Vector3 _targetArea;
-
+        private MonsterIdelData _monsterData;
         public AreaMeleeAttack(bool isEnemy, float damage, float attackRadius, AttackableCollection targetCollection)
         {
             this.isEnemy = isEnemy;
@@ -20,11 +20,12 @@ namespace Monsters
             _attackRadius = attackRadius;
             _targetCollection = targetCollection;
         }
-        public void InitAttack(IAttackTarget attackTarget, Vector3 monsterPosition) { }
-        public void InitAttack(Vector3 targetArea, Vector3 monsterPosition)
+        public void InitAttack(IAttackTarget attackTarget, Vector3 monsterPosition, MonsterIdelData data) { }
+        public void InitAttack(Vector3 targetArea, Vector3 monsterPosition, MonsterIdelData data)
         {
             _monsterPosition = monsterPosition;
             _targetArea = targetArea;
+            _monsterData = data;
         }
 
         public void Attack()
@@ -42,7 +43,7 @@ namespace Monsters
             {
                 for(int i = 0; i < _targetCollection.playerUnits.Count; i++)
                 {
-                    float distance = Vector3.Distance(_monsterPosition, _targetCollection.playerUnits[i].targetPosition);
+                    float distance = Vector3.Distance(_monsterPosition, _targetCollection.playerUnits[i].targetPosition.position);
                     if (distance < _attackRadius) 
                         answer.Add(_targetCollection.playerUnits[i]);
                 }
@@ -51,7 +52,7 @@ namespace Monsters
             {
                 for (int i = 0; i < _targetCollection.enemyUnits.Count; i++)
                 {
-                    float distance = Vector3.Distance(_monsterPosition, _targetCollection.enemyUnits[i].targetPosition);
+                    float distance = Vector3.Distance(_monsterPosition, _targetCollection.enemyUnits[i].targetPosition.position);
                     if (distance < _attackRadius)
                         answer.Add(_targetCollection.enemyUnits[i]);
                 }

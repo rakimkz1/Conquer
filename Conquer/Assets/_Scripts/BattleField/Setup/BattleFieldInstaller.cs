@@ -8,6 +8,7 @@ public class BattleFieldInstaller : MonoInstaller
     [SerializeField] private ResourceManager _resourceManager;
     [SerializeField] private BattleSceneSetting BattleSceneSetting;
     [SerializeField] private List<BattleMonsterPreset> so_monsterPresets;
+    [SerializeField] private MonsterSpritesPreset so_monsterSprites;
     [SerializeField] private GameObject monsterUnitPrefab;
     [SerializeField] private ArmyStandRowHandler playerRowHandler;
     [SerializeField] private ArmyStandRowHandler enemyRowHandler;
@@ -59,6 +60,7 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<EnemyCommandHandler>().AsSingle();
         Container.Bind<GameOverHandler>().AsSingle().NonLazy();
         Container.Bind<UnitsAliveChecker>().AsSingle().NonLazy();
+        Container.Bind<ProjectileViewManager>().AsSingle().NonLazy();
     }
 
     private void BindFactories()
@@ -84,5 +86,6 @@ public class BattleFieldInstaller : MonoInstaller
     private void BindScriptableObjects()
     {
         Container.Bind<List<BattleMonsterPreset>>().FromInstance(so_monsterPresets).AsSingle();
+        Container.Bind<MonsterSpritesPreset>().FromInstance(so_monsterSprites).AsSingle();
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Monsters
+﻿using UnityEngine;
+
+namespace Monsters
 {
     public class IdelState : IBattleMonsterState
     {
@@ -6,7 +8,10 @@
         {
             target.standPositionHandler.TargetLoopCheck();
             target.standPositionHandler.RememberStayingPosition();
-            target.viewMonster.animationManager.IdelAnimation();
+            target.viewMonster.animationManager?.IdelAnimation();
+            Vector3 targetDiraction = target.targetFinder.currentAttackTarget.targetPosition.position;
+            target.viewMonster.ChangeViewDirection(targetDiraction);
+            Debug.DrawRay(target.transform.position, targetDiraction * 5f, Color.red, 3f);
         }
 
         public void OnExit(BattleMonster target)

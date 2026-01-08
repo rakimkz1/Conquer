@@ -8,6 +8,6 @@ namespace MainHUB.Extractor
     {
         public int manaCost;
         public MonsterIdelData data;
-        public PrefabKey prefabKey;
+        public string prefabPath;
     }
 }

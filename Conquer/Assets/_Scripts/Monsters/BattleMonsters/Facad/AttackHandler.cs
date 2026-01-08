@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using BattleField;
+using Cysharp.Threading.Tasks;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -31,9 +32,9 @@ namespace Monsters
         public void Attack()
         {
             if (monster.monsterType == MonsterType.Sprinter || monster.monsterType == MonsterType.Rangers || monster.monsterType == MonsterType.Sieges)
-                attackType.InitAttack(monster.targetFinder.currentAttackTarget, monster.targetPosition);
+                attackType.InitAttack(monster.targetFinder.currentAttackTarget, monster.targetPosition.position, new MonsterIdelData(monster.monsterLevel, monster.monsterType));
             else
-                attackType.InitAttack(monster.targetFinder.currentAttackTarget.targetPosition, monster.targetPosition);
+                attackType.InitAttack(monster.targetFinder.currentAttackTarget.targetPosition.position, monster.targetPosition.position, new MonsterIdelData(monster.monsterLevel, monster.monsterType));
 
             attackType.Attack();
             WaitAttackColdown();
@@ -48,7 +49,7 @@ namespace Monsters
         {
             if (monster.targetFinder.currentAttackTarget == null || monster.targetFinder.currentAttackTarget.isDead)
                 return false;
-            float distance = Vector3.Distance(monster.transform.position, monster.targetFinder.currentAttackTarget.targetPosition);
+            float distance = Vector3.Distance(monster.transform.position, monster.targetFinder.currentAttackTarget.targetPosition.position);
             if (distance < attackDistance)
                 return true;
             return false;
@@ -56,7 +57,7 @@ namespace Monsters
 
         public void MoveToTarget()
         {
-            Vector2 target = monster.targetFinder.currentAttackTarget.targetPosition;
+            Vector2 target = monster.targetFinder.currentAttackTarget.targetPosition.position;
             monster.movementHandler.MoveToTarget(monster.transform, target, speed, Time.deltaTime);
         }
         public void StopPreparation()

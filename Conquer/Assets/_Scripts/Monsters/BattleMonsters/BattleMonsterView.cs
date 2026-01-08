@@ -11,13 +11,21 @@ namespace Monsters
         private void Start()
         {
             _battleMonster = GetComponent<BattleMonster>();
-            _battleMonster.healthHandler.unitHealth.Subscribe(ShowUnitHealth);
-            SetColor();
+            Init();
         }
 
-        private void SetColor()
+        private void Init()
         {
-            _battleMonster.GetComponent<SpriteRenderer>().color = (_battleMonster.isEnemyUnit) ? Color.red : Color.blue;
+            _battleMonster.healthHandler.unitHealth.Subscribe(ShowUnitHealth);
+            _battleMonster.movementHandler._diraction.DistinctUntilChanged().Subscribe(ChangeViewDirection);
+        }
+
+        public void ChangeViewDirection(Vector3 vector)
+        {
+            if (vector.x >= 0f)
+                gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            else if (vector.x < 0f)
+                gameObject.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
         public void ShowUnitHealth(float health)

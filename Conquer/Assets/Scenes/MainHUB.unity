@@ -1294,7 +1294,7 @@ MonoBehaviour:
     data:
       monsterLevel: 0
       monsterType: 1
-    prefabKey: 1
+    prefabPath: Assets/Prefabs/Monsters/Monster.prefab
   btn_buyButton: {fileID: 1492420101}
   txt_costText: {fileID: 1034015364}
 --- !u!1 &758396860
@@ -1383,7 +1383,7 @@ MonoBehaviour:
     data:
       monsterLevel: 0
       monsterType: 2
-    prefabKey: 1
+    prefabPath: Assets/Prefabs/Monsters/Monster.prefab
   btn_buyButton: {fileID: 1270345319}
   txt_costText: {fileID: 1259868354}
 --- !u!1 &905751708
@@ -1854,7 +1854,7 @@ MonoBehaviour:
     data:
       monsterLevel: 0
       monsterType: 0
-    prefabKey: 1
+    prefabPath: Assets/Prefabs/Monsters/Monster.prefab
   btn_buyButton: {fileID: 947409689}
   txt_costText: {fileID: 201241898}
 --- !u!1 &1259868352
@@ -2306,7 +2306,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceptableTime: 0.1
-  speed: 3
 --- !u!4 &1392098523
 Transform:
   m_ObjectHideFlags: 0
@@ -2577,7 +2576,7 @@ MonoBehaviour:
     data:
       monsterLevel: 0
       monsterType: 3
-    prefabKey: 1
+    prefabPath: Assets/Prefabs/Monsters/Monster.prefab
   btn_buyButton: {fileID: 499915387}
   txt_costText: {fileID: 330220488}
 --- !u!1 &1647349183
@@ -2670,7 +2669,7 @@ MonoBehaviour:
     data:
       monsterLevel: 0
       monsterType: 4
-    prefabKey: 1
+    prefabPath: Assets/Prefabs/Monsters/Monster.prefab
   btn_buyButton: {fileID: 1962285085}
   txt_costText: {fileID: 345198575}
 --- !u!1 &1686695004

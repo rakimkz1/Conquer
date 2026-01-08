@@ -1,5 +1,3 @@
-
-using Assets._Scripts.Managers;
 using MainHUB.HUB_Managers;
 using Zenject;
 
@@ -22,7 +20,7 @@ namespace MainHUB.Extractor
 
         public bool SpawnMonster()
         {
-            bool isAffordable = _monsterSpawn.SpawnMonster(model.manaCost, model.prefabKey, model.data);
+            bool isAffordable = _monsterSpawn.SpawnMonster(model.manaCost, model.prefabPath, model.data);
             return isAffordable;
         }
 

@@ -3,7 +3,7 @@ using Game_Setup;
 using Monsters;
 using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +21,8 @@ namespace BattleField
         private BattleMonsterPreset _preset;
         private BattleMonsterCommanPreset _commanPreset;
         private AttackableCollection _targetCollection;
+        private ProjectileViewManager _projectileManager;
+        private MonsterSpritesPreset so_spriteMonsterPreset;
         [Inject(Id = "playerArmyRow")] private ArmyStandRowHandler playerArmyRow;
         [Inject(Id = "enemyArmyRow")] private ArmyStandRowHandler enemyArmyRow;
         [Inject(Id = "playerRetreatPoint")] private Transform playerRetreatPoint;
@@ -28,13 +30,15 @@ namespace BattleField
         [Inject(Id = "playerEnterToBattleInRow")] private EnterToBattleInRowHandler playerEnterToBattle;
         [Inject(Id = "enemyEnterToBattleInRow")] private EnterToBattleInRowHandler enemyEnterToBattle;
         public event Action<BattleMonster> OnMonsterCreate;
-        public MonsterUnitFactory(DiContainer container, GameObject monsterPrefab, List<BattleMonsterPreset> list, SaveManager saveManager, ResourceManager resourceManager, AttackableCollection targetCollection)
+        public MonsterUnitFactory(DiContainer container, GameObject monsterPrefab, List<BattleMonsterPreset> list, SaveManager saveManager, ResourceManager resourceManager, AttackableCollection targetCollection, MonsterSpritesPreset spritesPreset, ProjectileViewManager projectileManager)
         {
             _container = container;
             _targetCollection = targetCollection;
             _monsterPrefab = monsterPrefab;
             so_monsterPreset = list;
             _resourceManager = resourceManager;
+            _projectileManager = projectileManager;
+            so_spriteMonsterPreset = spritesPreset;
             _saveManager = saveManager;
             _saveData = _saveManager.Load();
             LoadResources();
@@ -117,11 +121,11 @@ namespace BattleField
             else if (monster.monsterType == MonsterType.Sprinter)
                 attackType = new TargetMeleeAttack(monster.isEnemyUnit, _preset.attackProperties.Damage);
             else if (monster.monsterType == MonsterType.Rangers)
-                attackType = new TargetRangeAttack(monster.isEnemyUnit, _preset.attackProperties.Damage, _preset.attackProperties.MissileSpeed);
+                attackType = new TargetRangeAttack(monster.isEnemyUnit, _preset.attackProperties.Damage, _preset.attackProperties.MissileSpeed, _projectileManager);
             else if (monster.monsterType == MonsterType.Mage)
-                attackType = new AreaRangeAttack(monster.isEnemyUnit, _preset.attackProperties.Damage, _preset.attackProperties.DamageAreaRadius, _preset.attackProperties.MissileSpeed, _targetCollection);
+                attackType = new AreaRangeAttack(monster.isEnemyUnit, _preset.attackProperties.Damage, _preset.attackProperties.DamageAreaRadius, _preset.attackProperties.MissileSpeed, _targetCollection, _projectileManager);
             else
-                attackType = new TargetRangeAttack(monster.isEnemyUnit, _preset.attackProperties.Damage, _preset.attackProperties.MissileSpeed);
+                attackType = new TargetRangeAttack(monster.isEnemyUnit, _preset.attackProperties.Damage, _preset.attackProperties.MissileSpeed, _projectileManager);
             monster.attackHandler = new AttackHandler(monster, attackType, _preset.attackSpeed, _preset.attackDistance, _preset.attackPreparationTime, _preset.speed);
         }
         private void SetDefenceHandler(BattleMonster monster)
@@ -151,17 +155,21 @@ namespace BattleField
             else
                 playerEnterToBattle.Add(monster);
         }
-        private void SetSprite(BattleMonster monster, MonsterIdelData type)
+        private async Task SetSprite(BattleMonster monster, MonsterIdelData type)
         {
-            GameObject sprite;
+            _resourceManager.LoadAsset<GameObject>(so_spriteMonsterPreset.GetSprite(monster.isEnemyUnit, type), asset =>
+            {
+                GameObject target = UnityEngine.Object.Instantiate(asset, monster.transform.position, asset.transform.rotation, monster.transform);
+                monster.viewMonster.animationManager = new BattleMonsterAnimationManager(target.GetComponentInChildren<Animator>());
+            });
         }
         private async UniTask LoadResources()
         {
-            _resourceManager.LoadAsset<PlayerStartProperties>(_resourceManager.so_Keys.GetKey(PrefabKey.PlayerStartProperties),value =>
+            _resourceManager.LoadAsset<PlayerStartProperties>("Assets/Data/ScriptableObject/PlayerSetup/PlayerStartProperties.asset", value =>
             {
                 so_playerStartProperties = value;
             });
-            _resourceManager.LoadAsset<BattleMonsterCommanPreset>(_resourceManager.so_Keys.GetKey(PrefabKey.BattleMonsterCommanPreset), item =>
+            _resourceManager.LoadAsset<BattleMonsterCommanPreset>("Assets/Data/ScriptableObject/PlayerSetup/BattleMonsterCommanPreset.asset", item =>
             {
                 _commanPreset = item;
             });

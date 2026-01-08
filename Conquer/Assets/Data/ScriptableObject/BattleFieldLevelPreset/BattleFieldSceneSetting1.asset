@@ -16,10 +16,11 @@ MonoBehaviour:
   enemysWallHealth: 100
   enemyExtractorNumber: 1
   unitManaCost: 50
+  enemyBaseHealth: 0
   enemyWaves:
   - level: 0
     monsterType: 0
-    unitNumber: 3
+    unitNumber: 4
   - level: 0
     monsterType: 1
     unitNumber: 4

@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b2de44793d7904abb1a8fb8f0463fd, type: 3}
+  m_Name: MonsterSprite
+  m_EditorClassIdentifier: 
+  monsterSprites:
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Tank1Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 0
+      monsterType: 0
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Tank1Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 0
+      monsterType: 0
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Tank2Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 1
+      monsterType: 0
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Tank2Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 1
+      monsterType: 0
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Sprinter1Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 0
+      monsterType: 1
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Sprinter1Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 0
+      monsterType: 1
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Sprinter2Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 1
+      monsterType: 1
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Sprinter2Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 1
+      monsterType: 1
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Ranger1Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 0
+      monsterType: 2
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Ranger1Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 0
+      monsterType: 2
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Ranger2Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 1
+      monsterType: 2
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Ranger2Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 1
+      monsterType: 2
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Mage1Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 0
+      monsterType: 3
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Mage1Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 0
+      monsterType: 3
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Mage2Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 1
+      monsterType: 3
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Mage2Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 1
+      monsterType: 3
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Siege1Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 0
+      monsterType: 4
+  - path: Assets/Prefabs/Monsters/MonsterView/Level1/Siege1Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 0
+      monsterType: 4
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Siege2Blue.prefab
+    isEnemy: 0
+    data:
+      monsterLevel: 1
+      monsterType: 4
+  - path: Assets/Prefabs/Monsters/MonsterView/Level2/Siege2Red.prefab
+    isEnemy: 1
+    data:
+      monsterLevel: 1
+      monsterType: 4

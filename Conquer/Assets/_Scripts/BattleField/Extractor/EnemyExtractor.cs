@@ -19,7 +19,7 @@ namespace BattleField
         private BattleStarter _battleStarter;
         private AttackableCollection _targetCollection;
         public float attackPriority { get; set; }
-        public Vector3 targetPosition { get; set; }
+        public Transform targetPosition { get; set; }
         public float powerScale { get; set; }
         public bool isDead { get; set; }
 

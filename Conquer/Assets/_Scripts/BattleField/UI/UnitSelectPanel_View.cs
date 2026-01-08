@@ -54,7 +54,7 @@ namespace BattleField
 
         private async UniTask LoadAllPrefabs()
         {
-            string key = _resourceManager.so_Keys.GetKey(PrefabKey.MonsterSelectionIcon);
+            string key = "Assets/Prefabs/BattleField/SelectionIcon.prefab";
             _resourceManager.LoadAsset<GameObject>(key, prefab =>
             {
                 _monsterIconPrefab = prefab;

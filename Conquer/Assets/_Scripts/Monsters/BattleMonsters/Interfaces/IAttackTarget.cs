@@ -7,7 +7,7 @@ namespace Monsters
     {
         float attackPriority { get; set; }
         float powerScale { get; set; }
-        Vector3 targetPosition { get; set; }
+        Transform targetPosition { get; set; }
         bool isDead { get; set; }
         void TakeDamage(float damage);
         event Action<IAttackTarget> OnDead;

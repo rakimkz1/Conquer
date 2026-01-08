@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65f1c7f7f09b894a89cf7aadec670aa, type: 3}
+  m_Name: Sprinter0
+  m_EditorClassIdentifier: 
+  data:
+    monsterLevel: 0
+    monsterType: 1
+  provocationDistance: 2.18
+  maxTracingDistance: 0.5
+  defenceProvocationDistance: 12
+  defenceTraceDistance: 13
+  speed: 4.54
+  powerScale: 10
+  attackDistance: 0.59
+  attackSpeed: 0.89
+  attackPreparationTime: 1.32
+  attackPriority: 1
+  maxHealth: 100
+  attackProperties:
+    Damage: 40
+    MissileSpeed: 0
+    DamageAreaRadius: 0

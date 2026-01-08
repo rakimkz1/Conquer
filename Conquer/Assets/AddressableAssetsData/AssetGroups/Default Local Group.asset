@@ -15,6 +15,16 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 35844d271800aa6429d57d8d9a69e104
   m_SerializeEntries:
+  - m_GUID: 03e39a3a2ebbbd347a112ca8ad7b6072
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Sprinter1Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 076eb82506cb47542b7d8450ee51574d
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Ranger2Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 092adb1c0c2b2d340a1f331b0f850dcb
     m_Address: Assets/Data/ScriptableObject/PlayerSetup/PlayerStartProperties.asset
     m_ReadOnly: 0
@@ -25,8 +35,38 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 160a20c4aa98af245ba3e2c13db18cae
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Tank1Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 19d5ebafa3012a5498d1f66808dfc867
     m_Address: Assets/Scenes/MainHUB.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2bb289b2ed6374d48adcd658b2b444dd
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Siege2Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32ebb0f6c83fc9c42b5d6f84dd8d5c27
+    m_Address: Assets/Prefabs/Monsters/Projectiles/ArrowView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b3e854dc1554a44da0dd8b1a0a36bbd
+    m_Address: Assets/Prefabs/Monsters/Projectiles/Magic.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4883b7f6387afce4c8925b525010096f
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Ranger1Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49a93fab9cab3f649b177a9eadc1b76b
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Ranger2Blue.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -35,8 +75,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e7ef73d120a87942a3b4500bd13e435
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Ranger1Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f11ee7d5b3e4f44bb02fcf1a58f8860
     m_Address: Assets/Prefabs/BattleField/Extractor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bd21a7a6fef40143b12510cbe37acb8
+    m_Address: Assets/Sprites/Monsters/level1/arrow1.B.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7928dd34f77904343b03bfb124488cd6
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Siege1Red.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -45,13 +100,98 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80ce7740958e8ff4bbff474398d6e15b
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Mage1Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8efd73414681fc947a64915b957db66f
     m_Address: Assets/Data/ScriptableObject/PlayerSetup/BattleMonsterCommanPreset.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9755fd9d7dc54ee4383be598c01990f7
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Mage2Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98b16f79d36f4624f8ff4c6923667fa6
+    m_Address: Assets/Sprites/Monsters/level2/arrow2.R.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b0e80368aedda7498ae4ae96b2d1e6d
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Sprinter1Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d9b8fe0a2bcb91449a47c844be58246
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Siege1Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f96f7f3b3097984abef639767c4701e
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Sprinter2Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a74bf550456c70b468903fed8b71379d
     m_Address: Assets/Scenes/EntryPoint.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b006e44aef47c064ea5c93af9025fadd
+    m_Address: Assets/Sprites/Monsters/level2/arrow2.B.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b15ee789975946047b8151be7a2e89e6
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Siege2Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1c65859d8c4cd74eb5f6d71a22e510f
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Tank1Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4adfbb277cb6b44499000207ba171d9
+    m_Address: Assets/Prefabs/Monsters/Projectiles/Siege.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b959b1c4cb795214ab4b2db8e5f90d16
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Sprinter2Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bce9d2ebd40139b45bcb1a2151b6b6bd
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Tank2Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c029ff90a0a1d134d8144896d8ec288d
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Mage1Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d23faad640712804aade2ab2db11fdd1
+    m_Address: Assets/Sprites/Monsters/level1/arrow1.R.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3002caae355a084888eddfd90a07b6a
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Tank2Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d67b2e012b08a53409a67dcc33222407
+    m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Mage2Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e27387cfa88de0b44b77b008f02ec469
+    m_Address: Assets/Data/ScriptableObject/ProjectilePresets.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -67,6 +207,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff4cf0cd86a7bda43b93b3993123f2c3
     m_Address: Assets/Prefabs/BattleField/SelectionIcon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff79575b277ee4b4282b618f9feb9b6f
+    m_Address: Assets/Prefabs/Monsters/BattleMonsterUnit.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

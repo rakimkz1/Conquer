@@ -10,8 +10,6 @@ public class ResourceManager : MonoBehaviour
 {
     private Dictionary<string, AsyncOperationHandle> loadedAssets = new Dictionary<string, AsyncOperationHandle>();
     private DiContainer container;
-
-    public ResourceKeys so_Keys;
     // Загрузка ресурса (например, префаба)
 
     [Inject]

@@ -33,7 +33,7 @@ public partial class ArmyStandRowHandler : MonoBehaviour
         int rowsOder = rows.IndexOf(targetRow);
         int monsterOrder = rows[rowsOder].rowMembersOrder.IndexOf(monster);
 
-        Vector3 rowPostionInArmy = (rows.Count - rowsOder) * spaceBetweenRows * Vector3.right;
+        Vector3 rowPostionInArmy = (rows.Count - rowsOder) * spaceBetweenRows * Vector3.right * ((monster.isEnemyUnit) ? -1f: 1f);
         Vector3 positionInRow = (spaceBetweenUnitInRow * targetRow.rowMembersOrder.Count * 0.5f - monsterOrder * spaceBetweenUnitInRow) * Vector3.up;
         return transform.position + positionInRow + rowPostionInArmy;
     }

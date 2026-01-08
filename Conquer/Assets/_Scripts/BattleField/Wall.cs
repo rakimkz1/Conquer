@@ -8,7 +8,7 @@ public class Wall : MonoBehaviour, IAttackTarget
 {
     public bool isEnemyWall;
     public float attackPriority { get; set; }
-    public Vector3 targetPosition { get; set; }
+    public Transform targetPosition { get; set; }
     public float powerScale { get; set; }
     public bool isDead { get; set; }
 
@@ -31,12 +31,12 @@ public class Wall : MonoBehaviour, IAttackTarget
         else
             _targetCollection.AddPlayerUnit(this);
 
-        targetPosition = transform.position;
+        targetPosition = transform;
         attackPriority = 1f;
     }
     private void Update()
     {
-        targetPosition = transform.position;
+        targetPosition = transform;
     }
 
     public void TakeDamage(float damage)

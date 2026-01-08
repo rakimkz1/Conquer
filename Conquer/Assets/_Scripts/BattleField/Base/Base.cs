@@ -11,7 +11,7 @@ namespace BattleField
     {
         public float attackPriority { get; set; }
         public float powerScale { get; set; }
-        public Vector3 targetPosition { get; set; }
+        public Transform targetPosition { get; set; }
         public bool isDead { get; set; }
         public bool isEnemy;
 
@@ -35,7 +35,7 @@ namespace BattleField
         }
         private async void SetProperties()
         {
-            targetPosition = transform.position;
+            targetPosition = transform;
             if (isEnemy)
                 _targetCollection.AddEnemyUnit(this);
             else
@@ -49,7 +49,7 @@ namespace BattleField
 
         private void LoadProperties()
         {
-            _resourceManager.LoadAsset<PlayerStartProperties>(_resourceManager.so_Keys.GetKey(PrefabKey.PlayerStartProperties), asset =>
+            _resourceManager.LoadAsset<PlayerStartProperties>("Assets/Data/ScriptableObject/PlayerSetup/PlayerStartProperties.asset", asset =>
             {
                 _playerProperties = asset;
                 SetProperties();

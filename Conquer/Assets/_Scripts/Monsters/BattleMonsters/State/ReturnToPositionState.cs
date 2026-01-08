@@ -4,7 +4,7 @@ namespace Monsters
     {
         public void OnEnter(BattleMonster target) 
         {
-            target.viewMonster.animationManager.MoveAnimation();
+            target.viewMonster.animationManager?.MoveAnimation();
         }
 
         public void OnExit(BattleMonster target) { }

@@ -1,9 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game_Setup;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 namespace BattleField
@@ -33,7 +30,7 @@ namespace BattleField
         {
             string key = SceneTransferKeys.CURRENT_BATTLE_SETTING;
             //CurrentSceneSettings = _dataTransfer.Get<BattleSceneSetting>(key) as BattleSceneSetting;
-            _resourceManager.LoadAsset<PlayerStartProperties>(_resourceManager.so_Keys.GetKey(PrefabKey.PlayerStartProperties),item =>
+            _resourceManager.LoadAsset<PlayerStartProperties>("Assets/Data/ScriptableObject/PlayerSetup/PlayerStartProperties.asset", item =>
             {
                 _playerStartProperties = item;
                 SpawnExtractors();

@@ -29,7 +29,7 @@ namespace Monsters
                 targetList = _targetCollection.playerUnits;
 
             IAttackTarget suitableTarget = targetList.Aggregate((a, b) => 
-            Vector3.Distance(_monster.targetPosition, a.targetPosition) < Vector3.Distance(_monster.targetPosition, b.targetPosition)? a : b);
+            Vector3.Distance(_monster.targetPosition.position, a.targetPosition.position) < Vector3.Distance(_monster.targetPosition.position, b.targetPosition.position)? a : b);
             SetAttackTarget(suitableTarget);
         }
         private void SetAttackTarget(IAttackTarget newAttackTarget)
@@ -52,7 +52,7 @@ namespace Monsters
                 FindAttackTarget();
                 try
                 {
-                    await UniTask.Delay(UnityEngine.Random.Range(400, 800), cancellationToken: _cancellation.Token);
+                    await UniTask.Delay(UnityEngine.Random.Range(600, 800), cancellationToken: _cancellation.Token);
                 }
                 catch { return; }
             }

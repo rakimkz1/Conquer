@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65f1c7f7f09b894a89cf7aadec670aa, type: 3}
+  m_Name: Ranger0
+  m_EditorClassIdentifier: 
+  data:
+    monsterLevel: 0
+    monsterType: 2
+  provocationDistance: 2.18
+  maxTracingDistance: 5
+  defenceProvocationDistance: 20
+  defenceTraceDistance: 6
+  speed: 2.74
+  powerScale: 15
+  attackDistance: 8
+  attackSpeed: 0.45
+  attackPreparationTime: 1.09
+  attackPriority: 1
+  maxHealth: 80
+  attackProperties:
+    Damage: 50
+    MissileSpeed: 30
+    DamageAreaRadius: 0

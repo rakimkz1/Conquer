@@ -59,7 +59,7 @@ namespace Monsters
             for (int i = 0; i < hit.Length; i++)
             {
                 BattleMonster target = hit[i].collider?.GetComponent<BattleMonster>();
-                if(target != null && Vector2.Distance(target.targetPosition, _monster.targetPosition) < _obstacalCheckDistance && target != _monster)
+                if(target != null && Vector2.Distance(target.targetPosition.position, _monster.targetPosition.position) < _obstacalCheckDistance && target != _monster)
                 {
                     WaitEvadingTime();
                     return;
@@ -83,7 +83,7 @@ namespace Monsters
 
         public void EvadeTheObstacle()
         {
-            Vector3 dir = Vector3.up * (_monster.targetPosition.y > 0f ? 1f : -1f);
+            Vector3 dir = Vector3.up * (_monster.targetPosition.position.y > 0f ? 1f : -1f);
             _monster.movementHandler.MoveToTarget(_monster.transform, _monster.transform.position + dir, _speed * 0.6f, Time.deltaTime);
         }
 

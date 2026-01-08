@@ -4,7 +4,7 @@
     {
         public void OnEnter(BattleMonster target) 
         {
-            target.viewMonster.animationManager.IdelAnimation();
+            target.viewMonster.animationManager?.IdelAnimation();
         }
 
         public void OnExit(BattleMonster target) { }

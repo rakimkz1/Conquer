@@ -6,7 +6,6 @@
         {
             target.defenceHandler.SetRow();
             target.defenceHandler.GetDefendePosition();
-            target.viewMonster.animationManager.MoveAnimation();
         }
 
         public void OnExit(BattleMonster target)
@@ -20,6 +19,7 @@
         public void OnWork(BattleMonster target)
         {
             target.defenceHandler.MoveToDefencePosition();
+            target.viewMonster.animationManager?.MoveAnimation();
         }
     }
 }

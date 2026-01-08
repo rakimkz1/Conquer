@@ -21,11 +21,11 @@ namespace MainHUB.HUB_Managers
             LoadAllMonster();
         }
 
-        public async UniTask<GameObject> SpawnMonsterInstance(PrefabKey key, MonsterIdelData data, bool isAddToCollection)
+        public async UniTask<GameObject> SpawnMonsterInstance(string resourcePath , MonsterIdelData data, bool isAddToCollection)
         {
             Vector3 pos = GetSpawnPosition();
 
-            var handle = resource.InstantiateAsync(resource.so_Keys.GetKey(key), pos, Quaternion.identity);
+            var handle = resource.InstantiateAsync(resourcePath, pos, Quaternion.identity);
             var install = await handle;
             install.GetComponent<MonsterIdel>().SetMonsterData(data);
             if(isAddToCollection) 
@@ -56,13 +56,13 @@ namespace MainHUB.HUB_Managers
             Vector2 pos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * randomDistance;
             return pos + midPos;
         }
-        public bool SpawnMonster(int cost, PrefabKey key, MonsterIdelData data)
+        public bool SpawnMonster(int cost, string resourcePath, MonsterIdelData data)
         {
             bool isAffordable = ManaManager.Instance.RemoveMana(cost);
             if (!isAffordable)
                 return false;
 
-            SpawnMonsterInstance(key, data,true);
+            SpawnMonsterInstance(resourcePath, data,true);
 
             return true;
         }
@@ -70,10 +70,10 @@ namespace MainHUB.HUB_Managers
         public async UniTask LoadAllMonster()
         {
             List<MonsterIdelData> dataList = monsterCollection.monsterUnitList;
-            PrefabKey key = PrefabKey.MonsterIdel;
+            
             for (int i = 0; i < dataList.Count; i++)
             {
-                GameObject target = await SpawnMonsterInstance(key, dataList[i], false);
+                GameObject target = await SpawnMonsterInstance("Assets/Prefabs/Monsters/Monster.prefab", dataList[i], false);
             }
         }
 

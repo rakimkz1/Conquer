@@ -2,12 +2,13 @@
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
+using UniRx;
 
 namespace Monsters
 {
     public class GridMovementHandler : IDisposable
     {
-        private Vector3 _diraction;
+        public ReactiveProperty<Vector3> _diraction = new ReactiveProperty<Vector3>(); 
         private TransformAccessArray transformAccess;
         public void MoveToTarget(Transform pos, Vector3 target, float speed, float deltaTime)
         {
@@ -22,9 +23,9 @@ namespace Monsters
             JobHandle handler = job.Schedule(transformAccess);
             handler.Complete();
             transformAccess.Dispose();
-            _diraction = pos.position - initialPos;
+            _diraction.Value = pos.position - initialPos;
         }
-        public Vector3 GetDiraction() => _diraction;
+        public Vector3 GetDiraction() => _diraction.Value;
 
         public void Dispose()
         {

@@ -34,13 +34,13 @@ namespace Monsters
         }
         public bool IsTargetProvocationDistance()
         {
-            if (monster.targetFinder.currentAttackTarget != null && Vector3.Distance(monster.transform.position, monster.targetFinder.currentAttackTarget.targetPosition) < provocationDistance)
+            if (monster.targetFinder.currentAttackTarget != null && Vector3.Distance(monster.transform.position, monster.targetFinder.currentAttackTarget.targetPosition.position) < provocationDistance)
                 return true;
             return false;
         }
         public bool IsTargetInTracingDistance()
         {
-            if (monster.targetFinder.currentAttackTarget != null && Vector3.Distance(_keepingPosition, monster.targetFinder.currentAttackTarget.targetPosition) < maxTracingDistance)
+            if (monster.targetFinder.currentAttackTarget != null && Vector3.Distance(_keepingPosition, monster.targetFinder.currentAttackTarget.targetPosition.position) < maxTracingDistance)
                 return true;
             return false;
         }
