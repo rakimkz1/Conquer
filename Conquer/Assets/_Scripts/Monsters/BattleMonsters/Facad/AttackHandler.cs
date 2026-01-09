@@ -32,9 +32,9 @@ namespace Monsters
         public void Attack()
         {
             if (monster.monsterType == MonsterType.Sprinter || monster.monsterType == MonsterType.Rangers || monster.monsterType == MonsterType.Sieges)
-                attackType.InitAttack(monster.targetFinder.currentAttackTarget, monster.targetPosition.position, new MonsterIdelData(monster.monsterLevel, monster.monsterType));
+                attackType.InitAttack(monster.targetFinder.currentAttackTarget, monster.spriteContainer.projectileShootPoint.position, new MonsterIdelData(monster.monsterLevel, monster.monsterType));
             else
-                attackType.InitAttack(monster.targetFinder.currentAttackTarget.targetPosition.position, monster.targetPosition.position, new MonsterIdelData(monster.monsterLevel, monster.monsterType));
+                attackType.InitAttack(monster.targetFinder.currentAttackTarget.targetPosition.position, monster.spriteContainer.projectileShootPoint.position, new MonsterIdelData(monster.monsterLevel, monster.monsterType));
 
             attackType.Attack();
             WaitAttackColdown();

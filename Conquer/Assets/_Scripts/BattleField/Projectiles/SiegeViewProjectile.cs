@@ -5,14 +5,17 @@ namespace BattleField
 {
     public class SiegeViewProjectile : MonoBehaviour
     {
+        public AnimationCurve flyPath;
+        public float siegeMinHight;
+        public float siegeMaxHight;
+        public event Action<SiegeViewProjectile> OnSiegeHit;
         private Vector3 _initialPoint;
         private Transform _target;
         private float _flyingTime;
         private float _nowFlyingTime;
         private bool _isShoot;
-        public AnimationCurve flyPath;
-        public float siegeHieght;
-        public event Action<SiegeViewProjectile> OnSiegeHit;
+        private float _hightOffset;
+        private float _targetOffset;
 
         public void ShootSiege(Vector3 initialPoint, Transform target, float flyingTime, Sprite sprite)
         {
@@ -22,6 +25,8 @@ namespace BattleField
             _flyingTime = flyingTime;
             _nowFlyingTime = 0f;
             _isShoot = true;
+            _hightOffset = UnityEngine.Random.Range(siegeMinHight, siegeMaxHight);
+            _targetOffset = UnityEngine.Random.Range(0.1f, 3f);
             GetComponent<SpriteRenderer>().sprite = sprite;
         }
 
@@ -45,7 +50,7 @@ namespace BattleField
 
         private Vector3 GetSiegePosition(float lerp)
         {
-            return Vector3.Lerp(_initialPoint, _target.position, lerp) + flyPath.Evaluate(lerp) * siegeHieght * Vector3.up;
+            return Vector3.Lerp(_initialPoint, _target.position + _targetOffset * Vector3.up, lerp) + flyPath.Evaluate(lerp) * _hightOffset * Vector3.up;
         }
 
         private void HideSiege()

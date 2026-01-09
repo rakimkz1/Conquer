@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2383256190418473171}
+  - component: {fileID: 4893501823461356723}
   m_Layer: 0
   m_Name: Tank1Blue
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 1432450963648964085}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &4893501823461356723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595785686499020934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 4601401093535857214}
 --- !u!1001 &346425897750076459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122,5 +136,10 @@ Animator:
 --- !u!4 &1432450963648964085 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: c4df7ac701d08b640b4bc0d87c57bb5d, type: 3}
+  m_PrefabInstance: {fileID: 346425897750076459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4601401093535857214 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4257508509235537429, guid: c4df7ac701d08b640b4bc0d87c57bb5d, type: 3}
   m_PrefabInstance: {fileID: 346425897750076459}
   m_PrefabAsset: {fileID: 0}

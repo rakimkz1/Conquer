@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3802522303267442374}
+  - component: {fileID: 4536374893741597033}
   m_Layer: 0
   m_Name: Siege1Blue
   m_TagString: Untagged
@@ -25,13 +26,26 @@ Transform:
   m_GameObject: {fileID: 2160394092681522330}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -24.014, y: -5.569, z: -0.0049288105}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 613805654729195963}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &4536374893741597033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160394092681522330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 8724810886620653345}
 --- !u!1001 &2282052836216240229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +114,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1819529356487467196, guid: 3ded2505a25584d4d814d9e5c21bffc8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1819529356487467196, guid: 3ded2505a25584d4d814d9e5c21bffc8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6766485126959075108, guid: 3ded2505a25584d4d814d9e5c21bffc8, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
@@ -144,3 +166,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &8724810886620653345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1819529356487467196, guid: 3ded2505a25584d4d814d9e5c21bffc8, type: 3}
+  m_PrefabInstance: {fileID: 2282052836216240229}
+  m_PrefabAsset: {fileID: 0}

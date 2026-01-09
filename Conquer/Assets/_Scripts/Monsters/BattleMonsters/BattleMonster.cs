@@ -17,13 +17,13 @@ namespace Monsters
         public EvadeObstacalseHanlder evadeHandler;
         public GridMovementHandler movementHandler;
         public BattleMonsterView viewMonster;
+        public BattleMonsterSpriteContainer spriteContainer;
         public bool isEnemyUnit;
         [Header("Properties")]
         public int monsterLevel;
         public MonsterType monsterType;
         public event Action<IAttackTarget> OnDead;
         public event Action<IAttackTarget> OnExitTargetCollection;
-
         public float attackPriority { get; set; }
         public Transform targetPosition { get; set; }
         public float powerScale { get; set; }
@@ -67,7 +67,6 @@ namespace Monsters
             stateMachine.currentState?.OnWork(this);
             stateMachine.CheckAnyTransitions();
             stateMachine.CheckTransitions();
-            targetPosition = transform;
         }
         public void ListenArmyCommand(ArmyCommandTypes commandType, MonsterType monsterType) => stateMachine.ListenArmyCommand(commandType, monsterType);
         public void TakeDamage(float damage) => healthHandler.TakeDamage(damage);

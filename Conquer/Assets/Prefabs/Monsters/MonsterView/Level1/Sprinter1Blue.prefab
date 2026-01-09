@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3923633953565013330}
+  - component: {fileID: 2795926231479595785}
   m_Layer: 0
   m_Name: Sprinter1Blue
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 1613641247878418122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2795926231479595785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2696239729792775691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 4205989660340261121}
 --- !u!1001 &93194748388701972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,5 +152,10 @@ Animator:
 --- !u!4 &1613641247878418122 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 671f6fbf039ec3940b27cfa8bb9c8d04, type: 3}
+  m_PrefabInstance: {fileID: 93194748388701972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4205989660340261121 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4257508509235537429, guid: 671f6fbf039ec3940b27cfa8bb9c8d04, type: 3}
   m_PrefabInstance: {fileID: 93194748388701972}
   m_PrefabAsset: {fileID: 0}

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6892131254004961254}
+  - component: {fileID: 2496743007573651709}
   m_Layer: 0
   m_Name: Ranger2Red
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 6640601090257665540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2496743007573651709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6162013890806866584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 1390209892802407308}
 --- !u!1001 &5406555448561420250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,6 +122,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7935740922005445901}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 663726d621253c4428c1c5a0498c3fd1, type: 3}
+--- !u!4 &1390209892802407308 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6362729758988201046, guid: 663726d621253c4428c1c5a0498c3fd1, type: 3}
+  m_PrefabInstance: {fileID: 5406555448561420250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5539496084032349799 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 663726d621253c4428c1c5a0498c3fd1, type: 3}

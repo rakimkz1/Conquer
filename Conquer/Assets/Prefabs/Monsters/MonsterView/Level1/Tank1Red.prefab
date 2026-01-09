@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3418641020862538270}
-  - component: {fileID: 7674864488053814164}
+  - component: {fileID: 7292296482142834206}
   m_Layer: 0
   m_Name: Tank1Red
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1149339517196448784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &7674864488053814164
+--- !u!114 &7292296482142834206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1290383383770568715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f629621250307ec42860ecd17fd960e2, type: 3}
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 2578633313479175131}
 --- !u!1001 &1791465324374511054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,3 +138,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &2578633313479175131 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4257508509235537429, guid: 345bfa6c2f66e7b4491cf0c07eae7a8b, type: 3}
+  m_PrefabInstance: {fileID: 1791465324374511054}
+  m_PrefabAsset: {fileID: 0}

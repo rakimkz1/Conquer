@@ -6,15 +6,18 @@ namespace BattleField
 {
     public class ArrowViewProjectile : MonoBehaviour
     {
+        public AnimationCurve flyPath;
+        public float arrowMinHieght;
+        public float arrowMaxHight;
+        public event Action<ArrowViewProjectile> OnArrowHit;
+
         private Vector3 _initialPoint;
         private Transform _target;
         private float _flyingTime;
         private float _nowFlyingTime;
         private bool _isShoot;
-        public AnimationCurve flyPath;
-        public float arrowHieght;
-        public event Action<ArrowViewProjectile> OnArrowHit;
-
+        private float _targetOffset;
+        private float _hightOffset;
         public void ShootArrow(Vector3 initialPoint, Transform target, float flyingTime, Sprite sprite)
         {
             gameObject.SetActive(true);
@@ -23,6 +26,8 @@ namespace BattleField
             _flyingTime = flyingTime;
             _nowFlyingTime = 0f;
             _isShoot = true;
+            _targetOffset = UnityEngine.Random.Range(0.1f, 3f);
+            _hightOffset = UnityEngine.Random.Range(arrowMinHieght, arrowMaxHight);
             GetComponent<SpriteRenderer>().sprite = sprite;
         }
 
@@ -39,14 +44,16 @@ namespace BattleField
 
             float lerp = _nowFlyingTime / _flyingTime;
             transform.position = GetArrowPosition(lerp);
-            Vector3 arrowAxis = (GetArrowPosition(Mathf.Clamp(lerp + 0.02f, 0f, 1f)) - GetArrowPosition(lerp)).normalized;
-            transform.rotation = Quaternion.Euler(new Vector3(Mathf.Cos(arrowAxis.x), Mathf.Sin(arrowAxis.y), 0f));
+            Vector3 arrowAxis = (GetArrowPosition(Mathf.Clamp(lerp + 0.1f, 0f, 1f)) - GetArrowPosition(lerp)).normalized;
+            Debug.DrawRay(transform.position, arrowAxis, Color.red);
+            float angle = Mathf.Atan2(arrowAxis.y, arrowAxis.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
             _nowFlyingTime += Time.deltaTime;
         }
 
         private Vector3 GetArrowPosition(float lerp)
         {
-            return Vector3.Lerp(_initialPoint, _target.position, lerp) + flyPath.Evaluate(lerp) * arrowHieght * Vector3.up;
+            return Vector3.Lerp(_initialPoint, _target.position + Vector3.up * _targetOffset, lerp) + flyPath.Evaluate(lerp) * _hightOffset * Vector3.up;
         }
 
         private void HideArrow()

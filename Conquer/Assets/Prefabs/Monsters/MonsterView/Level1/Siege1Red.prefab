@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13603894554592314}
+  - component: {fileID: 4326904249555986462}
   m_Layer: 0
   m_Name: Siege1Red
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 5568265665665491528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &4326904249555986462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749574309304439186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 4383719484536407250}
 --- !u!1001 &6514916550920313750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +114,22 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1819529356487467196, guid: 4e6eba79307de7a45a3553728ace2ad6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1819529356487467196, guid: 4e6eba79307de7a45a3553728ace2ad6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1819529356487467196, guid: 4e6eba79307de7a45a3553728ace2ad6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1819529356487467196, guid: 4e6eba79307de7a45a3553728ace2ad6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -108,6 +138,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4271606221429779970}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 4e6eba79307de7a45a3553728ace2ad6, type: 3}
+--- !u!4 &4383719484536407250 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1819529356487467196, guid: 4e6eba79307de7a45a3553728ace2ad6, type: 3}
+  m_PrefabInstance: {fileID: 6514916550920313750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5568265665665491528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 4e6eba79307de7a45a3553728ace2ad6, type: 3}

@@ -28,5 +28,5 @@ MonoBehaviour:
   maxHealth: 200
   attackProperties:
     Damage: 100
-    MissileSpeed: 20
+    MissileSpeed: 4
     DamageAreaRadius: 0

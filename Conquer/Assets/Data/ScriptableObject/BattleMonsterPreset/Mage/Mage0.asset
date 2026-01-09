@@ -21,12 +21,12 @@ MonoBehaviour:
   defenceTraceDistance: 12
   speed: 2.02
   powerScale: 20
-  attackDistance: 8
+  attackDistance: 15
   attackSpeed: 0.89
   attackPreparationTime: 1.32
   attackPriority: 1
   maxHealth: 50
   attackProperties:
     Damage: 50
-    MissileSpeed: 30
+    MissileSpeed: 5
     DamageAreaRadius: 2

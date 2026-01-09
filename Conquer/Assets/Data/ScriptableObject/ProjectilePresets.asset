@@ -33,3 +33,43 @@ MonoBehaviour:
       monsterType: 2
     isEnemy: 1
     presetPath: Assets/Sprites/Monsters/level2/arrow2.R.asset
+  - data:
+      monsterLevel: 0
+      monsterType: 3
+    isEnemy: 0
+    presetPath: Assets/Sprites/Monsters/level1/MagicBalls1.B.png
+  - data:
+      monsterLevel: 0
+      monsterType: 3
+    isEnemy: 1
+    presetPath: Assets/Sprites/Monsters/level1/MagicBalls1.R.png
+  - data:
+      monsterLevel: 1
+      monsterType: 3
+    isEnemy: 0
+    presetPath: Assets/Sprites/Monsters/level1/MagicBalls1.B.png
+  - data:
+      monsterLevel: 1
+      monsterType: 3
+    isEnemy: 1
+    presetPath: Assets/Sprites/Monsters/level1/MagicBalls1.R.png
+  - data:
+      monsterLevel: 0
+      monsterType: 4
+    isEnemy: 0
+    presetPath: Assets/Sprites/Monsters/level1/projectile1.asset
+  - data:
+      monsterLevel: 0
+      monsterType: 4
+    isEnemy: 1
+    presetPath: Assets/Sprites/Monsters/level1/projectile1.asset
+  - data:
+      monsterLevel: 1
+      monsterType: 4
+    isEnemy: 0
+    presetPath: Assets/Sprites/Monsters/level2/projectile2.asset
+  - data:
+      monsterLevel: 1
+      monsterType: 4
+    isEnemy: 1
+    presetPath: Assets/Sprites/Monsters/level2/projectile2.asset

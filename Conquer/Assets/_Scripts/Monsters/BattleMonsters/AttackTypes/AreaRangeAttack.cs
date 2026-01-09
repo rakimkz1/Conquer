@@ -22,6 +22,7 @@ namespace Monsters
         {
             this.isEnemy = isEnemy;
             Damage = damage;
+            _attackRadius = attackRadius;
             _missileSpeed = missileSpeed;
             _targetCollection = targetCollection;
             _projectileViewManager = projectileViewManager;
@@ -47,6 +48,12 @@ namespace Monsters
             _projectileViewManager.ShootAreaProjectile(_rangerPosition, _targetPosition, flyingTime, _monsterData, isEnemy);
             await UniTask.Delay((int)(flyingTime * 1000f));
             List<IAttackTarget> targetList = FindTargetsInArea();
+            Debug.Log(_attackRadius);
+            for(int i=0; i < 50; i++)
+            {
+                float angle = 360f / 50 * i;
+                Debug.DrawRay(_targetPosition, new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * _attackRadius, Color.red, 1f);
+            }
             foreach (var target in targetList)
             {
                 target.TakeDamage(Damage);

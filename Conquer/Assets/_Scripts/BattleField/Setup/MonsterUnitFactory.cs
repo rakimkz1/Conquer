@@ -81,6 +81,7 @@ namespace BattleField
         {
             monster.monsterLevel = type.monsterLevel;
             monster.monsterType = type.monsterType;
+            monster.targetPosition = monster.gameObject.transform;
 
             SetMonsterHealProperties(monster);
             SetAttackHandler(monster);
@@ -161,6 +162,7 @@ namespace BattleField
             {
                 GameObject target = UnityEngine.Object.Instantiate(asset, monster.transform.position, asset.transform.rotation, monster.transform);
                 monster.viewMonster.animationManager = new BattleMonsterAnimationManager(target.GetComponentInChildren<Animator>());
+                monster.spriteContainer = target.GetComponent<BattleMonsterSpriteContainer>();
             });
         }
         private async UniTask LoadResources()

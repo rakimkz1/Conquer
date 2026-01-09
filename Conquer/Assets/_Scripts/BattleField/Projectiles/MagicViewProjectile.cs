@@ -5,14 +5,18 @@ namespace BattleField
 {
     public class MagicViewProjectile : MonoBehaviour
     {
+        private bool _isShoot;
+        public AnimationCurve flyPath;
+        public float magicMinHieght;
+        public float magicMaxHight;
+        public event Action<MagicViewProjectile> OnMagicHit;
+
         private Vector3 _initialPoint;
         private Vector3 _endPosition;
         private float _flyingTime;
         private float _nowFlyingTime;
-        private bool _isShoot;
-        public AnimationCurve flyPath;
-        public float magicHieght;
-        public event Action<MagicViewProjectile> OnMagicHit;
+        private float _targetOffset;
+        private float _hightTarget;
         public void CastMagic(Vector3 intialPos, Vector3 endPosition, float flyingTime, Sprite sprite)
         {
             _initialPoint = intialPos;
@@ -20,6 +24,10 @@ namespace BattleField
             _flyingTime = flyingTime;
             _isShoot = true;
             _nowFlyingTime = 0f;
+            _targetOffset = UnityEngine.Random.Range(0.1f, 3f);
+            _hightTarget = UnityEngine.Random.Range(magicMinHieght, magicMaxHight);
+            gameObject.SetActive(true);
+            GetComponent<SpriteRenderer>().sprite = sprite;
         }
 
         private void Update()
@@ -39,11 +47,12 @@ namespace BattleField
         }
         private Vector3 GetArrowPosition(float lerp)
         {
-            return Vector3.Lerp(_initialPoint, _endPosition, lerp) + flyPath.Evaluate(lerp) * magicHieght * Vector3.up;
+            return Vector3.Lerp(_initialPoint, _endPosition + _targetOffset * Vector3.up, lerp) + flyPath.Evaluate(lerp) * _hightTarget * Vector3.up;
         }
         private void HideMagic()
         {
             _isShoot = false;
+            gameObject.SetActive(false);
             OnMagicHit?.Invoke(this);
         }
     }

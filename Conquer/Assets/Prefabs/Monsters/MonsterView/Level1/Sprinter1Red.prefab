@@ -854,7 +854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2623840889370908671}
-  - component: {fileID: 635548746331823344}
+  - component: {fileID: 2942465876884770980}
   m_Layer: 0
   m_Name: Sprinter1Red
   m_TagString: Untagged
@@ -878,7 +878,7 @@ Transform:
   - {fileID: 5961661447288930503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &635548746331823344
+--- !u!114 &2942465876884770980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -887,9 +887,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4561228821244028246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f629621250307ec42860ecd17fd960e2, type: 3}
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 1250197973096101354}
 --- !u!1 &4928238043387969324
 GameObject:
   m_ObjectHideFlags: 0

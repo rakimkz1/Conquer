@@ -28,8 +28,8 @@ namespace Monsters
             else
                 targetList = _targetCollection.playerUnits;
 
-            IAttackTarget suitableTarget = targetList.Aggregate((a, b) => 
-            Vector3.Distance(_monster.targetPosition.position, a.targetPosition.position) < Vector3.Distance(_monster.targetPosition.position, b.targetPosition.position)? a : b);
+            IAttackTarget suitableTarget = targetList.Aggregate((a, b) =>
+            Vector3.Distance(_monster.targetPosition.position, a.targetPosition.position) < Vector3.Distance(_monster.targetPosition.position, b.targetPosition.position) ? a : b);
             SetAttackTarget(suitableTarget);
         }
         private void SetAttackTarget(IAttackTarget newAttackTarget)

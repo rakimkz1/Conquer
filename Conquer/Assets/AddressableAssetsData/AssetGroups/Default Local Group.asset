@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 35844d271800aa6429d57d8d9a69e104
   m_SerializeEntries:
+  - m_GUID: 006e553e15fff2247b9e27f8d2d8e2fb
+    m_Address: Assets/Sprites/Monsters/level1/MagicBalls1.B.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 03e39a3a2ebbbd347a112ca8ad7b6072
     m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Sprinter1Red.prefab
     m_ReadOnly: 0
@@ -30,6 +35,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e679905948b2224eaecb2cd68392523
+    m_Address: Assets/Sprites/Monsters/level2/projectile2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 12953d0c06b0ad343b38f217badc667e
     m_Address: Assets/Prefabs/Monsters/Monster.prefab
     m_ReadOnly: 0
@@ -37,6 +47,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 160a20c4aa98af245ba3e2c13db18cae
     m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Tank1Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16d4320cb6cf2e04aadbad460a64dbb4
+    m_Address: Assets/Sprites/Monsters/level1/MagicBalls1.R.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -157,6 +172,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4adfbb277cb6b44499000207ba171d9
     m_Address: Assets/Prefabs/Monsters/Projectiles/Siege.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5c37c9d95824c8419ef3ff0bb3ab82a
+    m_Address: Assets/Sprites/Monsters/level1/projectile1.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

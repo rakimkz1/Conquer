@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1562871125894322399}
+  - component: {fileID: 644497822375571534}
   m_Layer: 0
   m_Name: Ranger1Blue
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 8259282568889906557}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &644497822375571534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927297528066357540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3914b6ea1a0c9a4a9a7623146b2d676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileShootPoint: {fileID: 4467006465510187253}
 --- !u!1001 &7327650952475298979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,6 +122,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7298975752479006910}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 42f6d1ec7768b614ba440c84849ac3d0, type: 3}
+--- !u!4 &4467006465510187253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6362729758988201046, guid: 42f6d1ec7768b614ba440c84849ac3d0, type: 3}
+  m_PrefabInstance: {fileID: 7327650952475298979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7086067016662609182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 42f6d1ec7768b614ba440c84849ac3d0, type: 3}
