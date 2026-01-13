@@ -1,15 +1,18 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Threading;
 
 namespace BattleField
 {
     public class ExtractorManaProducer
     {
+        public event Action<float> OnManaProduce;
         private float _manaPerPeriod;
         private float _manaPerClick;
         private float _periodTime;
         private ManaHandler _manaHandler;
         private CancellationTokenSource _cancellation;
+
         public ExtractorManaProducer(float manaPerPeriod, float manaPerClick, float periodTime, ManaHandler manaHandler)
         {
             _manaPerPeriod = manaPerPeriod;
@@ -31,6 +34,7 @@ namespace BattleField
         public void ProduceManaClick()
         {
             _manaHandler.AddMana(_manaPerClick);
+            OnManaProduce.Invoke(_manaPerClick);
         }
 
         private async UniTask ProduceMana()
@@ -39,6 +43,7 @@ namespace BattleField
             while (!_cancellation.IsCancellationRequested)
             {
                 _manaHandler.AddMana(_manaPerPeriod);
+                OnManaProduce.Invoke(_manaPerPeriod);
                 try
                 {
                     await UniTask.Delay((int)(_periodTime * 1000f), cancellationToken: _cancellation.Token);

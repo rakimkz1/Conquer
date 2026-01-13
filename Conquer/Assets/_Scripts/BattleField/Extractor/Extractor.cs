@@ -11,7 +11,7 @@ namespace BattleField
         private ManaHandler _manaHandler;
         private AttackableCollection _targetCollection;
         public ExtractorHealthHandler _healthHandler;
-        private ExtractorManaProducer _manaProducer;
+        public ExtractorManaProducer manaProducer;
         private BattleStarter _battleStarter;
         public event Action<IAttackTarget> OnDead;
         public event Action<IAttackTarget> OnExitTargetCollection;
@@ -39,9 +39,9 @@ namespace BattleField
         {
             _healthHandler = new ExtractorHealthHandler(this,maxHealth, repairmentAmount, _targetCollection);
             _healthHandler.OnDead += () => OnDead?.Invoke(this);
-            _manaProducer = new ExtractorManaProducer(manaPerPeriod, manaPerClick, periodTime, _manaHandler);
+            manaProducer = new ExtractorManaProducer(manaPerPeriod, manaPerClick, periodTime, _manaHandler);
             this.attackPriority = attackPriority;
-            _battleStarter.OnBattleStart += _manaProducer.StartProduceMana;
+            _battleStarter.OnBattleStart += manaProducer.StartProduceMana;
         }
         public void TakeDamage(float damage) => _healthHandler.TakeDamage(damage);
 
@@ -54,7 +54,9 @@ namespace BattleField
         private void Clicked()
         {
             if (_healthHandler.isWorking)
-                _manaProducer.ProduceManaClick();
+            {
+                manaProducer.ProduceManaClick();
+            }
             else
                 _healthHandler.Repair();
         }
