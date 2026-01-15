@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _model:
-    manaCost: 7
+    manaCost: 5
     data:
       monsterLevel: 0
       monsterType: 1

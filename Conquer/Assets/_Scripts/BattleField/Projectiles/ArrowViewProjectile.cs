@@ -43,6 +43,8 @@ namespace BattleField
             }
 
             float lerp = _nowFlyingTime / _flyingTime;
+            if (_flyingTime == 0f)
+                Debug.Log("fly is 0");
             transform.position = GetArrowPosition(lerp);
             Vector3 arrowAxis = (GetArrowPosition(Mathf.Clamp(lerp + 0.1f, 0f, 1f)) - GetArrowPosition(lerp)).normalized;
             Debug.DrawRay(transform.position, arrowAxis, Color.red);

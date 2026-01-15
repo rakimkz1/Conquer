@@ -1,4 +1,5 @@
 using BattleField;
+using ScriptableObjects;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -9,6 +10,7 @@ public class BattleFieldInstaller : MonoInstaller
     [SerializeField] private BattleSceneSetting BattleSceneSetting;
     [SerializeField] private List<BattleMonsterPreset> so_monsterPresets;
     [SerializeField] private MonsterSpritesPreset so_monsterSprites;
+    [SerializeField] private BaseArchersPresets so_archerPreset;
     [SerializeField] private GameObject monsterUnitPrefab;
     [SerializeField] private ArmyStandRowHandler playerRowHandler;
     [SerializeField] private ArmyStandRowHandler enemyRowHandler;
@@ -61,6 +63,7 @@ public class BattleFieldInstaller : MonoInstaller
         Container.Bind<GameOverHandler>().AsSingle().NonLazy();
         Container.Bind<UnitsAliveChecker>().AsSingle().NonLazy();
         Container.Bind<ProjectileViewManager>().AsSingle().NonLazy();
+        Container.Bind<ArchersHandler>().AsCached();
     }
 
     private void BindFactories()
@@ -87,5 +90,6 @@ public class BattleFieldInstaller : MonoInstaller
     {
         Container.Bind<List<BattleMonsterPreset>>().FromInstance(so_monsterPresets).AsSingle();
         Container.Bind<MonsterSpritesPreset>().FromInstance(so_monsterSprites).AsSingle();
+        Container.Bind<BaseArchersPresets>().FromInstance(so_archerPreset).AsSingle();
     }
 }

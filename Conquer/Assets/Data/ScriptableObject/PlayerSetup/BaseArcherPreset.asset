@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2c80786881e0f419076cac266c0b61, type: 3}
-  m_Name: PlayerStartProperties
+  m_Script: {fileID: 11500000, guid: ea33917c265f6904cabb6efbdb1c2ec5, type: 3}
+  m_Name: BaseArcherPreset
   m_EditorClassIdentifier: 
-  RetreatHealColdown: 1.11
-  RetreatHealAmount: 5
-  PlayerExtractorNumber: 1
-  PlayerBaseHealth: 100
+  arrowDamage: 5
+  archerDistance: 15
+  attackingSpeed: 2
+  projectileSpeed: 16

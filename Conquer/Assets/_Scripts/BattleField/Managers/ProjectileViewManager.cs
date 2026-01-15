@@ -104,5 +104,24 @@ namespace BattleField
         {
             siegePool.Enqueue(projectile);
         }
+
+        public void ShootBaseArcherProjectile(Vector3 initialPos, Transform target, float flyingTime, bool isEnemy)
+        {
+            string path = "Assets/Sprites/Monsters/level1/arrow1.B.asset";
+            _resourceManager.LoadAsset<Sprite>(path, sprite =>
+            {
+                if(arrowPool.Count == 0)
+                {
+                    GameObject arrow = GameObject.Instantiate(_arrowPrefab);
+                    arrow.GetComponent<ArrowViewProjectile>().OnArrowHit += AddArrowPool;
+                    arrow.GetComponent<ArrowViewProjectile>().ShootArrow(initialPos, target, flyingTime, sprite);
+                }
+                else
+                {
+                    ArrowViewProjectile arrow = arrowPool.Dequeue();
+                    arrow.ShootArrow(initialPos, target, flyingTime, sprite);
+                }
+            });
+        }
     }
 }
