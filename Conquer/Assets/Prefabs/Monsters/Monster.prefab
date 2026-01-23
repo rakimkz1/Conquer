@@ -129,12 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962f4b35199e42947a037581ff8bdc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 3554856988977001251}
+  monsterType: 0
+  monsterLevel: 0
   waitState: {fileID: 11400000, guid: 51640b7f3070d5947994f4dc7bb66c8a, type: 2}
   moveState: {fileID: 11400000, guid: 03a2ed8725270b0408f17974e91b44a9, type: 2}
   dragState: {fileID: 11400000, guid: 3737f05a8533b2c4d8450caed2635736, type: 2}
-  rb: {fileID: 0}
-  monsterType: 0
-  monsterLevel: 0
+  monsterSpawn: {fileID: 0}
 --- !u!58 &1050689659016640183
 CircleCollider2D:
   m_ObjectHideFlags: 0

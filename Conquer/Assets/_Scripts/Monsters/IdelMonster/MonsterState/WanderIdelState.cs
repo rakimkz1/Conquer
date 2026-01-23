@@ -1,8 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using System.Threading;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Monsters.MonsterState
 {
@@ -25,19 +21,19 @@ namespace Monsters.MonsterState
             this.target = target;
             
             float time = Random.Range(minMovingTime, maxMovingTime);
-            target.SwichStateByTime(time, target.waitState);
+            target.stateHandler.SwichStateByTime(time, target.stateHandler.waitState);
             float angle = Random.Range(0f, 360f);
             diraction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         }
 
         public override void OnExit()
         {
-            target.WanderToDiraction(0f, diraction);
+            target.movementHandler.WanderToDiraction(0f, diraction);
         }
 
         public override void OnWork()
         {
-            target?.WanderToDiraction(speed, diraction);
+            target.movementHandler?.WanderToDiraction(speed, diraction);
         }
     }
 }

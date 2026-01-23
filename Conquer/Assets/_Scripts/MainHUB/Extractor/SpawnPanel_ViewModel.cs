@@ -20,7 +20,8 @@ namespace MainHUB.Extractor
 
         public bool SpawnMonster()
         {
-            bool isAffordable = _monsterSpawn.SpawnMonster(model.manaCost, model.prefabPath, model.data);
+            int randomIndex = UnityEngine.Random.Range(0, model.data.Length);
+            bool isAffordable = _monsterSpawn.SpawnMonster(model.manaCost, model.prefabPath, model.data[randomIndex]);
             return isAffordable;
         }
 

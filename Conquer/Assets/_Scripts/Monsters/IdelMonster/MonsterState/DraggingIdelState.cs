@@ -21,7 +21,7 @@ namespace Monsters.MonsterState
 
         public override void OnWork()
         {
-            target.OnDragging();
+            target.dragAndDropHandler.OnDragging();
         }
     }
 }

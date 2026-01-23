@@ -21,7 +21,7 @@ namespace Monsters.MonsterState
             this.target = target;
 
             float time = Random.Range(minWaitTime, maxWaitTime);
-            target.SwichStateByTime(time, target.moveState);
+            target.stateHandler.SwichStateByTime(time, target.stateHandler.moveState);
         }
 
         public override void OnExit()

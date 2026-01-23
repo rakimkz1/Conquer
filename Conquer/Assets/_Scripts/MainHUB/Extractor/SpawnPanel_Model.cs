@@ -7,7 +7,7 @@ namespace MainHUB.Extractor
     public class SpawnPanel_Model : Model
     {
         public int manaCost;
-        public MonsterIdelData data;
+        public MonsterIdelData[] data;
         public string prefabPath;
     }
 }

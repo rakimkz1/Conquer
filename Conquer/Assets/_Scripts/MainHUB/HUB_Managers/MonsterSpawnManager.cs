@@ -42,7 +42,7 @@ namespace MainHUB.HUB_Managers
         }
         public void DestroyMonsterInstance(MonsterIdel target)
         {
-            target.CancelUniTask();
+            target.CancelStateTimer();
             monsterCollection?.RemoveUnit(target);
             Destroy(target.gameObject);
         }
