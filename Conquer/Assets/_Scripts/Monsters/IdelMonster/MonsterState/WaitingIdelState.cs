@@ -19,6 +19,7 @@ namespace Monsters.MonsterState
         public override void OnEnter(MonsterIdel target)
         {
             this.target = target;
+            Debug.Log("EnterWaitState");
 
             float time = Random.Range(minWaitTime, maxWaitTime);
             target.stateHandler.SwichStateByTime(time, target.stateHandler.moveState);

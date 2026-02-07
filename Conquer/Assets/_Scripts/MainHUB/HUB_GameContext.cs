@@ -10,10 +10,13 @@ public class HUB_GameContext : MonoInstaller
     [SerializeField] private MonsterSpawnManager monsterSpawnManager;
     [SerializeField] private GameObject resourceManager;
     [SerializeField] private GameObject audioManager;
+    [SerializeField] private IdelMonsterEggSpritePresets so_EggSpritePreset;
+    [SerializeField] private IdelMonsterSpritePreset so_IdelMonsterSpritePreset;
     public override void InstallBindings()
     {
         BindManagers();
         BindFactory();
+        BindScriptableObject();
     }
     private void BindManagers()
     {
@@ -30,5 +33,11 @@ public class HUB_GameContext : MonoInstaller
     {
         Container.Bind<IFactory<Extractor_Model, Extractor_ViewModel>>().To<Extractor_ViewModel.Factory>().AsTransient();
         Container.Bind<IFactory<SpawnPanel_Model, SpawnPanel_ViewModel>>().To<SpawnPanel_ViewModel.Factory>().AsTransient();
+    }
+
+    private void BindScriptableObject()
+    {
+        Container.Bind<IdelMonsterSpritePreset>().FromInstance(so_IdelMonsterSpritePreset).AsSingle();
+        Container.Bind<IdelMonsterEggSpritePresets>().FromInstance(so_EggSpritePreset).AsSingle();
     }
 }

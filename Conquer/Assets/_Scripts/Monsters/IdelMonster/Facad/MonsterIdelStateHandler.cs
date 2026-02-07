@@ -11,15 +11,17 @@ namespace Monsters
         public IdelStateBase waitState;
         public IdelStateBase moveState;
         public IdelStateBase dragState;
+        public IdelStateBase eggState;
         private MonsterIdel monsterTarget;
 
         private CancellationTokenSource _cancelToken;
-        public MonsterIdelStateHandler(MonsterIdel monsterTarget, IdelStateBase waitState, IdelStateBase moveState, IdelStateBase dragState)
+        public MonsterIdelStateHandler(MonsterIdel monsterTarget, IdelStateBase waitState, IdelStateBase moveState, IdelStateBase dragState, IdelStateBase eggState)
         {
             this.monsterTarget = monsterTarget;
             this.waitState = waitState;
             this.moveState = moveState;
             this.dragState = dragState;
+            this.eggState = eggState;
         }
         public void SwichState(IdelStateBase toState)
         {
@@ -29,9 +31,18 @@ namespace Monsters
         }
         public void TransmisionHandle()
         {
-            if (currentState == null)
+            if (currentState == null && monsterTarget.isEgg == false)
+            {
+                Debug.Log("waitState");
                 SwichState(waitState);
-             monsterTarget.dragAndDropHandler.CheckDraging();
+            }
+            else if (currentState == null && monsterTarget.isEgg == true)
+            {
+                Debug.Log("eggState");
+                SwichState(eggState);
+            }
+
+            monsterTarget.dragAndDropHandler.CheckDraging();
         }
         public async UniTask SwichStateByTime(float time, IdelStateBase toState)
         {
@@ -45,7 +56,10 @@ namespace Monsters
                 return;
             }
             if (monsterTarget.gameObject != null)
+            {
+                Debug.Log("State by Time");
                 SwichState(toState);
+            }
         }
         public void CancelUniTask()
         {

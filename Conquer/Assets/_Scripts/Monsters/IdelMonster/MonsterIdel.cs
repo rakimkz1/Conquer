@@ -13,10 +13,13 @@ namespace Monsters
         public Rigidbody2D rb;
         public MonsterType monsterType;
         public int monsterLevel;
+        public bool isEgg;
         public IdelStateBase waitState;
         public IdelStateBase moveState;
         public IdelStateBase dragState;
+        public IdelStateBase eggState;
         public DragAndDropHandler dragAndDropHandler;
+        public EggIdelHandler eggIdelHandler;
         public MonsterIdelStateHandler stateHandler;
         public MonsterUniteHandler uniteHandler;
         public MonsterMovementHandler movementHandler;
@@ -30,16 +33,16 @@ namespace Monsters
         public void Construct(MonsterSpawnManager monsterSpawn)
         {
             this.monsterSpawn = monsterSpawn;
-            Init();
         }
 
-        private void Init()
+        public void Init()
         {
             dragAndDropHandler = new DragAndDropHandler(this);
-            stateHandler = new MonsterIdelStateHandler(this, waitState, moveState, dragState);
+            stateHandler = new MonsterIdelStateHandler(this, waitState, moveState, dragState, eggState);
             uniteHandler = new MonsterUniteHandler(this);
             movementHandler = new MonsterMovementHandler(this);
-            Debug.Log("Init");
+            eggIdelHandler = new EggIdelHandler(this, 12);
+            GetComponent<MonsterIdel_View>().Init();
         }
 
         private void Update()
@@ -50,7 +53,7 @@ namespace Monsters
         private void StateUpdate()
         {
             stateHandler?.TransmisionHandle();
-            stateHandler.currentState?.OnWork();
+            stateHandler?.currentState?.OnWork();
         }
 
         public void SetMonsterData(MonsterIdelData data)

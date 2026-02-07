@@ -21,15 +21,18 @@ namespace MainHUB.HUB_Managers
             LoadAllMonster();
         }
 
-        public async UniTask<GameObject> SpawnMonsterInstance(string resourcePath , MonsterIdelData data, bool isAddToCollection)
+        public async UniTask<GameObject> SpawnMonsterInstance(string resourcePath , MonsterIdelData data, bool isAddToCollection, bool isBought)
         {
             Vector3 pos = GetSpawnPosition();
 
             var handle = resource.InstantiateAsync(resourcePath, pos, Quaternion.identity);
             var install = await handle;
             install.GetComponent<MonsterIdel>().SetMonsterData(data);
-            if(isAddToCollection) 
+            if (isBought)
+                install.GetComponent<MonsterIdel>().isEgg = true;
+            if (isAddToCollection) 
                 monsterCollection.AddUnit(install.GetComponent<MonsterIdel>());
+            install.GetComponent<MonsterIdel>().Init();
             return install;
         }
 
@@ -62,7 +65,7 @@ namespace MainHUB.HUB_Managers
             if (!isAffordable)
                 return false;
 
-            SpawnMonsterInstance(resourcePath, data,true);
+            SpawnMonsterInstance(resourcePath, data,true,true);
 
             return true;
         }
@@ -73,7 +76,7 @@ namespace MainHUB.HUB_Managers
             
             for (int i = 0; i < dataList.Count; i++)
             {
-                GameObject target = await SpawnMonsterInstance("Assets/Prefabs/Monsters/Monster.prefab", dataList[i], false);
+                GameObject target = await SpawnMonsterInstance("Assets/Prefabs/Monsters/Monster.prefab", dataList[i], false, false);
             }
         }
 

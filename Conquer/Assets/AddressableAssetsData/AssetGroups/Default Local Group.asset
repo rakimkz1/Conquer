@@ -95,13 +95,43 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f0bef4c114796148ad985aeb893a781
+    m_Address: Assets/Sprites/MainHUB/Monster/Siege1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f11ee7d5b3e4f44bb02fcf1a58f8860
     m_Address: Assets/Prefabs/BattleField/Extractor.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 512bf98c3a94d634a8c2effa46f8bd95
+    m_Address: Assets/Sprites/MainHUB/Monster/Spinter2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ee72bdc2e49b8d4d92d2baf38dc2889
+    m_Address: Assets/Sprites/MainHUB/Monster/Ranger1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fad6d3714cec4947a5379bf015c4e0d
+    m_Address: Assets/Sprites/MainHUB/Monster/Siege2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6195c26a8f4d4dc43a1db792d931c899
+    m_Address: Assets/Sprites/MainHUB/Monster/Ranger2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6bd21a7a6fef40143b12510cbe37acb8
     m_Address: Assets/Sprites/Monsters/level1/arrow1.B.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7475430882df386439aeb8b2f885aafe
+    m_Address: Assets/Sprites/MainHUB/Monster/Egg2.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -117,6 +147,21 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 80ce7740958e8ff4bbff474398d6e15b
     m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Mage1Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87420eab01fb5204cabdd1508fc8b63b
+    m_Address: Assets/Sprites/MainHUB/Monster/Egg1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 894606720512ef24bbd1cb198896d1a6
+    m_Address: Assets/Sprites/MainHUB/Monster/Mage1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89c1f27dbdfcf6f42a67141d21a4d3d6
+    m_Address: Assets/Sprites/MainHUB/Monster/Mage2.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -147,6 +192,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f96f7f3b3097984abef639767c4701e
     m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Sprinter2Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fb7e2cd7fd753840b41f9f6421b4f33
+    m_Address: Assets/Sprites/MainHUB/Monster/Tank1.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -190,6 +240,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd488bd8ee3eaac4b80c725bcf9e50ba
+    m_Address: Assets/Sprites/MainHUB/Monster/Spinter1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c029ff90a0a1d134d8144896d8ec288d
     m_Address: Assets/Prefabs/Monsters/MonsterView/Level1/Mage1Red.prefab
     m_ReadOnly: 0
@@ -202,6 +257,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3002caae355a084888eddfd90a07b6a
     m_Address: Assets/Prefabs/Monsters/MonsterView/Level2/Tank2Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d30273c8fec761f418248769c2229e53
+    m_Address: Assets/Sprites/MainHUB/Monster/Tank2.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
