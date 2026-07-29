@@ -13,7 +13,7 @@ public class EggStateIdel : IdelStateBase
 
     public override void OnExit()
     {
-
+        Debug.Log("Egg Exit");
     }
 
     public override void OnWork()

@@ -21,9 +21,9 @@ namespace Monsters.IdelMonster
 
             bool isMousePointing = (hit.collider != null) & (hit.collider?.GetComponent<MonsterIdel>() == _targetMonster);
 
-            if (Input.GetMouseButtonDown(0) && _targetMonster.stateHandler.currentState.GetType() != typeof(DraggingIdelState) && isMousePointing)
+            if (Input.GetMouseButtonDown(0) && _targetMonster.stateHandler.currentState != null && _targetMonster.stateHandler.currentState.GetType() != typeof(DraggingIdelState) && isMousePointing)
                 OnBeginDrag();
-            if (Input.GetMouseButtonUp(0) && _targetMonster.stateHandler.currentState.GetType() == typeof(DraggingIdelState))
+            if (Input.GetMouseButtonUp(0) && _targetMonster.stateHandler.currentState != null && _targetMonster.stateHandler.currentState.GetType() == typeof(DraggingIdelState))
                 OnEndDrag();
         }
         public void OnBeginDrag()
@@ -43,8 +43,7 @@ namespace Monsters.IdelMonster
         {
             _targetMonster.uniteHandler.CheckIsUnity();
             _targetMonster.gameObject.GetComponent<Collider2D>().isTrigger = false;
-            _targetMonster.stateHandler.currentState.OnExit();
-            _targetMonster.stateHandler.currentState = null;
+            _targetMonster.stateHandler.SwichState(_targetMonster.stateHandler.waitState);
         }
     }
 }

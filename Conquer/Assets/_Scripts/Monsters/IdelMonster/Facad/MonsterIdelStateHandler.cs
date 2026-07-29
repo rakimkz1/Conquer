@@ -7,7 +7,7 @@ namespace Monsters
 {
     public class MonsterIdelStateHandler
     {
-        public IdelStateBase currentState;
+        public IdelStateBase currentState { get; private set; }
         public IdelStateBase waitState;
         public IdelStateBase moveState;
         public IdelStateBase dragState;
@@ -25,13 +25,18 @@ namespace Monsters
         }
         public void SwichState(IdelStateBase toState)
         {
+            if(currentState == eggState) {
+                Debug.Log($"From egg to {toState.GetType()}");
+            }
             currentState?.OnExit();
             currentState = GameObject.Instantiate(toState);
             currentState.OnEnter(monsterTarget);
         }
         public void TransmisionHandle()
         {
-            if (currentState == null && monsterTarget.isEgg == false)
+            if (currentState == null)
+                Debug.LogError("Current State null");
+            if (currentState == eggState && monsterTarget.isEgg == false)
             {
                 Debug.Log("waitState");
                 SwichState(waitState);

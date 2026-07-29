@@ -13,7 +13,6 @@ namespace Monsters
         public Rigidbody2D rb;
         public MonsterType monsterType;
         public int monsterLevel;
-        public bool isEgg;
         public IdelStateBase waitState;
         public IdelStateBase moveState;
         public IdelStateBase dragState;
@@ -24,6 +23,7 @@ namespace Monsters
         public MonsterUniteHandler uniteHandler;
         public MonsterMovementHandler movementHandler;
         public MonsterSpawnManager monsterSpawn;
+        public bool isEgg;
         protected virtual void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -42,6 +42,7 @@ namespace Monsters
             uniteHandler = new MonsterUniteHandler(this);
             movementHandler = new MonsterMovementHandler(this);
             eggIdelHandler = new EggIdelHandler(this, 12);
+            eggIdelHandler.onMonsterRelease += () => { isEgg = false; };
             GetComponent<MonsterIdel_View>().Init();
         }
 

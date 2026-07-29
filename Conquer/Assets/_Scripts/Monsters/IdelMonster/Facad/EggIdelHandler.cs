@@ -7,6 +7,7 @@ namespace Monsters
     {
         public int clickNumberToBrock;
         public Action onMonsterRelease;
+        public event Action onEngClicked;
 
         private MonsterIdel monsterIdel;
         public EggIdelHandler(MonsterIdel monsterTarget, int clickNumber)
@@ -17,7 +18,6 @@ namespace Monsters
 
         public void CheckEgg()
         {
-
             if(!Input.GetMouseButtonDown(0))
                 return;
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -32,6 +32,7 @@ namespace Monsters
         private void CrackEgg()
         {
             clickNumberToBrock--;
+            onEngClicked?.Invoke();
             if (clickNumberToBrock <= 0)
                 RealaseMonster();
         }

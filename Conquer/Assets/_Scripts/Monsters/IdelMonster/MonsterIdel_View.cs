@@ -42,6 +42,8 @@ namespace Monsters
 
         public void ShowMonsterTrueForm()
         {
+            Debug.Log("TrueFormShown");
+            eggSprite.SetActive(false);
             _resourceManager.LoadAsset<Sprite>(so_MonsterSpritePreset.GetSprite(new MonsterIdelData(monsterIdel.monsterLevel, monsterIdel.monsterType)), asset =>
             {
                 monsterSprite.sprite = asset;
